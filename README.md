@@ -1,7 +1,7 @@
 # Az-900-John Savils youtube+Microsoft Learn 06.05.2026
 
 ### Kurz Az-900
-Video number:20
+Video n.:20
 https://www.youtube.com/watch?v=jNBcXnMTo9s&list=PLlVtbbG169nED0_vMEniWBQjSoxTsBYS3&index=22
 
 ## What is a Storage Account:
@@ -23,9 +23,11 @@ For new resources, there are few reasons to consider the other choices.
 <img width="875" height="288" alt="image" src="https://github.com/user-attachments/assets/ff27f5fb-c3f0-4734-9149-c302c01786a1" />
 
 
-# Excercise:Create a storage account
+# Excercise:Exercise - Create a storage account using the Azure portal
 
 <img width="889" height="522" alt="image" src="https://github.com/user-attachments/assets/9f6d3f2d-3427-46d9-9c70-414fd04dfc86" />
 _____________________________
 
-
+Performance-I choose classic(premium one is for faster access).
+Redundancy-I choose (LRS) There is no need to pay for event of catastrophic scenarios,,, (GRS-Geo redundant Storage).If happens something really catastrophic, i have fresh content from my users.(it is a surf report web app).
+Require secure transfer for REST API operations-Better to activate, (enable) → everything goes through HTTPS (šifrované, bezpečné) 🔒
