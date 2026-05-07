@@ -50,3 +50,17 @@ Enable versioning for blobs-Uncheck-ukladá všetky verzie jedného blobu (všet
 Enable blob change feed-Uncheck-zaznamenáva všetky zmeny v storage účte-logy zmien.Nepotrebne...nepotrebujem audit
 Enable version-level immutability support-Uncheck-Immutability-súbor sa nedá zmeniť ani zmazať počas určenej doby(dôležité pre banky,archívy,compliance).Cvičenie nepracuje s politikami WORM.nechcem blokovať zmeny súborov takže to nechávam vypnuté
 
+# Prečo sú dobré tagy?
+project-ak máš 30 Storage účtov, hned vieš ktorý patrí surf appke
+Environment-dôležité pre security policies
+Owner-Kto to spravuje
+Datatype/Data classification/ cloud security must have-firma potrebuje vedieť, aké dáta skladujú.(UserContent)-videá,fotky.Je to klasifikované ako public=nízke riziko.
+
+## Summary
+
+Storage accounts let you create a group of data management rules and apply them all at once to the data stored in the account: blobs, files, tables, and queues.
+
+If you tried to achieve the same thing without storage accounts, the end product would be tedious and error-prone. For example, what are the chances that you could successfully apply the same rules to thousands of blobs?
+
+Instead, you capture the rules in the settings for a storage account, and those rules are automatically applied to every data service in the account.
+
