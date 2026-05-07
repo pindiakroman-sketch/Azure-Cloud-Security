@@ -64,3 +64,187 @@ If you tried to achieve the same thing without storage accounts, the end product
 
 Instead, you capture the rules in the settings for a storage account, and those rules are automatically applied to every data service in the account.
 
+
+_____________________________________________________
+
+#Video n.21:-Data Movement and Migration Options
+
+
+
+
+| Tool             | Purpose               |
+| ---------------- | --------------------- |
+| Azure File Sync  | Sync SMB file servers |
+| Storage Explorer | GUI upload/download   |
+| AZCopy           | Automation + sync     |
+| Azure Migrate    | VM/database migration |
+| Data Box         | Offline data transfer |
+
+
+# Azure provides multiple ways to move data:
+
+online over the network
+offline using physical devices
+
+# The best option depends on:
+
+data size
+available bandwidth
+workload type
+automation requirements
+whether you are migrating files, VMs, or databases
+
+# Azure File Sync
+What it is
+
+A service that synchronizes Windows SMB file servers with Azure Files.
+
+Local file servers sync through a central Azure file share.
+
+# When to use it
+hybrid file server environments
+migration to Azure Files
+resiliency scenarios
+multiple office locations
+Important Notes
+file servers do NOT sync directly with each other
+all synchronization happens through the Azure file share
+supports cloud tiering
+Cloud Tiering
+
+Less frequently used files exist only in Azure.
+
+Locally, only a placeholder/link remains.
+When a user opens the file, it is automatically downloaded again.
+
+Mental Model-pre predstavu
+
+“Like OneDrive for enterprise file servers.”
+
+# Azure Storage Explorer
+What it is
+
+A GUI application for managing Azure Storage resources.
+
+What it can do
+upload/download files
+manage blob containers
+manage file shares
+interact with queues
+interact with tables
+
+# When to use it
+manual operations
+smaller data transfers
+ad hoc uploads/downloads
+Mental Model
+
+“File Explorer for Azure Storage.”
+
+# Storage Browser (Azure Portal)
+What it is
+
+A web-based version of Storage Explorer built directly into the Azure Portal.
+
+When to use it
+
+Quick uploads/downloads without installing a desktop application.
+
+# AZCopy
+What it is
+
+A command-line tool for automated data copy and synchronization.
+
+When to use it
+scripting
+automation
+large-scale transfers
+scheduled jobs
+Important Notes
+
+Supports:
+
+local ↔ Azure
+Azure ↔ Azure
+AWS/GCP → Azure
+Major Advantage
+
+Azure-to-Azure transfers are server-side.
+
+Data does not pass through your local machine.
+
+
+# Azure Migrate
+What it is
+
+A migration service for:
+
+virtual machines
+databases
+physical servers
+What it can do
+workload assessment
+Azure SKU recommendations
+replication
+cutover/migration
+Supported Sources
+VMware
+Hyper-V
+bare-metal servers
+Mental Model
+
+“A migration orchestrator for Azure.”
+
+# Azure Data Box
+What it is
+
+An offline migration solution using physical devices.
+
+Used when:
+
+internet bandwidth is limited
+datasets are extremely large
+
+# Data Box Disk
+What it is
+
+Encrypted SSD disks shipped by Microsoft.
+
+Use Case
+
+Importing data into Azure.
+
+
+# Data Box
+What it is
+
+A physical network appliance for large-scale offline transfers.
+
+Capacity
+
+~80 TB usable storage.
+
+Workflow
+Microsoft ships the device
+Copy data via SMB/NFS
+Ship the device back
+Microsoft uploads the data into your storage accounts
+
+# Data Box Heavy
+What it is
+
+A larger enterprise version of Data Box.
+
+Capacity
+
+~770 TB
+
+Use Case
+
+Massive enterprise-scale migrations.
+
+______________________________________________
+
+
+
+
