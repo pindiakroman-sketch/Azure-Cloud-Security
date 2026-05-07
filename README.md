@@ -67,7 +67,8 @@ Instead, you capture the rules in the settings for a storage account, and those 
 
 _____________________________________________________
 
-## Video n.21:-Data Movement and Migration Options
+## Video n.21:-Data Movement and Migration Options-
+https://www.youtube.com/watch?v=jNBcXnMTo9s&list=PLlVtbbG169nED0_vMEniWBQjSoxTsBYS3&index=22
 
 
 
