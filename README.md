@@ -246,6 +246,129 @@ Massive enterprise-scale migrations.
 
 ______________________________________________
 
+Video.n.23
+https://www.youtube.com/watch?v=22z9ARaKlbU&list=PLlVtbbG169nED0_vMEniWBQjSoxTsBYS3&index=23
+Benefits and Usage of Azure IoT Services
 
+| Service      | Purpose                           |
+| ------------ | --------------------------------- |
+| IoT Hub      | Custom IoT communication platform |
+| IoT Central  | Ready-made IoT SaaS solution      |
+| Azure Sphere | IoT security                      |
 
+# What is IoT (Internet of Things)
+
+ IoT = devices with microcontrollers connected to the cloud.
+
+Devices can:
+
+send telemetry/data to the cloud
+receive commands/updates
+communicate with other devices
+
+Benefits:
+
+remote management
+firmware updates
+analytics
+predictive maintenance
+
+Downside:
+
+larger attack surface → requires strong security and authentication
+Azure IoT Hub
+Purpose
+
+# Core Azure service for communication with IoT devices.
+
+Features
+device-to-cloud telemetry
+cloud-to-device commands
+file uploads
+request/response communication
+Device Twin
+
+# Virtual representation of a device inside Azure.
+
+Applications communicate with:
+
+the device twin
+instead of directly with the physical device.
+
+Use cases:
+
+firmware updates
+restart commands
+device state tracking
+
+When to Use
+
+Use when:
+
+building a custom IoT solution
+writing your own application/code
+working directly with SDKs/APIs
+
+IoT Hub = more developer-oriented.
+
+# Azure IoT Central
+Purpose
+
+Ready-made SaaS IoT platform built on top of IoT Hub.
+
+Features
+dashboards
+device templates
+starter applications
+simulated devices
+rules engine
+GUI-based management
+Example Rule
+
+IF:
+temperature > threshold
+
+THEN:
+
+send email
+create ITSM ticket
+trigger Azure Function
+When to Use
+
+Use when:
+
+you want minimal coding
+you need fast deployment
+you want built-in dashboards/templates
+
+# IoT Central = more managed / low-code solution.
+
+# Azure Sphere
+Purpose
+
+Provides end-to-end security for IoT devices.
+
+Components
+Azure Sphere MCU
+Custom Linux-based OS
+Azure Sphere Security Service (AS3)
+Security Features
+certificate-based authentication
+integrity verification
+anti-tampering protection
+When to Use
+
+Use when:
+
+security is critical
+medical devices
+industrial systems
+financial/sensitive environments
+
+Azure Sphere is typically combined with:
+
+IoT Hub
+IoT Central
+
+Video.n.24
 
