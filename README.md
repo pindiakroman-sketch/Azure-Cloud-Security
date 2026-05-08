@@ -276,10 +276,11 @@ predictive maintenance
 Downside:
 
 larger attack surface → requires strong security and authentication
-Azure IoT Hub
+
+# Azure IoT Hub
 Purpose
 
-# Core Azure service for communication with IoT devices.
+Core Azure service for communication with IoT devices.
 
 Features
 device-to-cloud telemetry
@@ -288,7 +289,7 @@ file uploads
 request/response communication
 Device Twin
 
-# Virtual representation of a device inside Azure.
+Virtual representation of a device inside Azure.
 
 Applications communicate with:
 
@@ -370,5 +371,249 @@ Azure Sphere is typically combined with:
 IoT Hub
 IoT Central
 
-Video.n.24
+# Video.n.24-Benefits and Usage of Big Data and Analytics Services
+
+## Basic Flow of Data
+
+Sources → Extract → Store → Transform → Analytics
+
+Modern approach:
+- ELT instead of ETL
+- Raw data is first stored in Data Lake
+- Transformation happens later
+
+Why?
+- Storage is cheap
+- Keeps original data
+- Future reprocessing is possible
+
+---
+
+# Important Concepts
+
+## ETL
+Extract → Transform → Load
+
+Traditional model:
+1. Extract data
+2. Transform immediately
+3. Load into database
+
+Problem:
+- Some useful data may be lost during transformation
+
+---
+
+## ELT
+Extract → Load → Transform
+
+Modern cloud approach:
+- Store raw data first
+- Transform later when needed
+
+Benefit:
+- More flexibility for future analytics
+
+---
+
+# Azure Services
+
+## Azure Data Lake Storage Gen2
+Cheap, scalable storage for raw/unstructured data.
+
+Used for:
+- keeping original data
+- near infinite scale
+- analytics pipelines
+
+Think:
+"Raw storage for everything"
+
+---
+
+## Data Transformation
+
+Transformation includes:
+- cleaning missing values
+- removing duplicates
+- formatting data
+- reshaping data ("wrangling")
+
+Goal:
+Prepare data for analytics.
+
+---
+
+## Azure Data Factory
+Orchestration service.
+
+Responsible for:
+- connecting to sources
+- moving data
+- triggering transformations
+- loading data into destination systems
+
+Think:
+"Pipeline manager"
+
+---
+
+## HDInsight
+Managed open-source analytics frameworks.
+
+Includes:
+- Hadoop
+- Spark
+- Kafka
+- Hive
+- Storm
+- HBase
+
+Goal:
+Run big data tools without manually managing infrastructure.
+
+---
+
+## Hadoop
+Disk-based distributed processing using MapReduce.
+
+Good for:
+- very large datasets
+- distributed computation
+
+---
+
+## Spark
+Memory-based analytics engine.
+
+Faster than Hadoop because processing happens in RAM.
+
+Supports:
+- Python
+- Scala
+- SQL
+- Java
+- R
+
+Used for:
+- batch processing
+- transformations
+- analytics
+
+---
+
+## Kafka
+Streaming ingestion platform.
+
+Used when:
+- continuous data arrives constantly
+- IoT / sensors / live systems
+
+Think:
+"Massive real-time data pipe"
+
+---
+
+## Azure Databricks
+Managed Databricks service built on Apache Spark.
+
+Features:
+- collaborative analytics
+- notebooks
+- Delta Lake
+- scalable processing
+
+Think:
+"Advanced Spark analytics platform"
+
+---
+
+## Delta Lake
+Layer on top of Data Lake.
+
+Adds:
+- versioning
+- transactions
+- auditing
+
+---
+
+## Azure Synapse Analytics
+Unified analytics workspace.
+
+Combines:
+- data integration
+- big data analytics
+- BI
+- machine learning
+
+Think:
+"All-in-one analytics platform"
+
+
+# video.25-Benefits and Usage of AI Services
+Azure AI Services Overview
+# 1. Why use AI services?
+
+
+identify patterns in data,predict future outcomes,understand language, speech, images,Approaches
+
+Machine learning → train your own model
+
+
+AI services → use ready-made AI APIs
+
+
+# 2. Azure Machine Learning (AML) – custom platform 
+
+Use AML when:you need a custom model,you want full control,you need advanced customization
+
+
+
+# 3. Azure Cognitive Services – prebuilt AI
+No need to build your own models.
+Just call APIs.
+Key point
+fast setup
+low-code
+ready-made AI
+
+
+
+# 4. Azure Bot Service – conversational AI
+Build chatbots and virtual assistants.
+Workflow
+user sends message/speech,bot understands intent,bot checks knowledge base,bot sends response
+
+
+Can use:
+
+
+Language services
+
+
+Speech services
+
+
+other Cognitive Services
+
+
+Deployment:web apps,Teams,mobile apps
+
+# 5. Three main Azure AI offerings
+
+Take-away
+
+
+AML → build your own AI
+
+
+Cognitive Services → use Microsoft AI APIs
+
+
+Bot Service → create conversational assistants
+
+
+All can be exposed as APIs/endpoints for applications.
+
 
