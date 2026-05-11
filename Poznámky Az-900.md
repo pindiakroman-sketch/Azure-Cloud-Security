@@ -772,35 +772,57 @@ Used for:
 
 ___________________________
 
-#video.n.28-Azure Management Solutions – AZ-900 Notes
+# video.n.28-Azure Management Solutions – AZ-900 Notes
 
-All Azure management tools communicate through Azure Resource Manager (ARM).
-Azure Portal
-graphical interface
-good for monitoring, viewing, and basic management
-not ideal for large-scale or consistent deployments
-Azure Mobile App
-quick access to alerts and resource status
-supports simple actions like start/stop VM
-Azure PowerShell
-used for scripting and automation
-cross-platform (Windows/Linux/macOS)
-ideal for PowerShell-based environments
-Azure CLI
-command-line management tool
-similar capabilities to PowerShell
-commonly used in Bash/Linux workflows
-Azure Cloud Shell
-browser-based shell inside Azure Portal
-supports both Bash and PowerShell
-no local installation required
-All management tools enforce:
-RBAC permissions
-Azure Policies
-ARM security controls
-GUI tools are useful for management and troubleshooting, but:
-not the best option for consistent provisioning
-ARM Templates
-recommended deployment method
-Infrastructure as Code (IaC)
-repeatable and consistent deployments
+# Azure Management Solutions (AZ-900)
+
+## Azure Resource Manager (ARM)
+- Central management layer in Azure
+- All management tools communicate through ARM
+- Enforces:
+  - RBAC permissions
+  - Azure Policies
+  - Security and resource management rules
+
+---
+
+## Azure Portal
+- Graphical web interface
+- Best for:
+  - Viewing resources
+  - Monitoring
+  - Troubleshooting
+  - Basic configuration
+- Not ideal for:
+  - Large-scale deployments
+  - Consistent provisioning
+  - Automation
+
+### Pros
+- Easy to use
+- Intuitive UI
+
+### Cons
+- Slow for repetitive tasks
+- Hard to standardize deployments
+
+---
+
+## Azure Mobile App
+- Available for iOS and Android
+- Used for:
+  - Viewing alerts
+  - Checking resource status
+  - Simple actions (start/stop VM)
+
+### Limitation
+- Not suitable for resource creation
+
+---
+
+## Azure PowerShell
+- Automation and scripting tool
+- Cross-platform:
+  - Windows
+  - Linux
+  - macOS
