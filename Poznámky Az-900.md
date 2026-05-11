@@ -934,4 +934,148 @@ ARM templates are the core Azure-native IaC approach.
 
 ARM templates transform infrastructure from manual processes into **automated, repeatable, and version-controlled deployments**. They are essential for building scalable and reliable Azure solutions.
 
+---_____________________________
+
+video.n.31:
+
+# Azure Monitor – Functionality and Usage (AZ-900)
+
+## Overview
+
+Azure Monitor is the **central observability platform in Azure**. It collects, analyzes, and acts on telemetry data from across your entire Azure environment, including subscriptions, services, and applications.
+
+It unifies:
+- Metrics (performance data)
+- Logs (detailed event data)
+- Alerts (automation triggers)
+
 ---
+
+## Key Data Sources in Azure Monitor
+
+### 1. Azure Active Directory Logs
+- Sign-in logs  
+- Audit logs  
+- Risk-based identity logs  
+
+These help track identity and access activity.
+
+---
+
+### 2. Azure Subscription Activity Logs
+- Records control-plane actions (via Azure Resource Manager)
+- Example: creating, deleting, or modifying resources
+- Typically retained for ~90 days
+
+---
+
+### 3. Resource Telemetry
+Azure resources generate two types of signals:
+
+- **Metrics** → numerical, time-series data (enabled by default)
+- **Logs** → detailed diagnostic data (requires configuration)
+
+---
+
+## Diagnostic Settings
+
+Logs are **not collected automatically** from resources. You must configure diagnostic settings to send them to a destination:
+
+### Supported Destinations
+
+- 📦 **Azure Storage**
+  - Low-cost long-term retention
+  - Limited querying capability
+
+- 🌐 **Event Hub**
+  - Streams logs to external systems (e.g., SIEM tools)
+
+- 📊 **Log Analytics Workspace**
+  - Primary analytics engine in Azure Monitor
+  - Supports querying, dashboards, and insights
+  - Retention up to ~2 years (based on configuration)
+
+---
+
+## Azure Monitor Capabilities
+
+### 1. Metrics Monitoring
+- Real-time performance data
+- Example: CPU usage, storage capacity, network traffic
+- Time-series visualization in Azure Portal
+
+---
+
+### 2. Log Analytics
+- Centralized log analysis platform
+- Supports queries and correlation across resources
+- Used by advanced tools like Azure Sentinel and Insights
+
+---
+
+### 3. Alerts
+
+Azure Monitor allows you to define **alert rules** based on:
+
+- Metrics (e.g., CPU > 80%)
+- Activity logs
+- Log Analytics queries
+
+When conditions are met → an alert is triggered.
+
+---
+
+## Action Groups
+
+Alerts can trigger automated actions using **action groups**, such as:
+
+- Email or SMS notifications
+- Webhooks
+- Azure Functions
+- Logic Apps
+- IT Service Management (ITSM) integration
+- Automation Runbooks
+- Event Hub streaming
+
+---
+
+## Alert Processing Flow
+
+1. Data is collected (metrics/logs/activity logs)
+2. Alert rule evaluates conditions
+3. Alert is generated if condition is met
+4. Action group executes response (notification or automation)
+
+---
+
+## Azure Monitor Portal Features
+
+- View metrics for any resource
+- Analyze performance trends over time
+- Create and manage alert rules
+- Configure diagnostic settings
+
+Example:
+- Monitor VM CPU usage
+- Trigger alert when threshold is exceeded
+
+---
+
+## Key Concepts to Remember
+
+- Azure Monitor is the **central monitoring hub for Azure**
+- Metrics are available by default; logs require configuration
+- Log Analytics Workspace is the core analysis engine
+- Alerts + Action Groups enable automation and response
+- Supports full-stack observability across Azure services
+
+---
+
+## Summary
+
+Azure Monitor provides a **unified observability platform** that enables:
+- Real-time monitoring (metrics)
+- Deep diagnostics (logs)
+- Automated response (alerts + actions)
+
+It is essential for managing performance, availability, and reliability in Azure environments.
