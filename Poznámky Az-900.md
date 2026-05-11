@@ -936,9 +936,7 @@ ARM templates transform infrastructure from manual processes into **automated, r
 
 ---_____________________________
 
-video.n.31:
-
-# Azure Monitor – Functionality and Usage (AZ-900)
+# video.n.31:  Azure Monitor – Functionality and Usage (AZ-900)
 
 ## Overview
 
@@ -1079,3 +1077,30 @@ Azure Monitor provides a **unified observability platform** that enables:
 - Automated response (alerts + actions)
 
 It is essential for managing performance, availability, and reliability in Azure environments.
+
+# video.n.32:Azure Service Health
+Azure Service Health is basically a **dashboard that tells you what’s going on in Azure and whether it affects you**.
+
+### Simple explanation:
+
+* It shows if **Azure services are down or having issues**
+* It informs you about **planned maintenance** that might temporarily affect services
+* It notifies you about **changes or deprecations** in Azure services
+* It tells you if a **specific resource (like your VM or database) has a problem**
+
+### Why it matters:
+
+* You can quickly see if the problem is **on your side or Microsoft’s side**
+* You don’t need to guess or check multiple places
+* You can set up **alerts (email, SMS, etc.)** so you get notified automatically
+
+### Quick difference:
+
+* **Azure Status** → global Azure health (everyone)
+* **Service Health** → issues affecting *your subscription*
+* **Resource Health** → health of a specific resource
+
+### Bottom line:
+
+👉 It’s a tool that tells you: *“Is Azure broken, and does it affect me?”*
+
