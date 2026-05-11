@@ -617,3 +617,190 @@ Bot Service → create conversational assistants
 All can be exposed as APIs/endpoints for applications.
 
 
+# video n.26 Benefits and Usage of Serverless Technologies:
+
+```md
+# Serverless Technologies (AZ-900)
+
+## Serverless
+- no server management
+- pay only when code runs
+- event-driven
+
+Examples:
+- file upload
+- queue message
+- HTTP request
+- scheduled task
+
+---
+
+# Azure Functions
+Run custom code on events.
+
+Use when:
+- you need backend logic
+- you want automation with code
+- you need scalable compute
+
+Features:
+- supports .NET, Python, JavaScript, Java...
+- usually stateless
+- auto scaling
+
+Durable Functions:
+- stateful workflows
+- long-running processes
+
+---
+
+# Azure Logic Apps
+Low-code workflow automation.
+
+Use when:
+- connecting services
+- automating business processes
+- minimal coding required
+
+Features:
+- visual designer
+- many connectors
+- fast integrations
+
+Examples:
+- Outlook
+- SQL
+- SharePoint
+- Salesforce
+
+---
+
+# Functions vs Logic Apps
+
+| Functions | Logic Apps |
+|---|---|
+| write code | visual workflows |
+| developer-focused | low-code |
+| custom logic | integrations |
+
+---
+
+# Practical Rule
+- Need custom code → Azure Functions
+- Need workflow automation/integration → Logic Apps
+
+____________________________________________
+
+
+# video.n.27 Benefits and Usage of DevOps Technologies (AZ-900)
+
+## DevOps
+DevOps = development + operations
+
+Goal:
+- faster deployments
+- automation
+- better collaboration
+- continuous delivery
+
+---
+
+# Main Benefits
+- faster software releases
+- fewer deployment errors
+- automated testing/deployment
+- easier monitoring
+- better scalability
+
+---
+
+# Important DevOps Practices
+
+## CI (Continuous Integration)
+- developers merge code frequently
+- automatic build + testing
+
+## CD (Continuous Delivery/Deployment)
+- automatic release pipeline
+- faster deployments
+
+## Infrastructure as Code (IaC)
+- infrastructure defined in code
+- repeatable deployments
+
+Tools:
+- ARM Templates
+- Bicep
+- Terraform
+
+---
+
+# Azure DevOps Services
+
+## Azure Repos
+- Git repositories
+- source control
+
+## Azure Pipelines
+- CI/CD pipelines
+- automate build and deployment
+
+## Azure Boards
+- task/project tracking
+
+## Azure Test Plans
+- testing management
+
+## Azure Artifacts
+- package management
+
+---
+
+# GitHub in DevOps
+Used for:
+- source control
+- collaboration
+- CI/CD with GitHub Actions
+
+---
+
+# Practical Rule
+- CI = build + test automatically
+- CD = deploy automatically
+- DevOps = automate everything possible
+
+
+___________________________
+
+#video.n.28-Azure Management Solutions – AZ-900 Notes
+
+All Azure management tools communicate through Azure Resource Manager (ARM).
+Azure Portal
+graphical interface
+good for monitoring, viewing, and basic management
+not ideal for large-scale or consistent deployments
+Azure Mobile App
+quick access to alerts and resource status
+supports simple actions like start/stop VM
+Azure PowerShell
+used for scripting and automation
+cross-platform (Windows/Linux/macOS)
+ideal for PowerShell-based environments
+Azure CLI
+command-line management tool
+similar capabilities to PowerShell
+commonly used in Bash/Linux workflows
+Azure Cloud Shell
+browser-based shell inside Azure Portal
+supports both Bash and PowerShell
+no local installation required
+All management tools enforce:
+RBAC permissions
+Azure Policies
+ARM security controls
+GUI tools are useful for management and troubleshooting, but:
+not the best option for consistent provisioning
+ARM Templates
+recommended deployment method
+Infrastructure as Code (IaC)
+repeatable and consistent deployments
