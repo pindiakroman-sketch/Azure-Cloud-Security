@@ -826,3 +826,112 @@ ___________________________
   - Windows
   - Linux
   - macOS
+
+video.n.29-Functionality and usage of Azure Advisor
+
+# Important Notes for AZ-900
+- Azure Advisor is a recommendation service
+- It focuses on:
+  - Reliability
+  - Security
+  - Performance
+  - Cost
+  - Operational Excellence
+- Advisor does NOT automatically fix issues
+- Users choose whether to apply recommendations
+
+_________________________________________
+
+#video. 30. ARM Templates – Benefits for Azure Management Solutions
+
+This document explains the benefits of using **Azure Resource Manager (ARM) templates** as part of an Azure management and infrastructure-as-code strategy.
+
+---
+
+## Overview
+
+ARM templates are a declarative way to define and deploy Azure infrastructure using JSON (or Bicep). Instead of describing *how* to create resources, you define *what the final state should be*, and Azure handles the rest.
+
+---
+
+## Key Benefits
+
+### 1. Consistent and Repeatable Deployments
+ARM templates ensure that every environment (development, testing, production) is deployed in the same way.
+
+- Eliminates configuration drift  
+- Guarantees identical infrastructure across environments  
+- Improves reliability of deployments  
+
+---
+
+### 2. Idempotent Deployments (Safe Re-runs)
+You can deploy the same template multiple times safely.
+
+- If resources already match the desired state → no changes  
+- If changes exist → only required updates are applied  
+- Prevents accidental duplication or failures  
+
+---
+
+### 3. CI/CD Pipeline Integration
+ARM templates integrate seamlessly with modern DevOps workflows.
+
+- Works with Azure DevOps and GitHub Actions  
+- Enables automated infrastructure deployment  
+- Supports version-controlled infrastructure changes  
+- Allows promotion across environments (dev → test → prod)  
+
+---
+
+### 4. Governance and Compliance
+ARM templates help enforce organizational standards.
+
+- Standardized naming conventions  
+- Controlled resource configurations  
+- Easier auditing and compliance tracking  
+- Infrastructure defined as code in source control  
+
+---
+
+### 5. Reusability and Modularity
+Templates can be parameterized and reused.
+
+- Same template used for multiple environments  
+- Supports parameters and variables  
+- Encourages modular infrastructure design  
+
+---
+
+### 6. Reduced Human Error
+Automation reduces reliance on manual configuration.
+
+- No manual portal setup  
+- Fewer misconfigurations  
+- Less risk of inconsistent environments  
+
+---
+
+### 7. Built-in Dependency Management
+Azure automatically handles resource dependencies.
+
+- Resources deployed in correct order  
+- No need for manual sequencing  
+- Supports complex multi-resource deployments  
+
+---
+
+### 8. Foundation for Modern Infrastructure as Code
+ARM templates are the core Azure-native IaC approach.
+
+- Can be extended using **Bicep (recommended modern syntax)**  
+- Can integrate with tools like Terraform  
+- Supports scalable cloud architecture practices  
+
+---
+
+## Summary
+
+ARM templates transform infrastructure from manual processes into **automated, repeatable, and version-controlled deployments**. They are essential for building scalable and reliable Azure solutions.
+
+---
