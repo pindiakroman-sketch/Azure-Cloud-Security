@@ -827,7 +827,7 @@ ___________________________
   - Linux
   - macOS
 
-video.n.29-Functionality and usage of Azure Advisor
+# video.n.29-Functionality and usage of Azure Advisor
 
 # Important Notes for AZ-900
 - Azure Advisor is a recommendation service
@@ -842,7 +842,7 @@ video.n.29-Functionality and usage of Azure Advisor
 
 _________________________________________
 
-#video. 30. ARM Templates – Benefits for Azure Management Solutions
+# video. 30. ARM Templates – Benefits for Azure Management Solutions
 
 This document explains the benefits of using **Azure Resource Manager (ARM) templates** as part of an Azure management and infrastructure-as-code strategy.
 
