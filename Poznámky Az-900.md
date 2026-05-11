@@ -1077,6 +1077,7 @@ Azure Monitor provides a **unified observability platform** that enables:
 - Automated response (alerts + actions)
 
 It is essential for managing performance, availability, and reliability in Azure environments.
+____________________________________
 
 # video.n.32:Azure Service Health
 Azure Service Health is basically a **dashboard that tells you what’s going on in Azure and whether it affects you**.
