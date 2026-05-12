@@ -1330,6 +1330,196 @@ Example:
 
 > Azure Key Vault is a secure Azure service used to store and manage secrets, encryption keys, and certificates.
 
+_______________________________________________
+
+# video.n.35 Microsoft Sentinel 
+
+## What It Is
+Microsoft Sentinel is a cloud-native:
+- SIEM → collects/analyzes security logs
+- SOAR → automates security responses
+
+Main purpose:
+- detect threats
+- investigate incidents
+- automate reactions
+
+---
+
+# Core Architecture
+
+## Required Components
+- Log Analytics Workspace
+- Microsoft Sentinel
+
+Sentinel runs on top of Log Analytics.
+
+---
+
+# Most Important Thing = Data Connectors
+
+No logs = no detection.
+
+## Common Connectors
+- Entra ID (Azure AD)
+- Microsoft Defender
+- AWS CloudTrail
+- Google Cloud
+- Cisco / Palo Alto / Fortinet
+- Microsoft 365
+
+More data sources = better detection.
+
+---
+
+# Key Concept: Correlation
+
+Sentinel combines logs from multiple systems.
+
+Example:
+```text
+Failed login
++ impossible travel
++ suspicious mailbox rule
+= possible account compromise
+```
+
+Single logs usually mean little.
+
+---
+
+# KQL (Very Important)
+
+Kusto Query Language is used for:
+- investigations
+- hunting
+- analytics rules
+
+Example:
+```kql
+SigninLogs
+| where ResultType != 0
+| summarize count() by UserPrincipalName
+```
+
+---
+
+# Alerts vs Incidents
+
+## Alert
+Single suspicious event.
+
+## Incident
+Collection of related alerts.
+
+Workflow:
+```text
+Alert → Incident → Investigation → Response
+```
+
+---
+
+# Automation (SOAR)
+
+Sentinel can automate responses using:
+- Playbooks
+- Logic Apps
+
+Examples:
+- block malicious IP
+- disable compromised account
+- trigger MFA reset
+
+---
+
+# Threat Hunting
+
+Manual search for hidden threats.
+
+Common hunting targets:
+- PowerShell abuse
+- privilege escalation
+- credential theft
+- lateral movement
+
+---
+
+# Workbooks
+
+Dashboards for visualization.
+
+Examples:
+- attack maps
+- failed logins
+- risky users
+- malware detections
+
+---
+
+# UEBA
+
+User and Entity Behavior Analytics.
+
+Detects abnormal behavior:
+```text
+User normally logs in from Slovakia
+Suddenly logs in from another country
+= suspicious
+```
+
+---
+
+# Threat Intelligence
+
+Supports external threat feeds:
+- malicious IPs
+- domains
+- file hashes
+- IOCs
+
+---
+
+# Biggest Real-World Problem = Cost
+
+Pricing is mostly based on:
+```text
+GB/day ingested
+```
+
+More logs:
+- better visibility
+- higher cost
+
+---
+
+# Real SOC Workflow
+
+```text
+1. Collect logs
+2. Correlate events
+3. Detect threats
+4. Generate alerts
+5. Investigate incidents
+6. Hunt threats
+7. Automate response
+```
+
+---
+
+# Most Important Practical Point
+
+Sentinel does NOT secure systems itself.
+
+It:
+- provides visibility
+- detects suspicious activity
+- helps analysts respond faster
+
+Good detections depend on:
+```text
+Good data + good rules
+```
+
 # Simple Definition
 
 > Microsoft Defender for Cloud is a cloud security service that helps protect Azure, hybrid, and multi-cloud environments by providing security recommendations, compliance monitoring, and threat protection.
