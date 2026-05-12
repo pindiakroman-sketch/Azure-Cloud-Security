@@ -1248,6 +1248,101 @@ Defender for Cloud integrates with:
 
 This allows automated monitoring and centralized security management.
 
+
+# video.n.34.
+
+# Azure Key Vault (AZ-900 Notes)
+
+## What is Azure Key Vault?
+
+Azure Key Vault is a service used to securely store and manage:
+
+- Secrets
+- Encryption keys
+- Certificates
+
+Instead of storing sensitive information inside application code, it is stored securely in Key Vault.
+
+---
+
+# Main Types
+
+| Type | Example |
+|---|---|
+| Secrets | Passwords, API keys, connection strings |
+| Keys | Encryption and decryption keys |
+| Certificates | SSL/TLS certificates for HTTPS |
+
+---
+
+# Practical Example
+
+A web application needs a database password.
+
+### Without Key Vault
+```python
+password = "Admin123!"
+```
+
+The password is exposed inside the code.
+
+### With Key Vault
+- Password is stored securely in Key Vault
+- The application retrieves it when needed
+- Access is controlled using permissions
+
+---
+
+# Access Control
+
+Azure Key Vault supports:
+
+- Access Policies (older method)
+- Azure RBAC (recommended)
+
+RBAC provides granular access control.
+
+Example:
+- User A can access Secret 1
+- User B can access Secret 2
+
+---
+
+# Managed Identity
+
+Managed Identity allows Azure services to access Key Vault securely without storing credentials.
+
+Example:
+- An Azure VM can access secrets using its built-in identity
+
+---
+
+# Important Features
+
+- Secure secret storage
+- Encryption key management
+- Certificate lifecycle management
+- Hardware Security Module (HSM) support
+- Bring Your Own Key (BYOK)
+
+---
+
+# AZ-900 Key Points
+
+| Feature | Purpose |
+|---|---|
+| Secrets | Store sensitive data |
+| Keys | Perform cryptographic operations |
+| Certificates | Manage HTTPS certificates |
+| RBAC | Secure access control |
+| Managed Identity | Passwordless authentication |
+
+---
+
+# Simple Definition
+
+> Azure Key Vault is a secure Azure service used to store and manage secrets, encryption keys, and certificates.
+
 # Simple Definition
 
 > Microsoft Defender for Cloud is a cloud security service that helps protect Azure, hybrid, and multi-cloud environments by providing security recommendations, compliance monitoring, and threat protection.
