@@ -1105,3 +1105,150 @@ Azure Service Health is basically a **dashboard that tells you what’s going on
 
 👉 It’s a tool that tells you: *“Is Azure broken, and does it affect me?”*
 
+# video.n.33.
+# Microsoft Defender for Cloud (AZ-900 Notes)
+
+## What is Microsoft Defender for Cloud?
+
+Microsoft Defender for Cloud is a cloud security service in Azure that helps protect:
+
+- Azure resources
+- On-premises servers
+- Other cloud platforms like AWS
+
+It helps organizations:
+
+- Improve security posture
+- Detect threats
+- Find vulnerabilities
+- Meet compliance requirements
+
+---
+
+# Main Features
+
+## 1. Secure Score
+
+Secure Score measures how secure your Azure environment is.
+
+It:
+
+- Checks resources against security best practices
+- Gives a security score
+- Provides recommendations to improve security
+
+### Examples
+
+- Enable MFA
+- Install system updates
+- Close unnecessary ports
+- Fix vulnerabilities
+
+> Higher score = better security posture
+
+---
+
+## 2. Security Recommendations
+
+Defender for Cloud continuously scans Azure resources and suggests ways to improve security.
+
+Some recommendations can be fixed automatically using **Quick Fix**.
+
+Recommendations can also be marked as **Exempt** if they do not apply.
+
+---
+
+## 3. Regulatory Compliance
+
+Defender for Cloud checks whether resources follow security standards and compliance frameworks.
+
+Example:
+
+- Azure Security Benchmark
+
+It shows:
+
+- Compliant resources
+- Non-compliant resources
+- Overall compliance status
+
+---
+
+# Free Tier vs Paid Tier
+
+## Free Features
+
+Included by default:
+
+- Secure Score
+- Security recommendations
+- Basic security monitoring
+
+## Paid Features (Microsoft Defender Plans)
+
+Advanced protection features include:
+
+- Threat detection
+- Endpoint protection
+- Regulatory compliance dashboards
+- Just-In-Time VM access
+- Adaptive application controls
+
+---
+
+# Important Security Features
+
+## Just-In-Time (JIT) VM Access
+
+JIT helps protect virtual machines by opening management ports only when needed.
+
+Examples:
+
+- RDP port (3389)
+- SSH port (22)
+
+Access is:
+
+- Temporary
+- Limited to specific IP addresses
+
+> This reduces the risk of attacks.
+
+---
+
+## Adaptive Application Controls
+
+Uses machine learning to:
+
+- Learn normal application behavior
+- Detect suspicious software
+- Help block malicious applications
+
+---
+
+## Threat Protection
+
+Provides advanced threat detection for:
+
+- Virtual machines
+- Servers
+- Azure services
+
+Uses analytics and machine learning to detect attacks and suspicious activity.
+
+---
+
+# Integration
+
+Defender for Cloud integrates with:
+
+- Azure Policy
+- Azure Monitor
+- Other security tools
+
+This allows automated monitoring and centralized security management.
+
+# Simple Definition
+
+> Microsoft Defender for Cloud is a cloud security service that helps protect Azure, hybrid, and multi-cloud environments by providing security recommendations, compliance monitoring, and threat protection.
+
