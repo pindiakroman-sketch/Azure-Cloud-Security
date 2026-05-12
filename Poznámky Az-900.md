@@ -1282,7 +1282,6 @@ A web application needs a database password.
 ### Without Key Vault
 ```python
 password = "Admin123!"
-```
 
 The password is exposed inside the code.
 
