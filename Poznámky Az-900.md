@@ -1327,18 +1327,6 @@ Example:
 
 ---
 
-# AZ-900 Key Points
-
-| Feature | Purpose |
-|---|---|
-| Secrets | Store sensitive data |
-| Keys | Perform cryptographic operations |
-| Certificates | Manage HTTPS certificates |
-| RBAC | Secure access control |
-| Managed Identity | Passwordless authentication |
-
----
-
 # Simple Definition
 
 > Azure Key Vault is a secure Azure service used to store and manage secrets, encryption keys, and certificates.
