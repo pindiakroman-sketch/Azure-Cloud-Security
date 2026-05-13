@@ -2818,8 +2818,5 @@ They decide:
 * Who can leave
 * Which doors (ports) they can use
 
----
-
-Learn more on Glasp: [https://glasp.co/reader?url=https://www.youtube.com/watch?v=flCoRc1uv9o](https://glasp.co/reader?url=https://www.youtube.com/watch?v=flCoRc1uv9o)
 
 
