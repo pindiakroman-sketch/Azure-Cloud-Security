@@ -2141,6 +2141,381 @@ Ensure systems and services remain accessible.
 Microsoft guidance emphasizes that layered security:
 > “Slows down attacks and provides alert information for response teams.”
 
+video.n.38-# Concept of Defense in Depth - AZ-900 Certification Course
+
+## Overview
+Defense in Depth is a layered security strategy where multiple security controls protect systems and data. If one layer fails, another layer continues protection.
+
+---
+
+## Key Concept
+- Never rely on a single security mechanism.
+- Multiple defensive layers reduce risk and improve detection/response.
+- The most valuable asset is usually **data**.
+
+---
+
+# Defense in Depth Layers
+
+## 1. Data Layer
+**Goal:** Protect sensitive information.
+
+### Security Measures
+- Data encryption
+- Data classification
+- Access controls
+
+### Important Idea
+Data is the “core pearl” that all other layers protect.
+
+---
+
+## 2. Application Layer
+**Goal:** Secure applications from vulnerabilities and attacks.
+
+### Best Practices
+- Write secure code
+- Avoid storing secrets in code
+- Use Azure Key Vault
+- Deploy Web Application Firewalls (WAF)
+
+### Purpose
+Protect against common web attacks and application exploits.
+
+---
+
+## 3. Compute Layer
+**Goal:** Secure servers, VMs, and workloads.
+
+### Security Measures
+- Firewalls
+- Patching
+- Anti-malware
+- Threat detection
+
+### Shared Responsibility
+- In PaaS, Azure manages more of this layer.
+- In IaaS, customers manage most compute security.
+
+---
+
+## 4. Network Layer
+**Goal:** Restrict and secure communication.
+
+### Core Principles
+- Least privilege access
+- Deny by default
+- Zero Trust
+- Restrict unnecessary ports
+
+### Recommended Connectivity
+- Private endpoints
+- VPN tunnels
+- ExpressRoute
+
+### Important Idea
+Never trust traffic simply because it exists on the network.
+
+---
+
+## 5. Perimeter Layer
+**Goal:** Stop attacks before they reach services.
+
+### Security Tools
+- DDoS Protection
+- Edge firewalls
+- Traffic filtering
+
+### Purpose
+Mitigate large-scale attacks before impacting workloads.
+
+---
+
+## 6. Identity & Access Layer
+**Goal:** Verify users and control access.
+
+### Security Measures
+- Multi-factor authentication (MFA)
+- Passwordless authentication
+- Auditing sign-ins and changes
+- Continuous verification
+
+### Important Idea
+In cloud environments, **identity becomes the security perimeter**.
+
+---
+
+## 7. Physical Security Layer
+**Goal:** Protect datacenter infrastructure.
+
+### Responsibility
+Managed by the cloud provider (e.g., Microsoft Azure).
+
+---
+
+# Shared Responsibility Model
+
+## SaaS
+Provider manages most security responsibilities.
+
+## PaaS
+Customer focuses mainly on:
+- Applications
+- Data
+- Identity
+
+## IaaS
+Customer manages:
+- Networks
+- Compute
+- Applications
+- Data
+- Identity
+
+Provider mainly manages:
+- Physical infrastructure
+
+---
+
+# CIA Triad
+
+## Confidentiality
+Ensure only authorized users access data.
+
+### Methods
+- Least privilege access
+- Strong authentication
+
+---
+
+## Integrity
+Ensure data is not altered improperly.
+
+### Methods
+- Digital signatures
+- Validation checks
+- Secure transmission
+
+---
+
+## Availability
+Ensure systems and services remain accessible.
+
+### Threat Example
+- Distributed Denial of Service (DDoS)
+
+---
+
+# Key Takeaways
+- Defense in Depth uses multiple security layers.
+- Identity is critical in cloud security.
+- Zero Trust assumes no implicit trust.
+- Least privilege reduces attack surface.
+- Security responsibilities vary across SaaS, PaaS, and IaaS.
+- The CIA Triad remains foundational:
+  - Confidentiality
+  - Integrity
+  - Availability
+
+__________________________________
+# video.n.38 Describe the Concept of Zero Trust
+
+## Overview
+Zero Trust is a modern security model based on the principle:
+
+> **"Never trust, always verify."**
+
+Unlike traditional security models that automatically trust users and devices inside a network, Zero Trust assumes that every request could be a threat.
+
+---
+
+# Core Principles of Zero Trust
+
+## 1. Verify Explicitly
+Always authenticate and authorize every request.
+
+### Verification Includes
+- User identity
+- Device health
+- Location
+- Application
+- Data sensitivity
+- Risk level
+
+### Common Security Methods
+- Multi-factor authentication (MFA)
+- Passwordless authentication
+- Conditional access policies
+
+---
+
+## 2. Use Least Privilege Access
+Users and applications should only have the minimum permissions required.
+
+### Goals
+- Reduce attack surface
+- Prevent unauthorized access
+- Limit damage from compromised accounts
+
+### Techniques
+- Just-in-time (JIT) access
+- Role-based access control (RBAC)
+- Privileged identity management (PIM)
+
+---
+
+## 3. Assume Breach
+Operate as if attackers are already inside the environment.
+
+### Security Strategies
+- Continuous monitoring
+- Threat detection
+- Network segmentation
+- Encryption
+- Logging and auditing
+
+### Important Idea
+Limit lateral movement across systems.
+
+---
+
+# Key Components of Zero Trust
+
+## Identity Security
+Identity becomes the new security perimeter.
+
+### Protection Methods
+- MFA
+- Strong authentication
+- Identity monitoring
+- Risk-based sign-ins
+
+---
+
+## Device Security
+Only trusted and compliant devices should access resources.
+
+### Device Checks
+- OS updates
+- Antivirus status
+- Compliance policies
+- Endpoint protection
+
+---
+
+## Network Security
+Do not automatically trust internal network traffic.
+
+### Security Measures
+- Micro-segmentation
+- Private access
+- Encrypted communication
+- Firewall controls
+
+---
+
+## Application Security
+Applications should enforce secure access controls.
+
+### Best Practices
+- Secure APIs
+- Web Application Firewalls (WAF)
+- Application monitoring
+- Secret management using Azure Key Vault
+
+---
+
+## Data Security
+Protect sensitive information everywhere.
+
+### Protection Methods
+- Encryption at rest
+- Encryption in transit
+- Data classification
+- Data loss prevention (DLP)
+
+---
+
+# Benefits of Zero Trust
+
+## Improved Security
+Reduces risk of:
+- Data breaches
+- Credential theft
+- Insider threats
+
+---
+
+## Better Visibility
+Provides continuous monitoring and auditing.
+
+---
+
+## Reduced Lateral Movement
+Attackers cannot easily move across systems.
+
+---
+
+## Cloud-Friendly Security
+Works well in:
+- Hybrid environments
+- Remote work
+- Multi-cloud systems
+
+---
+
+# Traditional Security vs Zero Trust
+
+| Traditional Security | Zero Trust |
+|---|---|
+| Trust inside network | Trust nobody automatically |
+| Perimeter-based security | Identity-based security |
+| One-time authentication | Continuous verification |
+| Broad network access | Least privilege access |
+| Assume safe internal traffic | Assume breach |
+
+---
+
+# Zero Trust in Azure
+
+## Microsoft Security Recommendations
+Azure Zero Trust commonly includes:
+- Microsoft Entra ID
+- Conditional Access
+- MFA
+- Microsoft Defender
+- Azure Firewall
+- Network segmentation
+
+---
+
+# Example Scenario
+
+## Traditional Model
+A user inside the company network may automatically gain access to internal systems.
+
+## Zero Trust Model
+The user must continuously verify:
+- Identity
+- Device compliance
+- Access permissions
+- Risk level
+
+before accessing resources.
+
+---
+
+# Key Takeaways
+
+- Zero Trust means:
+  > **Never trust, always verify**
+- Identity is the new security perimeter.
+- Every request must be authenticated and authorized.
+- Least privilege access reduces risk.
+- Continuous monitoring is essential.
+- Zero Trust assumes breaches can happen at any time.
+
+_________________________________________________________
 
 
 
