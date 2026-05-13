@@ -2517,5 +2517,309 @@ before accessing resources.
 
 _________________________________________________________
 
+# video.n.39-  Azure NSGs (Network Security Groups) — Beginner Notes
+
+## 📌 What is an NSG?
+
+A **Network Security Group (NSG)** is Azure’s way of controlling **network traffic**.
+
+Think of it like a **firewall for your Azure network**.
+
+It lets you decide:
+
+* What traffic is allowed
+* What traffic is blocked
+* Where traffic can come from
+* Which ports/protocols can be used
+
+---
+
+# 🌐 Azure Virtual Network (VNet) Basics
+
+A **Virtual Network (VNet)** is your private network inside Azure.
+
+Inside a VNet, you usually create **subnets**.
+
+Example:
+
+```text
+VNet
+├── Subnet A
+├── Subnet B
+└── Subnet C
+```
+
+By default:
+
+✅ Subnets can communicate with each other freely.
+
+✅ Peered VNets can also communicate freely.
+
+✅ Connected on-premises networks (VPN / ExpressRoute) are treated as part of the network.
+
+---
+
+# 🔥 Default Azure Network Behavior
+
+Azure already includes a built-in **stateful firewall**.
+
+This means:
+
+## Outbound Traffic
+
+Your VM can:
+
+* Access the internet
+* Access Azure services
+
+And the response is automatically allowed back.
+
+Example:
+
+```text
+VM → Internet ✅
+Internet Response → VM ✅
+```
+
+---
+
+## Inbound Traffic
+
+Random traffic from the internet is blocked by default.
+
+Example:
+
+```text
+Internet → VM ❌
+```
+
+---
+
+# 🚨 Why Do We Need NSGs?
+
+Without NSGs:
+
+* Everything inside the VNet can talk to everything else.
+* There is little granular control.
+
+NSGs solve this by letting you:
+
+✅ Restrict subnet communication
+✅ Allow specific internet traffic
+✅ Block unwanted traffic
+✅ Control communication with peered VNets or on-premises networks
+
+---
+
+# 🧩 NSG Rules
+
+An NSG contains **rules**.
+
+Each rule defines:
+
+| Property    | Meaning                       |
+| ----------- | ----------------------------- |
+| Source      | Where traffic comes from      |
+| Destination | Where traffic goes            |
+| Port        | Which port is used            |
+| Protocol    | TCP / UDP                     |
+| Action      | Allow or Deny                 |
+| Priority    | Which rule is evaluated first |
+
+---
+
+# 🧠 Important: Priority
+
+Lower number = Higher priority
+
+Example:
+
+```text
+100 → Checked first
+200 → Checked later
+65000 → Very low priority
+```
+
+---
+
+# ✅ Example Rule
+
+Allow HTTPS traffic from the internet:
+
+```text
+Source: Internet
+Destination: VM/Subnet
+Port: 443
+Protocol: TCP
+Action: Allow
+```
+
+This allows users to access a secure website hosted on your VM.
+
+---
+
+# 📦 Default NSG Rules
+
+Azure automatically adds some rules.
+
+## Default Inbound Rules
+
+| Rule                      | Action |
+| ------------------------- | ------ |
+| Allow VNet traffic        | ✅      |
+| Allow Azure Load Balancer | ✅      |
+| Deny everything else      | ❌      |
+
+---
+
+## Default Outbound Rules
+
+| Rule                    | Action |
+| ----------------------- | ------ |
+| Allow VNet outbound     | ✅      |
+| Allow Internet outbound | ✅      |
+| Deny everything else    | ❌      |
+
+---
+
+# 🏷️ Service Tags
+
+Azure services have many IP addresses.
+
+Managing them manually would be difficult.
+
+Instead, Azure provides **Service Tags**.
+
+Examples:
+
+* `VirtualNetwork`
+* `Internet`
+* `AzureLoadBalancer`
+* `AzureKeyVault`
+
+---
+
+## Example
+
+Instead of:
+
+```text
+Allow 20 different Azure IP addresses
+```
+
+You can simply use:
+
+```text
+Allow AzureKeyVault
+```
+
+Much easier 👍
+
+---
+
+# 🖥️ Where Can You Apply an NSG?
+
+## Recommended: Subnet Level
+
+```text
+Subnet → NSG
+```
+
+This is easier to manage.
+
+---
+
+## Possible but Not Recommended: NIC Level
+
+```text
+VM Network Interface (NIC) → NSG
+```
+
+Technically possible, but:
+
+❌ Harder to manage
+❌ Adds complexity
+❌ No extra security benefit
+
+---
+
+# ⚙️ How NSGs Actually Work
+
+NSGs are **not physical firewall devices**.
+
+Azure enforces NSG rules at the:
+
+```text
+VM Host / Virtual Switch Level
+```
+
+This happens behind the scenes automatically.
+
+---
+
+# 🎯 Common Use Cases
+
+## Restrict Communication Between Subnets
+
+```text
+Frontend Subnet → Backend Subnet ✅
+Backend Subnet → Frontend Subnet ❌
+```
+
+---
+
+## Allow Web Traffic
+
+Allow users to access a website:
+
+```text
+Port 80 (HTTP)
+Port 443 (HTTPS)
+```
+
+---
+
+## Protect Internal Services
+
+Block direct internet access to databases:
+
+```text
+Internet → Database ❌
+```
+
+---
+
+# 📝 Key Exam Takeaways (AZ-900)
+
+Remember these points:
+
+✅ NSGs control inbound and outbound traffic
+✅ NSGs use Allow/Deny rules
+✅ Rules use priorities
+✅ Lower priority number = evaluated first
+✅ NSGs are usually attached to subnets
+✅ Azure blocks inbound internet traffic by default
+✅ Azure allows outbound internet traffic by default
+✅ Service Tags simplify Azure service access management
+
+---
+
+# 🧠 Simple Mental Model
+
+Think of NSGs like:
+
+```text
+Security guards for your Azure network
+```
+
+They decide:
+
+* Who can enter
+* Who can leave
+* Which doors (ports) they can use
+
+---
+
+Learn more on Glasp: [https://glasp.co/reader?url=https://www.youtube.com/watch?v=flCoRc1uv9o](https://glasp.co/reader?url=https://www.youtube.com/watch?v=flCoRc1uv9o)
 
 
