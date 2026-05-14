@@ -2819,4 +2819,249 @@ They decide:
 * Which doors (ports) they can use
 
 
+# video.n.40-# Azure Firewall — Beginner Notes (AZ-900)
+
+## 🔥 What is Azure Firewall?
+
+Azure Firewall is a **fully managed security service** in Microsoft Azure that protects your network traffic.
+
+Think of it like a **smart security guard** sitting at the edge of your Azure network.
+
+Unlike Network Security Groups (NSGs), Azure Firewall understands both:
+
+* **Layer 4 traffic** → IPs, Ports, TCP/UDP
+* **Layer 7 traffic** → Websites, URLs, HTTP/HTTPS, categories
+
+---
+
+# 🧠 Why NSGs Are Not Enough
+
+## NSGs Understand Only Basic Networking
+
+NSGs can filter traffic using:
+
+* IP addresses
+* Ports
+* TCP / UDP protocols
+
+Example:
+
+```text
+Allow TCP port 443
+Block port 22
+```
+
+But NSGs **cannot understand**:
+
+* URLs
+* Website categories
+* HTTP/HTTPS traffic
+* Domain names
+
+So NSGs cannot block things like:
+
+* Gambling websites
+* Social media
+* Specific URLs
+
+---
+
+# 🚀 What Makes Azure Firewall Powerful
+
+Azure Firewall understands **application-level traffic**.
+
+This means it can inspect:
+
+* URLs
+* Domain names (FQDNs)
+* HTTPS traffic
+* Website categories
+
+Example:
+
+```text
+Allow: microsoft.com
+Block: gambling websites
+```
+
+---
+
+# 🏗️ How Azure Firewall Works
+
+Azure Firewall is deployed into its **own subnet** inside a Virtual Network.
+
+Required subnet name:
+
+```text
+AzureFirewallSubnet
+```
+
+Traffic is redirected to the firewall using:
+
+## User-Defined Routes (UDRs)
+
+UDRs tell Azure:
+
+> "Send traffic through the firewall first."
+
+---
+
+# 📌 Types of Rules in Azure Firewall
+
+## 1. Application Rules (Layer 7)
+
+Used for:
+
+* URLs
+* Websites
+* Domain names
+* Web categories
+
+Example:
+
+```text
+Allow github.com
+Block facebook.com
+```
+
+---
+
+## 2. Network Rules (Layer 4)
+
+Used for:
+
+* IP addresses
+* Ports
+* Protocols
+
+Example:
+
+```text
+Allow TCP 443
+Block TCP 22
+```
+
+---
+
+# 🔒 Azure Firewall Premium (TLS Inspection)
+
+Normally HTTPS traffic is encrypted.
+
+That means regular firewalls cannot see:
+
+* URLs
+* Web paths
+* Actual website content
+
+## Premium SKU solves this
+
+Azure Firewall Premium can perform:
+
+# TLS Inspection
+
+It temporarily decrypts traffic so it can inspect it.
+
+This allows Azure Firewall to:
+
+* See encrypted URLs
+* Detect risky websites
+* Apply filtering rules on HTTPS traffic
+
+---
+
+# 🌐 DNAT (Destination NAT)
+
+Azure Firewall can expose internal VMs securely to the internet.
+
+Example:
+
+```text
+Public IP:3389 → Internal VM:3389
+```
+
+Useful for:
+
+* RDP
+* SSH
+* Remote administration
+
+The firewall still controls who can access it.
+
+---
+
+# ⚙️ Managed & Auto-Scaling
+
+Azure Firewall is:
+
+* Fully managed by Microsoft
+* Automatically scales
+* Uses VM Scale Sets internally
+* No manual maintenance required
+
+You only configure the rules.
+
+---
+
+# 🛡️ Azure Firewall + NSGs = Best Practice
+
+Do NOT choose one over the other.
+
+Use BOTH together.
+
+## Recommended Strategy
+
+| Service        | Purpose                        |
+| -------------- | ------------------------------ |
+| NSGs           | Internal subnet/VM protection  |
+| Azure Firewall | Perimeter & advanced filtering |
+
+This is called:
+
+# Defense in Depth
+
+Multiple security layers = better protection.
+
+---
+
+# 🧾 Quick Summary
+
+## Azure Firewall
+
+✅ Layer 4 + Layer 7 filtering
+✅ URL & website filtering
+✅ HTTPS/TLS inspection (Premium)
+✅ DNAT support
+✅ Auto-scaling & managed
+✅ Perimeter security solution
+
+## NSGs
+
+✅ Basic port/IP filtering
+❌ No URL awareness
+❌ No HTTPS inspection
+
+---
+
+# 💡 Easy Analogy
+
+| Service        | Real-World Analogy        |
+| -------------- | ------------------------- |
+| NSG            | Door lock                 |
+| Azure Firewall | Smart security checkpoint |
+
+NSG checks:
+
+```text
+"Which port are you using?"
+```
+
+Azure Firewall checks:
+
+```text
+"Which website are you visiting?"
+"What category is it?"
+"Should you be allowed?"
+```
+
+---
 
