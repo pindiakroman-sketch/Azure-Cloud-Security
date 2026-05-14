@@ -3065,3 +3065,308 @@ Azure Firewall checks:
 
 ---
 
+# video.n.41- Azure DDoS Protection — Beginner Notes (AZ-900)
+
+## 🌐 What is a DDoS Attack?
+
+DDoS stands for:
+
+# Distributed Denial of Service
+
+A DDoS attack happens when attackers flood a service with massive amounts of traffic to make it unavailable.
+
+Think of it like:
+
+> Thousands or millions of fake users trying to enter a store at the same time so real customers can't get in.
+
+---
+
+# 🧠 Goal of a DDoS Attack
+
+Attackers try to:
+
+* Crash websites
+* Slow down applications
+* Exhaust server/network resources
+* Make services unavailable
+
+---
+
+# 📌 Common Types of DDoS Attacks
+
+## 1. Volumetric Attacks
+
+Flood the network with huge traffic volumes.
+
+Example:
+
+```text id="t8pn4v"
+Sending billions of packets to overload bandwidth
+```
+
+Goal:
+
+```text id="mjlwmj"
+Consume all network capacity
+```
+
+---
+
+## 2. Protocol Attacks
+
+Exploit weaknesses in network protocols.
+
+Example:
+
+```text id="7c4x9m"
+SYN Flood attacks
+```
+
+Goal:
+
+```text id="w1tqkh"
+Exhaust server/network resources
+```
+
+---
+
+## 3. Application Layer Attacks
+
+Target applications directly.
+
+Example:
+
+```text id="q85h34"
+Flooding a website with fake HTTP requests
+```
+
+Goal:
+
+```text id="jfwx1g"
+Crash the web application
+```
+
+---
+
+# ☁️ Azure DDoS Protection
+
+Microsoft Azure provides built-in protection against DDoS attacks.
+
+There are **2 tiers**:
+
+| Tier     | Purpose                              |
+| -------- | ------------------------------------ |
+| Basic    | Protects Azure infrastructure        |
+| Standard | Protects your applications/resources |
+
+---
+
+# 🟦 Azure DDoS Protection Basic
+
+## Included Automatically
+
+Every Azure public-facing service gets basic DDoS protection for free.
+
+You do NOT need to enable it.
+
+---
+
+## What Basic Protection Does
+
+It protects:
+
+* Azure datacenter infrastructure
+* Azure network fabric
+
+Main goal:
+
+```text id="sph8ow"
+Keep Azure itself running during huge attacks
+```
+
+---
+
+## Limitations of Basic Protection
+
+❌ No detailed metrics
+❌ No attack reports
+❌ No custom tuning
+❌ No alerts
+❌ Limited visibility
+
+It mainly protects Azure — not specifically YOUR app.
+
+---
+
+# 🛡️ Azure DDoS Protection Standard
+
+This is the advanced paid version.
+
+You create:
+
+```text id="7p2x2o"
+DDoS Protection Plan
+```
+
+Then attach it to:
+
+* Virtual Networks (VNets)
+
+---
+
+# 🔗 How Standard Protection Works
+
+## Step 1 — Create DDoS Plan
+
+```text id="vwql1j"
+Azure DDoS Protection Plan
+```
+
+## Step 2 — Link to VNets
+
+The plan protects resources inside those VNets that use:
+
+* Public IP addresses
+
+---
+
+# 🚀 Features of Standard Protection
+
+## ✅ Adaptive Tuning
+
+Azure learns your application's normal traffic behavior using machine learning.
+
+Then it can better detect unusual spikes.
+
+---
+
+## ✅ Attack Analytics & Reports
+
+You get visibility into:
+
+* Attack size
+* Attack type
+* Mitigation details
+* Traffic metrics
+
+---
+
+## ✅ Azure Monitor Alerts
+
+Azure can automatically alert you during attacks.
+
+Example:
+
+```text id="5y2nm7"
+Email notifications
+Azure Monitor alerts
+Automation triggers
+```
+
+---
+
+## ✅ Rapid Response Team
+
+During large attacks, Microsoft security experts can assist.
+
+---
+
+## ✅ Cost Protection
+
+If a DDoS attack causes unexpected scaling costs:
+
+Microsoft may provide service credits.
+
+---
+
+# 📍 Important Requirement
+
+## Standard Protection ONLY works for resources:
+
+✅ Inside a Virtual Network
+✅ Using Public IPs
+
+If a resource is NOT in a VNet:
+
+❌ It cannot use Standard protection.
+
+Only Basic protection applies.
+
+---
+
+# 🔄 One Plan Can Protect Multiple VNets
+
+A single DDoS Standard plan can protect:
+
+* Multiple virtual networks
+* Multiple subscriptions
+
+Very useful for large organizations.
+
+---
+
+# ⚙️ Behind the Scenes
+
+Azure automatically:
+
+* Detects attacks
+* Filters malicious traffic
+* Allows legitimate traffic
+* Mitigates attacks in real time
+
+No manual intervention needed.
+
+---
+
+# 🧾 Quick Comparison
+
+| Feature                      | Basic | Standard |
+| ---------------------------- | ----- | -------- |
+| Included Free                | ✅     | ❌        |
+| Protect Azure Infrastructure | ✅     | ✅        |
+| Protect Your Applications    | ❌     | ✅        |
+| Metrics & Reports            | ❌     | ✅        |
+| Alerts                       | ❌     | ✅        |
+| Adaptive Tuning              | ❌     | ✅        |
+| Rapid Response Support       | ❌     | ✅        |
+
+---
+
+# 💡 Easy Analogy
+
+| Service             | Analogy                                     |
+| ------------------- | ------------------------------------------- |
+| Basic Protection    | City police protecting the city             |
+| Standard Protection | Personal bodyguard protecting YOUR building |
+
+---
+
+# 🛡️ Best Practice
+
+Use Azure DDoS Protection Standard for:
+
+* Public web apps
+* APIs
+* Internet-facing workloads
+* Mission-critical applications
+
+Especially when downtime is expensive.
+
+---
+
+# 🧠 Exam Tip (AZ-900)
+
+Remember:
+
+```text id="y7ig5n"
+Basic = protects Azure
+Standard = protects your workloads
+```
+
+And:
+
+```text id="w5eg77"
+Standard protection requires VNets + Public IPs
+```
+
+---
