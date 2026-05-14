@@ -3370,3 +3370,93 @@ Standard protection requires VNets + Public IPs
 ```
 
 ---
+
+# video.n.42 Authentication vs Authorization — Quick Notes
+
+| Concept        | Meaning                            |
+| -------------- | ---------------------------------- |
+| Authentication | Verifies **who you are**           |
+| Authorization  | Determines **what you can access** |
+
+---
+
+# 🔐 Authentication (AuthN)
+
+Checks your identity.
+
+Examples:
+
+* Password
+* MFA
+* Fingerprint
+* Smart card
+
+Example:
+
+```text id="8qd3ji"
+Login with email + password
+```
+
+Real-world analogy:
+
+```text id="x7xqtx"
+Showing your ID card at a building entrance
+```
+
+---
+
+# 🔓 Authorization (AuthZ)
+
+Determines permissions after login.
+
+Examples:
+
+* Can read files
+* Can delete resources
+* Can access admin panel
+
+Real-world analogy:
+
+```text id="xq0jgl"
+Determining which rooms you can enter
+```
+
+---
+
+# 🔄 Order Matters
+
+## Step 1
+
+Authentication
+
+```text id="6mfr6z"
+"Who are you?"
+```
+
+## Step 2
+
+Authorization
+
+```text id="4qx6qy"
+"What are you allowed to do?"
+```
+
+---
+
+# ☁️ In Azure
+
+| Service            | Purpose        |
+| ------------------ | -------------- |
+| Microsoft Entra ID | Authentication |
+| RBAC               | Authorization  |
+
+---
+
+# 🧠 Easy Memory Trick
+
+```text id="7y8x5v"
+AuthN = Identity
+AuthZ = Permissions
+```
+
+---
