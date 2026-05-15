@@ -3460,3 +3460,398 @@ AuthZ = Permissions
 ```
 
 ---
+
+# video.n.43-Microsoft Entra Overview
+
+# Microsoft Entra Overview (AZ-900)
+
+- **Microsoft Entra** = umbrella suite for identity & access solutions.
+- Main portal: `entra.microsoft.com`
+
+## Core Components
+
+### Azure AD (Entra ID)
+- Identity provider for users, apps, and devices.
+- Supports:
+  - Single Sign-On (SSO)
+  - Conditional Access
+  - Authentication for Azure, Microsoft 365, and 3rd-party apps
+
+### Verified ID
+- Decentralized identity system.
+- Users control/verifiy credentials using apps like Microsoft Authenticator.
+- Uses trusted verification systems (e.g. blockchain-style ledgers).
+
+### Permissions Management
+- Manages permissions across:
+  - Azure
+  - AWS
+  - Google Cloud
+- Helps enforce **least privilege access**.
+
+### Workload Identities
+- Protects non-human identities:
+  - Service principals
+  - Managed identities
+- Includes monitoring, access reviews, and security policies.
+
+### Identity Governance
+- Features:
+  - Access reviews
+  - Entitlement management
+  - Privileged Identity Management (PIM)
+- Prevents permission sprawl.
+
+### Lifecycle Workflows
+- Automates onboarding/offboarding tasks:
+  - Welcome emails
+  - Access provisioning
+  - Account removal after leaving
+
+## Key Takeaway
+Microsoft Entra centralizes identity, access management, governance, and automation into one ecosystem.
+
+
+# video.n.44-Azure Directory Services
+
+# Azure Directory Services (AZ-900 Notes)
+
+## 📌 Core Idea
+
+Microsoft identity services evolved from **traditional on-premises Active Directory** to **cloud-based Microsoft Entra ID** (formerly Azure AD).
+
+Think of it like this:
+
+| Old World                                | Cloud World                      |
+| ---------------------------------------- | -------------------------------- |
+| Active Directory Domain Services (AD DS) | Microsoft Entra ID               |
+| Runs on company servers                  | Runs in Microsoft cloud          |
+| Designed for internal networks           | Designed for internet/cloud apps |
+
+---
+
+# 🏢 Traditional Active Directory (On-Premises)
+
+## What is Active Directory Domain Services (AD DS)?
+
+AD DS is a centralized system for managing:
+
+* Users
+* Groups
+* Computers
+* Permissions
+* Authentication
+
+It allows users to:
+
+✅ Log in once
+✅ Access company resources
+✅ Use Single Sign-On (SSO)
+
+---
+
+## 🖥️ Domain Controllers
+
+AD DS runs on special servers called:
+
+```text
+Domain Controllers (DCs)
+```
+
+These servers:
+
+* Store user accounts
+* Handle authentication
+* Enforce policies
+
+Most companies use **2 or more** DCs for redundancy.
+
+---
+
+## 📂 Organizational Units (OUs)
+
+OUs help organize resources in a hierarchy.
+
+Example:
+
+```text
+Company
+ ├── HR
+ ├── IT
+ └── Sales
+```
+
+OUs are useful for:
+
+* Delegating admin permissions
+* Applying Group Policies
+* Organizing users/devices
+
+---
+
+## 🔑 Traditional Authentication Protocols
+
+AD DS uses older enterprise protocols:
+
+| Protocol | Purpose                 |
+| -------- | ----------------------- |
+| Kerberos | Authentication          |
+| NTLM     | Legacy authentication   |
+| LDAP     | Directory queries       |
+| DNS      | Finding domain services |
+
+These work best on **private internal networks**.
+
+---
+
+# ☁️ Microsoft Entra ID (Formerly Azure AD)
+
+## What is Entra ID?
+
+Entra ID is Microsoft's **cloud identity provider**.
+
+It is designed for:
+
+* Cloud applications
+* Internet access
+* SaaS services
+* Azure resources
+
+---
+
+## 🌐 Modern Authentication
+
+Unlike AD DS, Entra ID uses internet-friendly protocols:
+
+| Protocol       | Purpose                   |
+| -------------- | ------------------------- |
+| OpenID Connect | Modern authentication     |
+| SAML           | Single Sign-On            |
+| WS-Fed         | Federation/authentication |
+
+Everything mainly works securely over:
+
+```text
+HTTPS (Port 443)
+```
+
+---
+
+# 🔗 Federation
+
+Apps can trust Entra ID to authenticate users.
+
+This means:
+
+```text
+User logs in once → Entra ID verifies identity
+→ Apps trust Entra ID
+```
+
+Examples:
+
+* Microsoft 365
+* Azure
+* Dynamics 365
+* Third-party SaaS apps
+
+---
+
+# 🛡️ Conditional Access
+
+One of the MOST important Entra ID features.
+
+Conditional Access checks things like:
+
+* User location
+* Device health
+* Risk level
+* Group membership
+
+Example:
+
+```text
+IF user is outside company country
+THEN require MFA
+```
+
+This improves security significantly.
+
+---
+
+# 💻 Device Management
+
+Devices can be:
+
+| Type       | Meaning                     |
+| ---------- | --------------------------- |
+| Registered | Known to Entra ID           |
+| Joined     | Fully connected to Entra ID |
+
+Microsoft Intune can then manage devices by:
+
+* Applying policies
+* Managing apps
+* Enforcing compliance
+
+---
+
+# 🔄 Hybrid Identity (Most Common Setup)
+
+Most companies use BOTH:
+
+```text
+On-Prem AD DS + Entra ID
+```
+
+Why?
+
+Because older systems still exist.
+
+---
+
+## 🔁 Identity Synchronization
+
+Users created in AD DS can sync to Entra ID.
+
+### Two Sync Methods
+
+| Tool               | Description                     |
+| ------------------ | ------------------------------- |
+| Entra Connect Sync | Traditional on-prem sync server |
+| Entra Cloud Sync   | Lightweight cloud-managed sync  |
+
+Goal:
+
+```text
+One identity for both on-prem and cloud
+```
+
+---
+
+# ☁️ Azure Resources & Legacy Authentication
+
+Some applications still need:
+
+* Kerberos
+* NTLM
+* LDAP
+
+But Entra ID does NOT fully support traditional domain services behavior.
+
+---
+
+# 🔌 Solution 1: Connect to On-Prem AD
+
+Azure networks can connect to on-premises networks using:
+
+* Site-to-Site VPN
+* ExpressRoute
+
+This allows Azure resources to talk directly to existing domain controllers.
+
+---
+
+# 🏗️ Solution 2: Microsoft Entra Domain Services
+
+If you DON'T have on-prem AD DS:
+
+Use:
+
+```text
+Microsoft Entra Domain Services
+```
+
+This provides:
+
+✅ Managed domain controllers
+✅ Kerberos support
+✅ NTLM support
+✅ LDAP support
+
+WITHOUT managing servers yourself.
+
+---
+
+## Important Limitation
+
+With Entra Domain Services:
+
+❌ You are NOT Domain Admin
+❌ No direct access to domain controllers
+
+Microsoft manages them for you.
+
+---
+
+# 🧠 Easy Mental Model
+
+## AD DS
+
+```text
+Traditional office building identity system
+```
+
+Built for:
+
+* Internal company networks
+* Windows environments
+* Legacy enterprise apps
+
+---
+
+## Entra ID
+
+```text
+Internet/cloud identity system
+```
+
+Built for:
+
+* Cloud apps
+* SaaS
+* Remote work
+* Modern authentication
+
+---
+
+## Entra Domain Services
+
+```text
+Bridge for legacy apps in Azure
+```
+
+Useful when apps still require:
+
+* Kerberos
+* LDAP
+* NTLM
+
+---
+
+# ✅ Exam Takeaways (AZ-900)
+
+Remember these key points:
+
+| Concept               | Important Detail               |
+| --------------------- | ------------------------------ |
+| Entra ID              | Formerly Azure AD              |
+| AD DS                 | Traditional on-prem directory  |
+| Conditional Access    | Security policy engine         |
+| Federation            | Apps trust Entra ID            |
+| Intune                | Device management              |
+| Hybrid Identity       | AD DS + Entra ID together      |
+| Entra Domain Services | Managed legacy domain services |
+
+---
+
+# 🚀 Super Short Summary
+
+```text
+AD DS = Traditional on-prem identity
+
+Entra ID = Cloud identity platform
+
+Entra Domain Services = Managed legacy authentication in Azure
+```
+
