@@ -4519,7 +4519,7 @@ That's SSO.
 ---
 
 
-video.n.47.Functionality and usage od RBAC---
+# video.n.47.Functionality and usage od RBAC---
 
 # AZ-900 Notes — RBAC (Role-Based Access Control)
 
@@ -4892,6 +4892,413 @@ Cannot enter server room
 ```
 
 
+# video.n.48-Functionallity and usage of Resource Locks
+
+# AZ-900 Notes — Resource Locks
+
+> Beginner-friendly notes for understanding Resource Locks in Microsoft Azure.
+
+---
+
+# 🔐 What are Resource Locks?
+
+Resource Locks help prevent:
+
+* accidental deletion
+* accidental modification
+
+Think of them as:
+
+> “Extra protection for important Azure resources.”
+
+---
+
+# 🧠 Why Use Resource Locks?
+
+Even admins can accidentally:
+
+* delete a VM
+* remove a storage account
+* modify critical resources
+
+Resource Locks add:
+
+```text id="x4q0q5"
+An extra safety step
+```
+
+---
+
+# 🎯 Main Purpose
+
+Resource Locks help protect:
+
+* Production resources
+* Critical databases
+* Important storage accounts
+* Shared infrastructure
+
+---
+
+# 📦 Where Can Locks Be Applied?
+
+Locks can be applied at:
+
+```text id="hzx7q9"
+Subscription
+Resource Group
+Individual Resource
+```
+
+---
+
+# 🌳 Azure Hierarchy
+
+```text id="y4o42s"
+Subscription
+    ↓
+Resource Group
+    ↓
+Resource
+```
+
+---
+
+# 📌 Important Rule — Inheritance
+
+Locks inherit downward.
+
+Example:
+
+```text id="2fqzly"
+Lock applied to Resource Group
+↓
+All resources inside also become locked
+```
+
+---
+
+# 🔒 Types of Resource Locks
+
+There are ONLY 2 lock types.
+
+---
+
+# 1️⃣ CanNotDelete Lock
+
+Also called:
+
+```text id="z90vcm"
+Delete Lock
+```
+
+---
+
+## What It Does
+
+✅ Can modify resource
+❌ Cannot delete resource
+
+---
+
+## Example
+
+```text id="s0ykkn"
+Storage Account protected from accidental deletion
+```
+
+You can still:
+
+* change settings
+* update configurations
+
+But:
+
+```text id="z8wxyx"
+Cannot delete it
+```
+
+---
+
+# 2️⃣ ReadOnly Lock
+
+## What It Does
+
+❌ Cannot modify
+❌ Cannot delete
+
+Resource becomes:
+
+```text id="35ujcg"
+Read-only
+```
+
+---
+
+## Example
+
+```text id="obd8k2"
+Critical production database
+```
+
+Admins can:
+✅ View it
+
+But cannot:
+❌ Change settings
+❌ Delete resource
+
+---
+
+# 🔄 Resource Lock Flow
+
+```text id="n3bhzk"
+User tries to modify/delete resource
+        ↓
+Azure checks for lock
+        ↓
+Lock exists?
+        ↓
+Operation blocked
+```
+
+---
+
+# 🔑 Who Can Manage Resource Locks?
+
+Usually:
+
+```text id="gk9y2k"
+Owner role
+```
+
+Owners can:
+
+* Create locks
+* Remove locks
+
+---
+
+# ⚠️ Important AZ-900 Concept
+
+To delete a locked resource:
+
+```text id="vj9a9j"
+You must remove the lock FIRST
+```
+
+This prevents accidental mistakes.
+
+---
+
+# 🧠 Very Important Concept
+
+# Resource Locks Protect the CONTROL PLANE
+
+NOT the DATA PLANE.
+
+---
+
+# 🏗️ Control Plane vs Data Plane
+
+| Plane         | Meaning                        |
+| ------------- | ------------------------------ |
+| Control Plane | Managing Azure resource itself |
+| Data Plane    | Actual data inside resource    |
+
+---
+
+# 📦 Example — Storage Account
+
+## Resource Lock Protects:
+
+✅ Deleting storage account
+✅ Modifying storage account settings
+
+---
+
+## Resource Lock DOES NOT Protect:
+
+❌ Files inside storage
+❌ Blobs inside storage
+❌ Data modifications
+
+---
+
+# Example
+
+Even with a lock:
+
+```text id="0sfb5q"
+You can still delete blobs/files inside storage account
+```
+
+Because:
+
+```text id="p6ny6v"
+That is DATA PLANE activity
+```
+
+---
+
+# 🔥 Important Exam Question Area
+
+Many AZ-900 questions test:
+
+```text id="e6p7m9"
+Resource Locks protect CONTROL PLANE only
+```
+
+NOT the data itself.
+
+---
+
+# 🧩 Real-World Example
+
+## Scenario
+
+Company has:
+
+* critical production database
+* shared storage account
+
+They apply:
+
+```text id="ms44q0"
+CanNotDelete lock
+```
+
+Result:
+
+* admins cannot accidentally delete resources
+* resources stay protected
+
+---
+
+# 🛠️ Another Example
+
+## Production VM
+
+Apply:
+
+```text id="n3jny5"
+ReadOnly lock
+```
+
+Result:
+
+* no accidental changes
+* no accidental deletion
+
+---
+
+# 🔄 Example of Inheritance
+
+```text id="8dij8q"
+Resource Group locked
+↓
+VMs inside locked
+↓
+Storage Accounts inside locked
+↓
+Databases inside locked
+```
+
+---
+
+# ⚠️ Important Limitation
+
+Locks are NOT security permissions.
+
+RBAC controls:
+
+```text id="7kx6ov"
+WHO can access resources
+```
+
+Locks control:
+
+```text id="s6m5m5"
+Preventing accidental changes/deletion
+```
+
+---
+
+# 🔐 RBAC vs Resource Locks
+
+| RBAC               | Resource Locks              |
+| ------------------ | --------------------------- |
+| Permission system  | Protection mechanism        |
+| Controls access    | Prevents accidental actions |
+| "Who can do this?" | "Should this be blocked?"   |
+
+---
+
+# 🧠 Easy Memory Trick
+
+## RBAC
+
+```text id="mpkjjw"
+Controls PEOPLE
+```
+
+## Resource Locks
+
+```text id="uijud4"
+Protect RESOURCES
+```
+
+---
+
+# 📝 Quick Exam Notes
+
+## CanNotDelete
+
+* Prevents deletion
+* Allows modification
+
+---
+
+## ReadOnly
+
+* Prevents modification
+* Prevents deletion
+
+---
+
+## Inheritance
+
+* Locks apply downward
+
+---
+
+## Important
+
+* Protects CONTROL PLANE only
+* Does NOT protect data inside resource
+
+---
+
+# ⭐ Super Simple Summary
+
+## Resource Locks
+
+```text id="x3o6nm"
+Extra protection against accidental changes or deletion
+```
+
+---
+
+# ✈️ Easy Analogy
+
+Think of a document:
+
+| Lock Type    | Real-Life Example          |
+| ------------ | -------------------------- |
+| CanNotDelete | Cannot throw document away |
+| ReadOnly     | Cannot edit document       |
+
+---
 
 
 
