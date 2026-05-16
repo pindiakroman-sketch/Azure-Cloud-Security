@@ -5301,7 +5301,306 @@ Think of a document:
 ---
 
 
+# video.n.49-Functionallity and usage of tags
 
+> Beginner-friendly notes for understanding Tags in Microsoft Azure.
+
+---
+
+# 🏷️ What are Tags?
+
+Tags are:
+
+> Metadata labels added to Azure resources.
+
+A tag is simply:
+
+```text id="n6ml8s"
+Key : Value
+```
+
+---
+
+# 🧠 Simple Example
+
+```text id="g2c26d"
+Environment : Production
+Owner : John
+Department : HR
+CostCenter : Finance
+```
+
+---
+
+# 🎯 Purpose of Tags
+
+Tags help organizations:
+
+* organize resources
+* search resources
+* track costs
+* identify ownership
+* manage environments
+
+---
+
+# 📦 Where Can Tags Be Applied?
+
+Tags can be added to:
+
+```text id="b1f07l"
+Subscription
+Resource Group
+Resource
+```
+
+---
+
+# 🌳 Azure Hierarchy
+
+```text id="9v9m8y"
+Subscription
+    ↓
+Resource Group
+    ↓
+Resource
+```
+
+---
+
+# ⚠️ IMPORTANT EXAM FACT
+
+# Tags are NOT inherited by default
+
+---
+
+# Example
+
+If Resource Group has tag:
+
+```text id="ylt4f1"
+Environment : Dev
+```
+
+Resources inside:
+
+```text id="3a3y6t"
+DO NOT automatically get the tag
+```
+
+---
+
+# 🧠 Key AZ-900 Concept
+
+## Resource Locks
+
+✅ Inherited
+
+## Tags
+
+❌ NOT inherited
+
+Very common exam question.
+
+---
+
+# 🔄 How to Auto-Apply Tags?
+
+You can use:
+
+```text id="44ay9i"
+Azure Policy
+```
+
+Azure Policy can:
+
+* require tags
+* copy tags from parent resources
+* enforce naming/tagging standards
+
+---
+
+# 🏷️ Common Tag Examples
+
+| Key         | Example Value     |
+| ----------- | ----------------- |
+| Environment | Dev / Test / Prod |
+| Owner       | Alice             |
+| Department  | Finance           |
+| CostCenter  | CC-100            |
+| OS          | Windows 11        |
+| Project     | WebsiteUpgrade    |
+
+---
+
+# 💰 Tags for Cost Management
+
+Very common use case.
+
+Example:
+
+```text id="o06w5m"
+CostCenter : Marketing
+```
+
+Now Azure billing reports can show:
+
+* how much Marketing spends
+* how much HR spends
+* how much Dev team spends
+
+---
+
+# 🔍 Tags for Searching
+
+Tags make resources easy to find.
+
+Example:
+
+```text id="if0wcc"
+Environment : Production
+```
+
+You can filter Azure resources using that tag.
+
+---
+
+# 🛠️ Real Example
+
+## Virtual Machine Tags
+
+```text id="4o74hr"
+Environment : Dev
+Owner : John
+OS : Windows 11
+Department : IT
+```
+
+This helps admins quickly understand:
+
+* who owns VM
+* purpose
+* environment
+* operating system
+
+---
+
+# 🔄 Tag Structure
+
+```text id="r2j6nk"
+Tag Key = Category
+Tag Value = Specific Information
+```
+
+Example:
+
+```text id="j08cl0"
+Key = Environment
+Value = Production
+```
+
+---
+
+# 📌 Important Characteristics
+
+## Tags are:
+
+✅ Metadata
+✅ Flexible
+✅ Searchable
+✅ Useful for billing/reporting
+
+---
+
+## Tags are NOT:
+
+❌ Security controls
+❌ Resource locks
+❌ Permissions
+
+---
+
+# 🔐 Tags vs RBAC vs Locks
+
+| Feature        | Purpose                       |
+| -------------- | ----------------------------- |
+| Tags           | Organization/metadata         |
+| RBAC           | Permissions/access            |
+| Resource Locks | Prevent deletion/modification |
+
+---
+
+# 🧩 Real-World Example
+
+## Company Resources
+
+| Resource    | Tag                 |
+| ----------- | ------------------- |
+| HR VM       | Department: HR      |
+| Finance DB  | CostCenter: Finance |
+| Dev Storage | Environment: Dev    |
+
+Now admins can:
+
+* filter resources
+* group costs
+* identify ownership quickly
+
+---
+
+# ⚠️ Important Azure Policy Note
+
+If Azure Policy requires tags:
+
+```text id="p7av1w"
+Resources without required tags may fail deployment
+```
+
+---
+
+---
+
+# 🔄 Tags vs Folders
+
+Azure doesn't use folders like Windows.
+
+Instead:
+
+```text id="smjq1q"
+Tags help logically organize resources
+```
+
+---
+
+# 📝 Quick Exam Notes
+
+## Tags
+
+* Metadata key-value pairs
+* Used for organization and billing
+* NOT inherited by default
+* Can be enforced using Azure Policy
+
+---
+
+# ⭐ Super Simple Summary
+
+## Tags
+
+```text id="s1q99e"
+Labels used to organize and track Azure resources
+```
+
+
+---
+
+# 🔥 Common AZ-900 Comparison
+
+| Feature        | Inherited? |
+| -------------- | ---------- |
+| RBAC           | ✅ Yes      |
+| Resource Locks | ✅ Yes      |
+| Tags           | ❌ No       |
 
 
 
