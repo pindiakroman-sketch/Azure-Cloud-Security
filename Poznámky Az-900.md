@@ -4519,6 +4519,379 @@ That's SSO.
 ---
 
 
+video.n.47.Functionality and usage od RBAC---
+
+# AZ-900 Notes — RBAC (Role-Based Access Control)
+
+> Beginner-friendly notes for understanding authorization in Microsoft Azure.
+
+---
+
+# 🔐 What is RBAC?
+
+RBAC stands for:
+
+```text id="kn9r4v"
+Role-Based Access Control
+```
+
+It controls:
+
+> **WHO can do WHAT on WHICH resource**
+
+---
+
+# 🧠 Simple Idea
+
+Instead of giving permissions one-by-one to users:
+
+❌ Bad Approach
+
+```text id="29f9li"
+Give Alice permission A
+Give Alice permission B
+Give Alice permission C
+```
+
+✅ Better Approach
+
+```text id="5u8v4f"
+Assign Alice a ROLE
+```
+
+The role already contains permissions.
+
+---
+
+# 🎯 Purpose of RBAC
+
+RBAC helps organizations:
+
+* Manage permissions easily
+* Improve security
+* Limit unnecessary access
+* Follow least privilege principle
+
+---
+
+# 👤 RBAC Components
+
+RBAC has 3 main parts:
+
+| Component          | Meaning              |
+| ------------------ | -------------------- |
+| Security Principal | WHO gets access      |
+| Role Definition    | WHAT they can do     |
+| Scope              | WHERE access applies |
+
+---
+
+# 1️⃣ Security Principal
+
+A security principal is:
+
+> The identity receiving permissions
+
+Examples:
+
+```text id="0rj7u8"
+User
+Group
+Application
+Service Principal
+Managed Identity
+```
+
+---
+
+# 2️⃣ Role Definition
+
+A role definition is:
+
+> A collection of permissions
+
+Examples:
+
+* Reader
+* Contributor
+* Owner
+
+---
+
+# 3️⃣ Scope
+
+Scope defines:
+
+> Where the permissions apply
+
+---
+
+# 📦 Azure Scope Hierarchy
+
+```text id="eclm0o"
+Management Group
+    ↓
+Subscription
+    ↓
+Resource Group
+    ↓
+Resource
+```
+
+---
+
+# 📌 Important Rule
+
+Permissions inherit downward.
+
+Example:
+
+```text id="8pnkto"
+Access at Subscription level
+↓
+Also applies to all Resource Groups and Resources inside it
+```
+
+---
+
+# 🔑 Common Built-in Roles
+
+| Role                      | Permissions                  |
+| ------------------------- | ---------------------------- |
+| Reader                    | View resources only          |
+| Contributor               | Create/manage resources      |
+| Owner                     | Full control + manage access |
+| User Access Administrator | Manage RBAC permissions      |
+
+---
+
+# 👀 Reader Role
+
+Can:
+✅ View resources
+
+Cannot:
+❌ Make changes
+❌ Delete resources
+
+Example:
+
+```text id="1b85n3"
+Auditors
+Managers
+Monitoring teams
+```
+
+---
+
+# 🛠️ Contributor Role
+
+Can:
+✅ Create resources
+✅ Modify resources
+✅ Delete resources
+
+Cannot:
+❌ Assign permissions to others
+
+---
+
+# 👑 Owner Role
+
+Can:
+✅ Do everything
+✅ Manage permissions
+✅ Full administrative control
+
+---
+
+# 🔄 RBAC Example
+
+```text id="f2hizj"
+Bob = Contributor
+Scope = Resource Group A
+```
+
+Result:
+
+```text id="ypsqcr"
+Bob can manage all resources inside Resource Group A
+```
+
+But:
+
+```text id="q0k8tq"
+Bob cannot manage resources outside that scope
+```
+
+---
+
+# 🧩 Real-World Example
+
+## HR Team
+
+```text id="o0r0ho"
+HR Group → Reader Role → Payroll App
+```
+
+Meaning:
+
+* HR can view payroll data
+* HR cannot modify infrastructure
+
+---
+
+# 🏢 Another Example
+
+## Developer Team
+
+```text id="vy53fk"
+Developers → Contributor → Dev Resource Group
+```
+
+Meaning:
+
+* Developers can create/test resources
+* Only inside development environment
+
+---
+
+# 🚨 Principle of Least Privilege
+
+Very important AZ-900 concept.
+
+Give users:
+
+> ONLY the access they truly need
+
+---
+
+# ❌ Bad Example
+
+```text id="e2t5wm"
+Everyone = Owner
+```
+
+Very dangerous ⚠️
+
+---
+
+# ✅ Good Example
+
+```text id="1xj8u6"
+Managers = Reader
+Developers = Contributor
+IT Admins = Owner
+```
+
+---
+
+# 🔄 How RBAC Works
+
+```text id="j8j6uo"
+User tries to access resource
+        ↓
+Azure checks assigned role
+        ↓
+Azure checks scope
+        ↓
+Permissions allowed?
+        ↓
+Access granted or denied
+```
+
+---
+
+# 🔐 RBAC vs Conditional Access
+
+| RBAC                 | Conditional Access          |
+| -------------------- | --------------------------- |
+| Controls permissions | Controls sign-in conditions |
+| Authorization        | Authentication/Security     |
+| "What can you do?"   | "Can you sign in?"          |
+
+---
+
+# 🧠 Easy Way to Remember
+
+## RBAC
+
+```text id="3hmfrq"
+What are you allowed to do?
+```
+
+## Conditional Access
+
+```text id="mec8gd"
+Under what conditions can you access?
+```
+
+---
+
+# 🔗 RBAC + Entra ID
+
+RBAC commonly works together with:
+
+* Microsoft Entra ID
+* Conditional Access
+* MFA
+
+---
+
+# 📝 Quick Exam Notes
+
+## RBAC
+
+* Controls authorization
+* Uses roles
+* Access assigned at scopes
+* Supports least privilege
+
+---
+
+# ⭐ Key Terms for AZ-900
+
+| Term            | Meaning                   |
+| --------------- | ------------------------- |
+| Role Assignment | Linking role to user      |
+| Scope           | Where permissions apply   |
+| Inheritance     | Permissions flow downward |
+| Least Privilege | Minimum required access   |
+
+---
+
+# 🧠 Super Simple Summary
+
+## RBAC
+
+```text id="k3p4qa"
+WHO can do WHAT on WHICH resource
+```
+
+---
+
+# ✈️ Easy Analogy
+
+Think of a company office building:
+
+| RBAC Part   | Office Example       |
+| ----------- | -------------------- |
+| User        | Employee             |
+| Role        | Job title            |
+| Scope       | Which office/floor   |
+| Permissions | What they can access |
+
+Example:
+
+```text id="pk3d4s"
+Receptionist
+↓
+Can enter lobby
+↓
+Cannot enter server room
+```
+
+
 
 
 
