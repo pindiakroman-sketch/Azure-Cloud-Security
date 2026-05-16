@@ -3855,3 +3855,278 @@ Entra ID = Cloud identity platform
 Entra Domain Services = Managed legacy authentication in Azure
 ```
 
+______________________
+# video.n.45- Describe Azure external Identities
+
+
+## 🌍 What Are External Identities?
+
+External identities are **users outside your organization** who still need access to your apps or resources.
+
+Examples:
+
+* Business partners
+* Vendors
+* Contractors
+* Customers using your application
+
+Azure handles these differently from internal employees.
+
+---
+
+# 🏢 Internal vs External Users
+
+## Internal Users
+
+These are employees inside your company.
+
+They can exist:
+
+* Directly in Azure
+* Synced from on-premises Active Directory
+
+Example:
+
+```text
+Company Employee → Azure AD Account
+```
+
+---
+
+## External Users
+
+These are people outside your company.
+
+Two main types:
+
+| Type | Purpose                                  |
+| ---- | ---------------------------------------- |
+| B2B  | Collaborating with partner organizations |
+| B2C  | Serving customers using your apps        |
+
+---
+
+# 🤝 B2B (Business-to-Business)
+
+## What is it?
+
+B2B is used when:
+
+* Another company needs access to your resources
+* You collaborate on projects
+* You share apps, Teams channels, documents, etc.
+
+Example:
+
+```text
+Your Company ↔ Partner Company
+```
+
+---
+
+## 🔑 Key Idea
+
+The external user:
+
+* Uses THEIR own company login
+* Authenticates with THEIR identity provider
+* Still appears in YOUR Azure tenant as a guest identity
+
+Azure creates a lightweight reference called a:
+
+```text
+Stub Object
+```
+
+---
+
+## ✅ Why B2B is Better Than Creating Accounts Manually
+
+Without B2B:
+
+* You manage their passwords
+* Security becomes messy
+* Users forget multiple passwords
+* Offboarding becomes difficult
+
+With B2B:
+
+* Their company manages their identity
+* You only manage permissions
+
+---
+
+## Supported Identity Providers
+
+Azure B2B supports:
+
+* Another Azure tenant
+* Microsoft accounts
+* Google accounts
+* Facebook accounts
+* One-time email passcodes
+
+---
+
+## ✉️ One-Time Passcode Feature
+
+If users don't have supported accounts:
+
+* Azure sends a temporary code to their email
+
+Benefits:
+
+* No password management
+* More secure
+* Access disappears if email access is removed
+
+---
+
+# 👥 B2C (Business-to-Customer)
+
+## What is it?
+
+B2C is for:
+
+* Customers using your applications
+* Public-facing apps/websites
+
+Example:
+
+```text
+Netflix / Spotify / Shopping App
+```
+
+---
+
+## 🚨 Important Difference
+
+With customers:
+
+* You may have millions of users
+* You DON'T want them inside your corporate tenant
+
+So Azure uses:
+
+```text
+A Separate B2C Tenant
+```
+
+---
+
+# 🎨 Why Use B2C?
+
+B2C provides:
+
+* Full branding customization
+* Social login support
+* Customer onboarding flows
+* Signup/signin pages
+
+Microsoft describes this as:
+
+```text
+"Customize every pixel"
+```
+
+---
+
+# 🌐 Social Login Providers in B2C
+
+B2C supports many identity providers:
+
+* Google
+* Facebook
+* Apple
+* Amazon
+* Twitter
+* WeChat
+* Microsoft Accounts
+
+And also:
+
+```text
+Local Accounts
+```
+
+---
+
+# 📝 Local Accounts
+
+Some users don't want social login.
+
+So B2C allows:
+
+```text
+Create username/password directly in your app
+```
+
+Example:
+
+```text
+"Sign in with Google"
+OR
+"Create an account"
+```
+
+---
+
+# 🔥 B2B vs B2C (Most Important Exam Concept)
+
+| Feature         | B2B                   | B2C                   |
+| --------------- | --------------------- | --------------------- |
+| Audience        | Partners & vendors    | Customers             |
+| Goal            | Collaboration         | Customer access       |
+| Identity Source | External organization | Social/local accounts |
+| Tenant Type     | Corporate tenant      | Separate B2C tenant   |
+| Custom Branding | Limited               | Extensive             |
+| Example         | Teams collaboration   | Shopping app login    |
+
+---
+
+# ⚡ B2B Direct Connect
+
+Special feature mainly for:
+
+```text
+Microsoft Teams Shared Channels
+```
+
+Allows collaboration:
+
+* Without adding every user manually as a guest
+
+---
+
+# 🧠 Easy Memory Trick
+
+## B2B
+
+```text
+Business Partners
+→ Collaboration
+→ Corporate identities
+```
+
+## B2C
+
+```text
+Customers
+→ Public applications
+→ Social logins + branding
+```
+
+---
+
+# 🎯 AZ-900 Exam Takeaway
+
+Remember:
+
+* **B2B** = collaborate with external organizations
+* **B2C** = authenticate customers in apps
+* B2C uses a separate tenant with rich customization
+* B2B users authenticate using their own identities
+
+---
+
+
