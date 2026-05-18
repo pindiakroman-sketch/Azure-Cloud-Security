@@ -8255,5 +8255,344 @@ Think of sovereign clouds like secure government buildings 🏢
 
 ---
 
+# video.n.58-Factors that affect costs
+
+> Beginner-friendly notes for understanding what affects pricing and cost in Microsoft Microsoft Azure.
+
+---
+
+# 💰 Core Idea of Azure Pricing
+
+Azure uses:
+
+```text id="v8p2ma"
+Consumption-based pricing
+```
+
+Meaning:
+
+> You pay for what you use.
+
+---
+
+
+# 🔑 Main Factors That Affect Cost
+
+| Factor        | Description                       |
+| ------------- | --------------------------------- |
+| Resource Type | VM, Storage, Database, etc.       |
+| SKU           | Different service levels/features |
+| Tier          | Premium vs Standard               |
+| Region        | Geographic location               |
+| Usage         | Amount consumed                   |
+| Runtime       | How long resources run            |
+| Transactions  | Number of operations              |
+| Licensing     | OS or software licenses           |
+
+---
+
+# 1️⃣ Resource Type
+
+Different Azure resources have different costs.
+
+---
+
+# Examples
+
+| Resource Type | Example          |
+| ------------- | ---------------- |
+| Compute       | Virtual Machines |
+| Storage       | Blob Storage     |
+| Database      | Azure SQL        |
+| Networking    | Load Balancer    |
+| AI/ML         | Machine Learning |
+
+---
+
+# 📌 Important Concept
+
+More powerful services usually:
+
+```text id="r3j7cf"
+Cost more
+```
+
+---
+
+# 2️⃣ SKU (Service Level)
+
+Many Azure services have multiple SKUs.
+
+---
+
+# Example
+
+## Load Balancer
+
+| SKU      | Cost                       |
+| -------- | -------------------------- |
+| Basic    | Lower cost                 |
+| Standard | More features, higher cost |
+
+---
+
+# Example
+
+## Azure Firewall
+
+| SKU      | Features          |
+| -------- | ----------------- |
+| Standard | Basic protection  |
+| Premium  | Advanced security |
+
+---
+
+# 📌 Important Concept
+
+Higher SKU:
+
+```text id="k1x5ou"
+Usually means higher cost and more features
+```
+
+---
+
+# 3️⃣ Pricing Tiers
+
+Services often have pricing tiers.
+
+---
+
+# Storage Example
+
+| Tier    | Usage                    |
+| ------- | ------------------------ |
+| Hot     | Frequently accessed data |
+| Cool    | Less frequently used     |
+| Archive | Rarely accessed          |
+
+---
+
+# 📌 Important Concept
+
+Different tiers optimize:
+
+* performance
+* access frequency
+* cost
+
+---
+
+# 4️⃣ Azure Region (Location)
+
+Costs vary by region.
+
+---
+
+# Why?
+
+Different regions have different:
+
+* electricity costs
+* operational costs
+* networking costs
+* infrastructure costs
+
+---
+
+# Example
+
+```text id="t9b4vl"
+Network traffic may cost more in some regions
+```
+
+---
+
+# 📌 Important AZ-900 Concept
+
+Region selection affects:
+
+```text id="n4m8yw"
+Pricing
+```
+
+---
+
+# 5️⃣ Provisioned vs Used Resources
+
+This is VERY important.
+
+Some services charge for:
+
+```text id="z6c2er"
+What you provision
+```
+
+Others charge for:
+
+```text id="q1f7pk"
+What you actually use
+```
+
+---
+
+# Example — Virtual Machine
+
+You pay compute cost:
+
+```text id="g3h5un"
+Only when VM is running
+```
+
+If stopped/deallocated:
+
+* compute charges stop
+* storage charges continue
+
+---
+
+# Example — Premium Storage
+
+You pay for:
+
+```text id="m7w9ta"
+Provisioned storage size
+```
+
+Even if unused.
+
+---
+
+# 6️⃣ Number of Instances
+
+Cloud services can scale automatically.
+
+---
+
+# Example
+
+If traffic increases:
+
+* Azure may create more VM instances
+* More instances = higher cost
+
+---
+
+# 📌 Important Concept
+
+Auto-scale helps:
+
+```text id="s5e0rd"
+Balance performance and cost
+```
+
+---
+
+# 7️⃣ Serverless Consumption
+
+Serverless services charge based on:
+
+```text id="j8u1bx"
+Actual work performed
+```
+
+---
+
+# Examples
+
+| Service         | Billing Method      |
+| --------------- | ------------------- |
+| Azure Functions | Per execution       |
+| Logic Apps      | Per workflow/action |
+
+---
+
+# 🧠 Why Serverless Saves Money
+
+You only pay:
+
+```text id="y2k6oq"
+When events happen
+```
+
+---
+
+# 8️⃣ Storage Consumption
+
+Storage pricing may depend on:
+
+* total storage used
+* provisioned capacity
+* redundancy options
+
+---
+
+# Example
+
+| Storage Type     | Billing Style      |
+| ---------------- | ------------------ |
+| Standard Storage | Amount used        |
+| Premium Storage  | Amount provisioned |
+
+---
+
+# 9️⃣ Transactions & Operations
+
+Some services charge per operation.
+
+---
+
+# Examples
+
+| Operation         | Example          |
+| ----------------- | ---------------- |
+| Read transaction  | Accessing a blob |
+| Write transaction | Uploading data   |
+| Database queries  | SQL operations   |
+
+---
+
+# 🔟 Licensing Costs
+
+Some resources include software licenses.
+
+---
+
+# Examples
+
+| License          | Example               |
+| ---------------- | --------------------- |
+| Windows Server   | VM OS cost            |
+| SQL Server       | Database licensing    |
+| Marketplace Apps | Third-party licensing |
+
+---
+
+
+
+# 🔄 Provisioned vs Running
+
+| Resource State                    | Cost?             |
+| --------------------------------- | ----------------- |
+| VM exists but stopped/deallocated | Storage only      |
+| VM running                        | Compute + storage |
+| Public IP exists                  | Usually charged   |
+
+---
+
+# 📌 Important Exam Concepts
+
+| Concept                           | Important? |
+| --------------------------------- | ---------- |
+| Consumption-based pricing         | ✅ YES      |
+| SKU affects pricing               | ✅ YES      |
+| Region affects pricing            | ✅ YES      |
+| Provisioned vs consumed resources | ✅ YES      |
+| Serverless billing                | ✅ YES      |
+| Licensing costs                   | ✅ YES      |
+
+---
+
+
 
 
