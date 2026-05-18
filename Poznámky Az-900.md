@@ -5603,5 +5603,1433 @@ Labels used to organize and track Azure resources
 | Tags           | ❌ No       |
 
 
+# video.n.50-Usage of Azure Policy
+
+> Beginner-friendly notes for understanding governance and compliance in Microsoft Azure.
+
+---
+
+# 📘 What is Azure Policy?
+
+Azure Policy is a service that helps enforce:
+
+* company rules
+* standards
+* compliance requirements
+* governance controls
+
+---
+
+# 🧠 Simple Definition
+
+Azure Policy says:
+
+```text id="s4n6na"
+"What is allowed in Azure?"
+```
+
+It automatically checks resources against rules.
+
+---
+
+# 🎯 Main Goal
+
+In cloud environments:
+
+* users can create resources themselves
+* deployments are automated
+* there may be no admin manually checking things
+
+Azure Policy acts like:
+
+```text id="x5l7i2"
+Automatic governance enforcement
+```
+
+---
+
+# 🏢 Old IT vs Cloud
+
+## Traditional IT
+
+```text id="0fxj6r"
+User requests server
+↓
+IT admin reviews request
+↓
+IT admin creates server
+```
+
+Admins manually enforced rules.
+
+---
+
+## Cloud / Azure
+
+```text id="h1g0ho"
+User deploys resources directly
+↓
+Azure Policy checks requirements automatically
+```
+
+---
+
+# 🛡️ Why Azure Policy Matters
+
+Organizations still need rules like:
+
+```text id="r31h6i"
+Only approved Azure regions
+No public IP addresses
+Specific VM sizes only
+Required tags
+Encryption enabled
+```
+
+Azure Policy enforces these automatically.
+
+---
+
+# 🔄 Where Azure Policy Works
+
+Azure Policy works at:
+
+```text id="6rqyyg"
+Azure Resource Manager (ARM)
+```
+
+Every deployment goes through ARM first.
+
+---
+
+# 🌳 Azure Hierarchy
+
+Policies can be applied at multiple scopes:
+
+```text id="s2odto"
+Management Group
+    ↓
+Subscription
+    ↓
+Resource Group
+    ↓
+Resource
+```
+
+---
+
+# 📌 Important Rule
+
+Azure Policies are:
+
+```text id="jlwm1z"
+Inherited downward
+```
+
+Example:
+
+```text id="oh6d22"
+Policy at Subscription level
+↓
+Applies to all Resource Groups and Resources inside it
+```
+
+---
+
+# 🧩 What is a Policy?
+
+A policy is basically:
+
+```text id="wl38kp"
+IF condition is true
+THEN apply effect
+```
+
+---
+
+# Example
+
+```text id="nvvzmg"
+IF storage account type is not approved
+THEN deny deployment
+```
+
+---
+
+# 📦 What is an Initiative?
+
+An Initiative is:
+
+> A collection of multiple policies
+
+---
+
+# Why Use Initiatives?
+
+Instead of assigning:
+
+```text id="h4yq3x"
+100 separate policies
+```
+
+You group them into:
+
+```text id="yw4w63"
+1 initiative
+```
+
+Much easier to manage.
+
+---
+
+# 🏛️ Real Example
+
+Compliance standards often use initiatives:
+
+* HIPAA
+* NIST
+* ISO
+* Microsoft Cloud Security Benchmark
+
+These contain MANY policies together.
+
+---
+
+# 🔥 Common Azure Policy Effects
+
+Policies can perform different actions.
+
+---
+
+# 1️⃣ Audit
+
+## Purpose
+
+Only checks compliance.
+
+✅ Resource still deploys
+⚠️ Azure logs warning/non-compliance
+
+---
+
+## Example
+
+```text id="phg2r3"
+Audit resources missing tags
+```
+
+---
+
+# 2️⃣ Deny
+
+## Purpose
+
+Blocks deployment.
+
+❌ Resource cannot be created
+
+---
+
+## Example
+
+```text id="f3j64f"
+Deny storage accounts in unapproved regions
+```
+
+---
+
+# 3️⃣ Append
+
+## Purpose
+
+Automatically adds information.
+
+---
+
+## Example
+
+```text id="qhy8vx"
+Automatically add required tags
+```
+
+---
+
+# 4️⃣ Modify
+
+## Purpose
+
+Changes resource configuration automatically.
+
+---
+
+# 5️⃣ DeployIfNotExists
+
+## Purpose
+
+Automatically deploys required resources/settings.
+
+---
+
+## Example
+
+```text id="yjlwmw"
+If monitoring agent missing
+→ Automatically install it
+```
+
+---
+
+# 🧠 Best Practice
+
+Start with:
+
+```text id="ys1l4e"
+Audit mode first
+```
+
+Why?
+
+Because a bad policy could:
+
+* break deployments
+* stop production systems
+* block developers
+
+---
+
+# ✅ Recommended Approach
+
+```text id="d3nfs4"
+1. Audit
+2. Review impact
+3. Fix issues
+4. Change to Deny
+```
+
+---
+
+# 🏷️ Azure Policy + Tags
+
+Azure Policy is commonly used to:
+
+* require tags
+* auto-add tags
+* enforce naming standards
+
+---
+
+# Example
+
+```text id="b2h3pw"
+Require:
+Environment tag
+CostCenter tag
+Owner tag
+```
+
+---
+
+# 🔄 Azure Policy Flow
+
+```text id="s9oh6o"
+User deploys resource
+        ↓
+Azure Resource Manager receives request
+        ↓
+Azure Policy evaluates rules
+        ↓
+Compliant?
+        ↓
+Allow / Audit / Deny / Modify
+```
+
+---
+
+# 🧩 Real-World Examples
+
+---
+
+# Example 1 — Allowed Regions
+
+Company policy:
+
+```text id="30mbf8"
+Resources allowed only in Europe
+```
+
+Azure Policy:
+
+```text id="9tqt8o"
+Deny deployments outside approved regions
+```
+
+---
+
+# Example 2 — Security
+
+Company requirement:
+
+```text id="q0f6uw"
+No public IP addresses allowed
+```
+
+Azure Policy:
+
+```text id="e6u90v"
+Deny public IP creation
+```
+
+---
+
+# Example 3 — Cost Control
+
+Company requirement:
+
+```text id="xg7jws"
+Only approved VM sizes allowed
+```
+
+Azure Policy:
+
+```text id="pd12mr"
+Block expensive VM types
+```
+
+---
+
+# 🔐 Azure Policy vs RBAC
+
+| Azure Policy             | RBAC                    |
+| ------------------------ | ----------------------- |
+| Controls WHAT is allowed | Controls WHO has access |
+| Governance/compliance    | Permissions/access      |
+| Resource rules           | User permissions        |
+
+---
+
+# 🔐 Azure Policy vs Resource Locks
+
+| Azure Policy            | Resource Locks              |
+| ----------------------- | --------------------------- |
+| Governance rules        | Prevent accidental deletion |
+| Automated enforcement   | Manual protection           |
+| Works during deployment | Works after deployment      |
+
+---
+
+# 📊 Compliance Tracking
+
+Azure Policy also tracks:
+
+* compliant resources
+* non-compliant resources
+* compliance percentage
+
+Very useful for:
+
+* security audits
+* governance reporting
+* compliance monitoring
+
+---
+
+# 🧠 Easy Memory Trick
+
+## Azure Policy
+
+```text id="3u0y3t"
+Company rules for Azure
+```
+
+Think:
+
+```text id="2v11md"
+"Guard rails"
+```
+
+---
+
+# 📝 Quick Exam Notes
+
+## Azure Policy
+
+* Governance service
+* Enforces standards and compliance
+* Uses policies and initiatives
+* Applied at multiple scopes
+* Inherited downward
+
+---
+
+# 🔥 Important Exam Concepts
+
+| Concept                         | Important? |
+| ------------------------------- | ---------- |
+| Policies are inherited          | ✅ YES      |
+| Audit mode                      | ✅ YES      |
+| Deny effect                     | ✅ YES      |
+| Initiatives = group of policies | ✅ YES      |
+| Works through ARM               | ✅ YES      |
+
+---
+
+# ⭐ Super Simple Summary
+
+## Azure Policy
+
+```text id="jffv5y"
+Automatically enforce company rules in Azure
+```
+
+---
+
+# video.n.51-Microsoft Purview OVerview
+# AZ-900 Notes — Microsoft Purview
+
+> Beginner-friendly notes for understanding data governance and compliance in Microsoft cloud environments.
+
+---
+
+# 📘 What is Microsoft Purview?
+
+Microsoft Purview is a:
+
+> Data governance, compliance, and data discovery solution.
+
+Its main goal is to help organizations understand:
+
+```text id="76afkq"
+What data they have
+Where the data is
+How sensitive the data is
+How the data is being used
+```
+
+---
+
+# 🧠 Simple Definition
+
+Microsoft Purview helps companies:
+
+```text id="jls7vo"
+Protect and manage their data
+```
+
+---
+
+# 🎯 Main Purpose
+
+Organizations store data everywhere:
+
+* Azure
+* Microsoft 365
+* AWS
+* Databases
+* On-premises servers
+* SaaS apps
+
+Purview gives:
+
+```text id="mvl4lg"
+One unified view of all data
+```
+
+---
+
+# 🌍 Data Sources Supported
+
+Purview supports MANY data sources.
+
+---
+
+# ☁️ Microsoft Services
+
+Examples:
+
+* Microsoft Azure Blob Storage
+* Azure SQL Database
+* Data Lake
+* Microsoft SharePoint
+* Microsoft Teams
+* Power BI
+
+---
+
+# 🌐 Other Clouds
+
+Examples:
+
+* Amazon Web Services S3
+* Other SaaS platforms
+
+---
+
+# 🏢 On-Premises Data
+
+Purview can also scan:
+
+* local databases
+* file systems
+* internal company storage
+
+---
+
+# 🔑 Core Goal
+
+The BIG idea is:
+
+```text id="l3up5z"
+Prevent data exposure
+```
+
+To protect data:
+
+1. Find it
+2. Understand it
+3. Classify it
+4. Secure it
+
+---
+
+# 🗺️ Main Components of Purview
+
+| Component          | Purpose                 |
+| ------------------ | ----------------------- |
+| Data Map           | Discover and scan data  |
+| Classification     | Identify sensitive data |
+| Sensitivity Labels | Apply security labels   |
+| Data Catalog       | Unified searchable view |
+| Data Lineage       | Track data movement     |
+| Data Sharing       | Secure sharing          |
+| Estate Insights    | Governance dashboards   |
+
+---
+
+# 🗺️ 1. Data Map
+
+The Data Map:
+
+> Scans and discovers data sources.
+
+---
+
+# Important Feature
+
+Purview scans:
+
+```text id="b8ub2m"
+Data in place
+```
+
+Meaning:
+
+* data stays where it already exists
+* no need to move/import all data
+
+---
+
+# Example
+
+Purview can scan:
+
+```text id="m25tb6"
+Azure Blob Storage
+AWS S3
+SQL Databases
+Microsoft 365
+```
+
+Without copying the data elsewhere.
+
+---
+
+# 🔍 2. Data Classification
+
+Purview can automatically identify:
+
+* credit card numbers
+* passport numbers
+* social security numbers
+* personal information
+
+---
+
+# Example
+
+```text id="w5qlhl"
+Detect:
+Credit Card Numbers
+PII
+Confidential Data
+```
+
+---
+
+# 🧠 Built-in Classifications
+
+Purview includes:
+
+```text id="znkjs5"
+200+ built-in classifiers
+```
+
+You can also create custom ones.
+
+---
+
+# 🏷️ 3. Sensitivity Labels
+
+After data is classified:
+Purview can apply labels.
+
+---
+
+# Example
+
+```text id="jnpmy3"
+Highly Confidential
+PII
+Public
+Internal Only
+```
+
+---
+
+# Why Labels Matter
+
+Labels can trigger actions like:
+
+* encryption
+* DLP policies
+* retention policies
+* access restrictions
+
+---
+
+# 🔐 Example
+
+```text id="8r1ijv"
+If file contains credit card numbers
+↓
+Apply "Highly Sensitive" label
+↓
+Block external sharing
+```
+
+---
+
+# 🔄 4. Data Lineage
+
+Data lineage tracks:
+
+> Where data came from and where it moved.
+
+---
+
+# Example
+
+```text id="jlwm06"
+Database
+↓
+Data transformation
+↓
+Power BI dashboard
+↓
+Reports
+```
+
+Purview shows the full journey.
+
+---
+
+# 📚 5. Data Catalog
+
+The Data Catalog provides:
+
+```text id="vjlwmm"
+One searchable view of all data
+```
+
+---
+
+# Why Important?
+
+Data may:
+
+* exist in many systems
+* be duplicated
+* be renamed
+
+Purview normalizes everything into:
+
+```text id="4owmx8"
+A single unified catalog
+```
+
+---
+
+# 🔍 Example
+
+A customer record may exist in:
+
+* SQL database
+* Excel file
+* SharePoint
+* Power BI
+
+Purview helps identify:
+
+```text id="zqqkq4"
+These are all related
+```
+
+---
+
+# 🤝 6. Data Sharing
+
+Purview supports secure data sharing.
+
+---
+
+# Important Feature
+
+Data sharing is:
+
+```text id="z48mmk"
+In-place
+```
+
+Meaning:
+
+* data is NOT copied
+* data stays in original location
+
+---
+
+# Example
+
+Company A shares storage with Company B.
+
+Result:
+
+```text id="v57s4z"
+Company B sees data
+BUT data physically stays with Company A
+```
+
+---
+
+# Benefits
+
+✅ Better governance
+✅ No unnecessary duplication
+✅ Easier control/revocation
+
+---
+
+# 📊 7. Estate Insights
+
+Estate Insights provide:
+
+* dashboards
+* compliance reports
+* governance analytics
+
+Mostly useful for:
+
+* security teams
+* compliance teams
+* executives
+
+---
+
+# Example Insights
+
+```text id="w11g4u"
+Sensitive data locations
+Compliance risks
+Data usage patterns
+```
+
+---
+
+# 🔐 Purview + Security
+
+Purview often works with:
+
+* DLP (Data Loss Prevention)
+* Microsoft 365 Compliance
+* Sensitivity Labels
+* Retention Policies
+
+---
+
+# 🆓 Free vs Enterprise
+
+Purview has:
+
+* Free version
+* Enterprise version
+
+---
+
+# Free Version
+
+Limited features:
+
+* basic catalog
+* limited data sources
+
+---
+
+# Enterprise Version
+
+Includes:
+
+* advanced governance
+* more data sources
+* advanced analytics
+* security/compliance tools
+
+---
+
+# 🧠 Easy Memory Trick
+
+## Microsoft Purview
+
+```text id="r2bwrj"
+"Know your data"
+```
+
+---
+
+# 📝 Quick Exam Notes
+
+## Microsoft Purview
+
+* Data governance solution
+* Scans data across environments
+* Supports classification and labeling
+* Tracks data lineage
+* Creates unified data catalog
+
+---
+
+# 🔥 Important AZ-900 Concepts
+
+| Concept               | Important? |
+| --------------------- | ---------- |
+| Data classification   | ✅ YES      |
+| Sensitivity labels    | ✅ YES      |
+| Data lineage          | ✅ YES      |
+| Unified data catalog  | ✅ YES      |
+| Data scanned in place | ✅ YES      |
+
+---
+
+# 🔐 Purview vs Azure Policy
+
+| Microsoft Purview                | Azure Policy            |
+| -------------------------------- | ----------------------- |
+| Governs DATA                     | Governs AZURE RESOURCES |
+| Data discovery/classification    | Resource compliance     |
+| Sensitive information protection | Deployment rules        |
+
+---
+
+# ⭐ Super Simple Summary
+
+## Microsoft Purview
+
+```text id="c9u8mn"
+Discover, classify, protect, and govern organizational data
+```
+
+---
+
+# ✈️ Easy Analogy
+
+Think of Purview like a library management system 📚
+
+| Purview Feature | Library Example        |
+| --------------- | ---------------------- |
+| Data Catalog    | Library index          |
+| Classification  | Book categories        |
+| Labels          | "Restricted" stickers  |
+| Lineage         | Book borrowing history |
+| Insights        | Library reports        |
+
+---
+
+# video.n.52-Governance Hierarchy Constructs
+
+
+> Beginner-friendly notes for understanding Azure governance hierarchy in Microsoft Azure.
+
+---
+
+# 🌳 Azure Governance Hierarchy
+
+Azure uses a hierarchy structure to organize:
+
+* management
+* governance
+* permissions
+* policies
+* budgets
+
+---
+
+# 🏗️ Full Azure Hierarchy
+
+```text id="j6d1oo"
+Microsoft Entra ID
+        ↓
+Root Management Group
+        ↓
+Management Groups
+        ↓
+Subscriptions
+        ↓
+Resource Groups
+        ↓
+Resources
+```
+
+---
+
+# 🔐 1. Microsoft Entra ID
+
+Previously called:
+
+```text id="7i2ce4"
+Azure Active Directory (Azure AD)
+```
+
+---
+
+## Purpose
+
+Stores identities like:
+
+* users
+* groups
+* applications
+* devices
+
+---
+
+## Example
+
+```text id="96x6jv"
+Employees
+Admins
+Service Accounts
+```
+
+---
+
+# 🌲 2. Root Management Group
+
+Automatically created under Entra ID.
+
+Purpose:
+
+```text id="rnpdkt"
+Top-level governance container
+```
+
+Everything in Azure belongs under it.
+
+---
+
+# 🧩 3. Management Groups
+
+Management Groups help organize subscriptions.
+
+---
+
+## Why Use Them?
+
+Useful for:
+
+* large companies
+* multiple departments
+* governance at scale
+
+---
+
+# Example Structure
+
+```text id="o9gtvw"
+Company
+ ├── Production
+ ├── Development
+ └── Testing
+```
+
+---
+
+# 📌 Important Fact
+
+You can create:
+
+```text id="odnhfu"
+Up to 6 levels deep
+```
+
+(not counting the root management group)
+
+---
+
+# 💳 4. Subscriptions
+
+A Subscription is:
+
+> A billing and management boundary.
+
+---
+
+## Purpose
+
+Subscriptions help separate:
+
+* billing
+* environments
+* departments
+* workloads
+
+---
+
+# Example
+
+```text id="x6y0ja"
+Production Subscription
+Development Subscription
+HR Subscription
+```
+
+---
+
+# 📌 Important Fact
+
+Subscriptions:
+
+```text id="yw3wtx"
+CANNOT be nested
+```
+
+---
+
+# 📦 5. Resource Groups
+
+Resource Groups contain Azure resources.
+
+---
+
+# Purpose
+
+Resources in same Resource Group should:
+
+```text id="3sv1g9"
+Share the same lifecycle
+```
+
+Meaning:
+
+* created together
+* managed together
+* deleted together
+
+---
+
+# Example
+
+```text id="i9i4gv"
+Web App
+Database
+Storage Account
+```
+
+All supporting same application.
+
+---
+
+# 📌 Important Fact
+
+Resource Groups:
+
+```text id="0m5e4r"
+CANNOT be nested
+```
+
+---
+
+# 🖥️ 6. Resources
+
+Resources are actual Azure services.
+
+Examples:
+
+* Virtual Machines
+* Storage Accounts
+* Databases
+* Networks
+
+---
+
+# 🔑 3 Major Governance Features
+
+The lesson focuses on 3 important governance tools:
+
+| Governance Feature | Purpose            |
+| ------------------ | ------------------ |
+| Azure Policy       | Rules & compliance |
+| RBAC               | Permissions        |
+| Budgets            | Cost control       |
+
+---
+
+# 🛡️ 1. Azure Policy
+
+Azure Policy creates:
+
+```text id="5vjlwm"
+Governance guard rails
+```
+
+---
+
+# What Policies Can Do
+
+| Action    | Purpose                  |
+| --------- | ------------------------ |
+| Deny      | Block actions            |
+| Audit     | Track compliance         |
+| Remediate | Automatically fix issues |
+
+---
+
+# Example
+
+```text id="jlwmjx"
+Require specific tags
+Block public IPs
+Allow only approved regions
+```
+
+---
+
+# 📌 Important Concept
+
+Policies are:
+
+```text id="z65r0h"
+Inherited downward
+```
+
+---
+
+# Example
+
+```text id="0w45jh"
+Policy at Management Group
+↓
+Applies to all child subscriptions and resources
+```
+
+---
+
+# 👥 2. RBAC (Role-Based Access Control)
+
+RBAC controls:
+
+```text id="d8o6m4"
+WHO can do WHAT
+```
+
+---
+
+# RBAC Formula
+
+```text id="iwcmum"
+Identity + Role + Scope
+```
+
+---
+
+# Example
+
+```text id="u1v0eh"
+Alice = Contributor
+Scope = Dev Subscription
+```
+
+Alice can manage resources in Dev Subscription.
+
+---
+
+# 📌 Important Concept
+
+RBAC assignments are also:
+
+```text id="7nqjlwm"
+Inherited downward
+```
+
+---
+
+# 💰 3. Budgets
+
+Budgets help track:
+
+```text id="jlwm4z"
+Azure spending
+```
+
+---
+
+# Budget Alerts
+
+Azure can alert based on:
+
+* actual spending
+* forecasted spending
+
+---
+
+# Example
+
+```text id="4ijcnm"
+80% budget reached
+Forecast predicts overspending
+```
+
+---
+
+# 📌 Budget Scope
+
+Budgets can be assigned at:
+
+* Management Group
+* Subscription
+* Resource Group
+
+---
+
+# 🔄 Inheritance in Azure
+
+Very important AZ-900 concept.
+
+---
+
+# What Gets Inherited?
+
+| Feature        | Inherited? |
+| -------------- | ---------- |
+| Azure Policy   | ✅ Yes      |
+| RBAC           | ✅ Yes      |
+| Resource Locks | ✅ Yes      |
+| Tags           | ❌ No       |
+
+---
+
+# 🧠 Governance Best Practice
+
+## Higher Levels
+
+Apply:
+
+```text id="rgjlwm"
+Broad company-wide rules
+```
+
+Example:
+
+* allowed regions
+* security requirements
+
+---
+
+## Lower Levels
+
+Apply:
+
+```text id="jlwmwv"
+Specific resource rules
+```
+
+Example:
+
+* app-specific permissions
+* dev/test policies
+
+---
+
+# 🔥 Common AZ-900 Exam Points
+
+| Concept                         | Important? |
+| ------------------------------- | ---------- |
+| Management Groups hierarchy     | ✅ YES      |
+| Policies inherited downward     | ✅ YES      |
+| RBAC inheritance                | ✅ YES      |
+| Resource Groups share lifecycle | ✅ YES      |
+| Subscriptions cannot be nested  | ✅ YES      |
+
+---
+
+# 🧠 Easy Memory Trick
+
+## Management Groups
+
+```text id="jlwm0q"
+Organization
+```
+
+## Subscriptions
+
+```text id="bdzjlwm"
+Billing boundary
+```
+
+## Resource Groups
+
+```text id="jlwm1a"
+Lifecycle grouping
+```
+
+## Resources
+
+```text id="jlwm2b"
+Actual Azure services
+```
+
+---
+
+# ⭐ Super Simple Summary
+
+## Azure Governance Hierarchy
+
+```text id="jlwm3c"
+Organize → Govern → Secure → Control Costs
+```
+
+---
+
+# ✈️ Easy Analogy
+
+Think of a company structure:
+
+| Azure Construct  | Real-Life Example   |
+| ---------------- | ------------------- |
+| Entra ID         | Company directory   |
+| Management Group | Corporate divisions |
+| Subscription     | Department budget   |
+| Resource Group   | Project team        |
+| Resources        | Actual equipment    |
+
+---
+
+
 
 
