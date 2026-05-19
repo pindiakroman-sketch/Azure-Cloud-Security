@@ -9062,5 +9062,581 @@ Think of Azure like renting apartments 🏢
 
 ---
 
+# video.n.60-Functionality and usage of pricing and TCO Calculators,,, using web Pricing Calculator,Azure Calculator
+# 💰 Functionality and Usage of Pricing & TCO Calculators (AZ-900)
+
+
+Azure provides **two major calculators** to help estimate cloud costs:
+
+| Calculator                                   | Purpose                                                 |
+| -------------------------------------------- | ------------------------------------------------------- |
+| **Pricing Calculator**                       | Estimates the cost of Azure resources before deployment |
+| **TCO (Total Cost of Ownership) Calculator** | Compares on-premises costs vs Azure cloud costs         |
+
+---
+
+# 🧮 1. Azure Pricing Calculator
+
+## ✅ What It Does
+
+Helps estimate:
+
+* Monthly Azure costs
+* Resource pricing
+* Infrastructure architecture expenses
+
+Useful before:
+
+* Deploying workloads
+* Budget planning
+* Cloud migration projects
+
+---
+
+## 🛠️ How It Works
+
+You manually add:
+
+* Services
+* Resource sizes
+* Usage estimates
+* Region/location
+* Storage
+* Networking
+* Licensing
+
+👉 The calculator estimates the total monthly price.
+
+---
+
+## 🧱 Example Inputs
+
+### Virtual Machines
+
+You specify:
+
+| Setting            | Example       |
+| ------------------ | ------------- |
+| Region             | East US       |
+| OS                 | Windows/Linux |
+| VM Size            | D2s_v3        |
+| Number of VMs      | 10            |
+| Hours Running      | 500 hrs/month |
+| Reserved Instance? | Yes/No        |
+
+---
+
+## 💾 Disk Costs Matter Too
+
+VMs also require disks:
+
+* OS disk
+* Data disks
+
+You choose:
+
+* Standard SSD
+* Premium SSD
+* Disk size
+* Number of disks
+
+⚠️ Premium disks cost more.
+
+---
+
+## 🌐 Networking Costs
+
+Azure also charges for:
+
+* Internet egress (outbound traffic)
+* Bandwidth usage
+
+Costs vary by:
+
+* Region
+* Amount of data transferred
+
+---
+
+## 📦 Important Pricing Factors
+
+### Cost depends on:
+
+* Resource type
+* SKU/size
+* Region
+* Usage hours
+* Storage amount
+* Transactions
+* Licensing
+* Reserved instances
+
+---
+
+## 💡 Reserved Instances
+
+If you commit for:
+
+* **1 year**
+* **3 years**
+
+You get major discounts.
+
+### Example
+
+| Option          | Monthly Cost |
+| --------------- | ------------ |
+| Pay-as-you-go   | ~$1500       |
+| 3-Year Reserved | ~$370        |
+
+Huge savings for predictable workloads.
+
+---
+
+## 🪪 Azure Hybrid Benefit
+
+If you already own:
+
+* Windows Server licenses
+* SQL Server licenses
+
+You can bring them to Azure and reduce costs.
+
+✅ Especially useful for:
+
+* Existing Microsoft customers
+* Hybrid cloud environments
+
+---
+
+## 📤 Extra Features
+
+You can:
+
+* Save estimates
+* Export pricing
+* Share estimates with others
+* Add support plans
+* Compare configurations
+
+---
+
+# 🏢 2. Total Cost of Ownership (TCO) Calculator
+
+## ✅ Purpose
+
+Helps organizations compare:
+
+| On-Premises       | Azure Cloud            |
+| ----------------- | ---------------------- |
+| Hardware          | Azure services         |
+| Electricity       | Managed infrastructure |
+| Cooling           | Reduced maintenance    |
+| Data center costs | Operational savings    |
+| Labor costs       | Automation benefits    |
+
+---
+
+## 🛠️ What You Input
+
+### Existing Infrastructure
+
+* Servers
+* Databases
+* Storage
+* Networking
+* VMware environments
+
+---
+
+## 📊 Example Inputs
+
+| Resource          | Example       |
+| ----------------- | ------------- |
+| Number of VMs     | 10            |
+| CPU cores         | 8             |
+| RAM               | 16 GB         |
+| Databases         | SQL           |
+| Storage           | NAS/SAN       |
+| Network bandwidth | Custom values |
+
+---
+
+## ⚙️ Adjustable Assumptions
+
+You can customize:
+
+* Electricity cost
+* Labor cost
+* Licensing
+* Redundancy
+* Azure region
+* Time period (e.g., 5 years)
+
+---
+
+## 📈 Final Output
+
+The TCO calculator shows:
+
+* Estimated on-prem costs
+* Estimated Azure costs
+* Potential savings over time
+
+Example:
+
+> “Moving to Azure could save X dollars over 5 years.”
+
+---
+
+# 🧠 Beginner-Friendly Key Takeaways
+
+## Pricing Calculator
+
+✅ Estimates Azure service costs
+✅ Good for architecture planning
+✅ Requires accurate usage estimates
+
+---
+
+## TCO Calculator
+
+✅ Compares cloud vs on-premises
+✅ Helps justify migration to Azure
+✅ Includes operational savings
+
+---
+
+# 🚀 AZ-900 Exam Tips
+
+## Remember:
+
+### Pricing Calculator
+
+= **Estimate Azure resource costs**
+
+### TCO Calculator
+
+= **Compare Azure vs on-premises costs**
+
+---
+
+# video.n.62-Purpose of Service Level Agreements
+# 📜 Purpose of Service Level Agreements (SLAs) — AZ-900 Notes
+
+## 🌟 What is an SLA?
+
+A **Service Level Agreement (SLA)** is Microsoft's promise about:
+
+* **Availability**
+* **Uptime**
+* **Reliability** of an Azure service
+
+It tells customers:
+
+> “How much downtime can we expect?”
+
+---
+
+# 🎯 Why SLAs Matter
+
+In cloud computing:
+
+* Microsoft manages much of the infrastructure
+* Customers need guarantees on reliability
+
+SLAs help define:
+
+* Expected uptime
+* Financial compensation if targets are missed
+* Reliability architecture requirements
+
+---
+
+# 🔢 Understanding “Nines” in SLAs
+
+SLAs are usually shown as percentages.
+
+| SLA               | Downtime Per Week |
+| ----------------- | ----------------- |
+| 99% (2 nines)     | ~1.68 hours       |
+| 99.9% (3 nines)   | ~10 minutes       |
+| 99.95%            | ~5 minutes        |
+| 99.99% (4 nines)  | ~1 minute         |
+| 99.999% (5 nines) | ~6 seconds        |
+
+👉 More “9s” = Higher availability = Less downtime
+
+---
+
+# 🏗️ Azure VM SLA Examples
+
+## ✅ Highest SLA (99.99%)
+
+To get **4 nines**, Azure requires:
+
+* **2 or more VMs**
+* Across **2 or more Availability Zones**
+* In the **same Azure region**
+
+### Example Architecture
+
+```text
+Region
+ ├── AZ1 → VM1
+ └── AZ2 → VM2
+```
+
+Usually combined with:
+
+* Standard Load Balancer
+* Zone redundancy
+
+---
+
+# 🌍 Availability Zones Improve SLA
+
+## Why?
+
+Availability Zones are:
+
+* Separate physical datacenters
+* Independent:
+
+  * Power
+  * Cooling
+  * Networking
+
+If one zone fails:
+✅ Another zone can continue running.
+
+---
+
+# 🧱 Availability Set SLA (99.95%)
+
+If you don't use Availability Zones:
+
+You can still improve uptime using:
+
+* **Availability Sets**
+
+### What they do:
+
+Spread VMs across:
+
+* Different racks
+* Different fault domains
+* Different update domains
+
+### Example
+
+```text
+Datacenter
+ ├── Rack 1 → VM1
+ └── Rack 2 → VM2
+```
+
+Better than single VM, but not as resilient as Availability Zones.
+
+---
+
+# 💻 Single VM SLA
+
+If you only deploy:
+
+* **One VM**
+
+Then SLA depends on:
+
+* Disk type
+
+| Disk Type                | SLA   |
+| ------------------------ | ----- |
+| Premium SSD / Ultra Disk | 99.9% |
+| Standard SSD             | 99.5% |
+| Standard HDD             | 95%   |
+
+⚠️ Single VMs have lower reliability.
+
+---
+
+# 💰 Financial Backing
+
+Azure SLAs are:
+✅ Financially backed
+
+If Microsoft fails the SLA:
+
+* You may receive service credits
+
+Example:
+
+* Partial refund
+* Account credit
+
+---
+
+# 📊 Azure Status & Monitoring
+
+## Azure Status Page
+
+Shows:
+
+* Current outages
+* Service availability
+* Regional incidents
+
+## Service Health Dashboard
+
+Inside your subscription:
+
+* Personalized alerts
+* Resource-specific issues
+
+---
+
+# 🧮 Composite SLA
+
+## What Happens When Multiple Services Work Together?
+
+Example:
+
+```text
+Web App + SQL Database
+```
+
+If BOTH are required:
+
+* Overall SLA becomes LOWER
+
+---
+
+## Example Formula
+
+If:
+
+* Web App = 99.95%
+* SQL = 99.99%
+
+Then:
+
+```text
+0.9995 × 0.9999
+= 99.94%
+```
+
+👉 Composite SLA decreases because BOTH services must work.
+
+---
+
+# 🔄 Improving Composite SLA
+
+## Add Redundancy ("OR" Relationship)
+
+Example:
+
+```text
+Web App
+   ├── SQL DB
+   └── Queue Backup
+```
+
+Now:
+
+* Either backend can work
+* Failure chance becomes much smaller
+
+This improves overall availability.
+
+---
+
+# ⚠️ Important SLA Concepts
+
+## AND Relationship
+
+More required components =
+❌ Lower SLA
+
+```text
+Service A AND Service B
+```
+
+---
+
+## OR Relationship
+
+Alternative services =
+✅ Higher SLA
+
+```text
+Service A OR Service B
+```
+
+---
+
+# 🚧 Reality of High Availability
+
+## 5 Nines is VERY Difficult
+
+Why?
+Because many Azure services themselves are:
+
+* 99.99% max
+
+Example:
+
+* Azure AD = 99.99%
+
+You cannot easily exceed dependencies.
+
+---
+
+# 🧠 Beginner-Friendly Key Takeaways
+
+## SLA
+
+= Microsoft's uptime guarantee
+
+---
+
+## Availability Zones
+
+✅ Highest resiliency
+✅ Better SLA
+
+---
+
+## Availability Sets
+
+✅ Good resiliency
+❌ Less isolated than AZs
+
+---
+
+## Single VM
+
+❌ Lowest SLA
+⚠️ Depends on disk type
+
+---
+
+## Composite SLA
+
+* Multiple required services lower uptime
+* Redundancy improves uptime
+
+---
+
+# 📝 Quick Summary
+
+* SLA = uptime guarantee from Microsoft
+* More “9s” = less downtime
+* Availability Zones provide highest VM SLA
+* Availability Sets improve resiliency within a datacenter
+* Single VMs have lower SLA
+* Composite SLAs decrease when services depend on each other
+* Redundancy improves overall availability
+
+
 
 
