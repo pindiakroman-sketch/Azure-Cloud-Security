@@ -8593,8 +8593,474 @@ Some resources include software licenses.
 
 ---
 
-video.n.59-Factors to reduce cost
+# video.n.59-Factors to reduce cost
 
+# 💰 Main Goal
+
+Azure pricing is:
+
+```text id="x1r7pv"
+Pay-as-you-go
+```
+
+So the goal is:
+
+> Use only what you need and avoid waste.
+
+---
+
+# 🧠 Core Cost Optimization Strategies
+
+| Strategy                   | Purpose                                |
+| -------------------------- | -------------------------------------- |
+| Auto-scale                 | Run fewer resources when demand is low |
+| Serverless                 | Pay only when code runs                |
+| Shut down unused resources | Avoid unnecessary charges              |
+| Use correct SKUs           | Prevent overpaying                     |
+| Use reservations           | Get long-term discounts                |
+| Use Spot VMs               | Use spare Azure capacity cheaply       |
+| Use tags                   | Track ownership and costs              |
+
+---
+
+# 1️⃣ Use Auto-Scaling
+
+## What is Auto-Scaling?
+
+Azure automatically:
+
+* adds resources when demand increases
+* removes resources when demand decreases
+
+---
+
+# Benefits
+
+```text id="m4z8qo"
+Only pay for the capacity you actually need
+```
+
+---
+
+# Examples
+
+| Service       | Auto-Scaling Feature         |
+| ------------- | ---------------------------- |
+| VM Scale Sets | Scale VM count automatically |
+| AKS           | Cluster autoscaler           |
+| App Service   | Auto-scale plans             |
+
+---
+
+# 📌 Important AZ-900 Concept
+
+Auto-scale helps:
+
+```text id="j9u2cy"
+Reduce wasted compute resources
+```
+
+---
+
+# 2️⃣ Prefer Serverless & PaaS
+
+## Why?
+
+Traditional VMs run continuously:
+
+```text id="k7x5dr"
+Even when idle
+```
+
+Serverless runs:
+
+```text id="q2p1lb"
+Only when triggered
+```
+
+---
+
+# Examples
+
+| Service         | Billing Style       |
+| --------------- | ------------------- |
+| Azure Functions | Per execution       |
+| Logic Apps      | Per workflow/action |
+
+---
+
+# 🧠 Key Benefit
+
+```text id="f6m9vn"
+You pay only for actual work performed
+```
+
+---
+
+# 3️⃣ Choose the Correct SKU & Size
+
+## Don't Overprovision
+
+Avoid:
+
+* oversized VMs
+* unnecessary premium tiers
+* excessive memory/CPU
+
+---
+
+# Example
+
+| Bad Choice             | Better Choice |
+| ---------------------- | ------------- |
+| Large VM for small app | Small VM      |
+
+---
+
+# 📌 Important Concept
+
+```text id="w3n4tb"
+Right-size your resources
+```
+
+---
+
+# 4️⃣ Shut Down Unused Resources
+
+## Common Beginner Mistake
+
+Leaving dev/test VMs running overnight.
+
+---
+
+# Solution
+
+Use:
+
+```text id="a8q6ej"
+Auto-shutdown schedules
+```
+
+---
+
+# Example
+
+A VM used only during work hours:
+
+* ON during day
+* OFF at night
+
+---
+
+# 🧠 Benefit
+
+```text id="d5k0ry"
+Reduce compute charges
+```
+
+---
+
+# 5️⃣ Delete Unused Resources
+
+Stopping a VM:
+
+```text id="z1v8pn"
+Does NOT always remove all costs
+```
+
+---
+
+# Resources That May Still Cost Money
+
+* disks
+* storage accounts
+* public IPs
+* load balancers
+
+---
+
+# 📌 Best Practice
+
+Delete resources completely when no longer needed.
+
+---
+
+# 🧠 Why Resource Groups Help
+
+Resources in the same project:
+
+```text id="n6h3cx"
+Can be deleted together
+```
+
+---
+
+# 6️⃣ Use Storage Tiers
+
+## Azure Storage Tiers
+
+| Tier    | Best For                   |
+| ------- | -------------------------- |
+| Hot     | Frequently accessed data   |
+| Cool    | Infrequently accessed data |
+| Archive | Rarely accessed data       |
+
+---
+
+# 🧠 Cost Optimization Idea
+
+Move older data to cheaper tiers.
+
+---
+
+# 📌 Lifecycle Management
+
+Azure can automatically:
+
+```text id="s9p2wm"
+Move data between tiers
+```
+
+based on usage.
+
+---
+
+# 7️⃣ Use Tags
+
+## What are Tags?
+
+Metadata labels like:
+
+* owner
+* environment
+* department
+* cost center
+
+---
+
+# Example
+
+| Tag         | Value        |
+| ----------- | ------------ |
+| Environment | Production   |
+| Owner       | Finance Team |
+| CostCenter  | CC-100       |
+
+---
+
+# 🧠 Why Tags Matter
+
+Tags help:
+
+* identify resources
+* track costs
+* avoid forgotten resources
+
+---
+
+# 📌 Important AZ-900 Concept
+
+Use:
+
+```text id="g4t7yk"
+Azure Policy
+```
+
+to enforce tags.
+
+---
+
+# 8️⃣ Use Azure Advisor
+
+## What is Azure Advisor?
+
+A recommendation tool that helps optimize:
+
+* cost
+* security
+* performance
+* reliability
+
+---
+
+# Example Recommendations
+
+```text id="v7m1ez"
+Resize underutilized VMs
+Delete unused resources
+Buy reservations
+```
+
+---
+
+# 9️⃣ Use Azure Reservations
+
+## What are Reservations?
+
+Commit to using resources for:
+
+* 1 year
+* 3 years
+
+to get large discounts.
+
+---
+
+# 🧠 Key Idea
+
+Azure rewards predictable usage:
+
+```text id="r2n8lf"
+With lower pricing
+```
+
+---
+
+# Example Savings
+
+| Pricing Model      | Example Cost |
+| ------------------ | ------------ |
+| Pay-as-you-go      | ~$1525/month |
+| Reserved (3 years) | ~$370/month  |
+
+---
+
+# 📌 Important Concept
+
+Reservations work best for:
+
+```text id="y5c0qa"
+Always-running workloads
+```
+
+---
+
+# 🔟 Use Azure Hybrid Benefit
+
+## What is it?
+
+Reuse existing:
+
+* Windows Server licenses
+* SQL Server licenses
+
+inside Azure.
+
+---
+
+# Benefit
+
+```text id="u3f6tw"
+Avoid paying license costs twice
+```
+
+---
+
+# Example
+
+Without Hybrid Benefit:
+
+* VM includes Windows license cost
+
+With Hybrid Benefit:
+
+* Use existing license
+
+---
+
+# 1️⃣1️⃣ Use Spot VMs
+
+## What are Spot VMs?
+
+Very cheap VMs using:
+
+```text id="p8k2vd"
+Azure's spare capacity
+```
+
+---
+
+# ⚠️ Important Tradeoff
+
+Azure can:
+
+```text id="h1z7mu"
+Evict (stop) the VM at any time
+```
+
+if capacity is needed.
+
+---
+
+# Best Use Cases
+
+| Good For   | Bad For                  |
+| ---------- | ------------------------ |
+| Batch jobs | Critical production apps |
+| Testing    | Always-on services       |
+| Rendering  | Databases                |
+
+---
+
+# 🧠 Key Benefit
+
+```text id="c4r9ox"
+Massive cost savings
+```
+
+---
+
+# 🔄 Cost Optimization Summary
+
+| Technique          | Savings Type          |
+| ------------------ | --------------------- |
+| Auto-scale         | Reduce idle resources |
+| Serverless         | Pay per execution     |
+| Shutdown schedules | Reduce runtime        |
+| Reservations       | Long-term discounts   |
+| Hybrid Benefit     | Reuse licenses        |
+| Spot VMs           | Cheap spare capacity  |
+
+---
+
+# 🧠 Easy Memory Trick
+
+## Reduce Azure Costs By:
+
+```text id="e7x3kj"
+Scale smart
+Shut down unused things
+Commit for discounts
+Use cheaper tiers
+```
+
+---
+
+# ⭐ Super Simple Summary
+
+Azure cost optimization means:
+
+* using fewer resources
+* using resources efficiently
+* deleting waste
+* using discounts
+* automating scaling
+
+---
+
+# ✈️ Easy Analogy
+
+Think of Azure like renting apartments 🏢
+
+| Azure Feature     | Apartment Analogy                    |
+| ----------------- | ------------------------------------ |
+| Auto-scale        | Rent more rooms only when needed     |
+| Reservations      | Long-term lease discount             |
+| Spot VM           | Cheap unused room that may disappear |
+| Shutdown schedule | Turn off lights when leaving         |
+| Tags              | Labels on apartment ownership        |
+
+---
 
 
 
