@@ -9638,5 +9638,6 @@ You cannot easily exceed dependencies.
 * Redundancy improves overall availability
 
 
-
+____________________________________
+prešiel som všetko na 80% ale ešte musím preopakovať praktikum
 
