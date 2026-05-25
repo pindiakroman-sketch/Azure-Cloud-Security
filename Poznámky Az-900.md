@@ -9640,4 +9640,7 @@ You cannot easily exceed dependencies.
 
 ____________________________________
 prešiel som všetko na 80% ale ešte musím preopakovať praktikum
+## SC-900 - Začiatok druhého kurzu na ktorom budem stavať dva hlavné AZ-104-AZ-500
+
+
 
