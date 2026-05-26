@@ -9672,6 +9672,10 @@ Cloud = less infrastructure work, NOT less security responsibility.
 
 <img width="3858" height="2475" alt="image" src="https://github.com/user-attachments/assets/bad72547-4a3b-4ddc-9f37-dba36905bea0" />
 
+
+
+Diagram showing the AI shared responsibility model, with responsibility divided across AI platform, AI application, and AI usage layers for IaaS, PaaS, and SaaS service types.
+
 ---
 
 # 2. Defense in Depth
