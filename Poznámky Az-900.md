@@ -9642,5 +9642,318 @@ ____________________________________
 prešiel som všetko na 80% ale ešte musím preopakovať praktikum
 ## SC-900 - Začiatok druhého kurzu na ktorom budem stavať dva hlavné AZ-104-AZ-500
 
+# Introduction to Security,Compliance and indentity concepts
+# SC-900 — Security, Compliance & Identity Concepts
+
+## 1. Shared Responsibility Model
+
+### Main idea
+In cloud computing, security responsibilities are shared between:
+- Cloud Provider
+- Customer
+
+### What YOU always own
+- Data
+- User identities
+- Devices
+- Access management
+
+### Service Models
+
+| Model | Provider Manages | Customer Manages |
+|---|---|---|
+| On-Prem | Nothing | Everything |
+| IaaS | Hardware, networking | OS, apps, data |
+| PaaS | Infrastructure + OS/runtime | Apps, data |
+| SaaS | Almost everything | Users, data access |
+
+### Easy Memory Trick
+Cloud = less infrastructure work, NOT less security responsibility.
+
+---
+
+# 2. Defense in Depth
+
+## Never rely on one protection layer
+
+Security should have multiple layers:
+- Physical security
+- MFA
+- Firewalls
+- Network segmentation
+- Device security
+- Encryption
+- Monitoring
+- Backups
+
+## Goal
+If one layer fails, another stops the attack.
+
+---
+
+# 3. CIA Triad
+
+## Core Security Goals
+
+### Confidentiality
+Only authorized users can access data.
+
+Examples:
+- Encryption
+- Permissions
+- MFA
+
+---
+
+### Integrity
+Data should remain accurate and unchanged.
+
+Examples:
+- Hashing
+- Auditing
+- Validation
+
+---
+
+### Availability
+Systems and data must stay accessible.
+
+Examples:
+- Backups
+- Redundancy
+- Disaster recovery
+
+---
+
+# 4. Zero Trust
+
+## Main Principle
+> Never Trust, Always Verify
+
+Do NOT automatically trust:
+- Users
+- Devices
+- Networks
+- Internal systems
+
+Always verify:
+- Identity
+- Device health
+- Access level
+- Risk signals
+
+---
+
+## 3 Core Principles
+
+### Verify Explicitly
+Validate every request.
+
+### Least Privilege Access
+Give minimum required permissions.
+
+### Assume Breach
+Design systems as if attackers already entered.
+
+---
+
+# 5. Encryption
+
+## Purpose
+Makes data unreadable without the correct key.
+
+## Protects Data:
+- At Rest
+- In Transit
+- In Use
+
+---
+
+## Types of Encryption
+
+### Symmetric Encryption
+- Same key encrypts & decrypts
+- Faster
+- Used for large data
+
+### Asymmetric Encryption
+- Public + private key pair
+- Used in HTTPS/TLS
+
+---
+
+# 6. Hashing
+
+## Purpose
+Used mainly for password protection.
+
+## Important Facts
+- One-way process
+- Cannot be reversed
+- Same input = same hash
+
+---
+
+## Password Security
+Systems should:
+- Store hashed passwords
+- Add salts to prevent rainbow-table attacks
+
+---
+
+# 7. Governance, Risk & Compliance (GRC)
+
+## Governance
+Rules and policies.
+
+Examples:
+- Access policies
+- Security standards
+- Accountability
+
+---
+
+## Risk Management
+Identify and reduce threats.
+
+Examples:
+- Data leaks
+- Cyberattacks
+- Insider threats
+
+---
+
+## Compliance
+Follow laws and regulations.
+
+Examples:
+- GDPR
+- HIPAA
+- ISO standards
+
+---
+
+# 8. Authentication vs Authorization
+
+## Authentication
+### "Who are you?"
+
+Examples:
+- Password
+- MFA
+- Biometrics
+
+---
+
+## Authorization
+### "What can you access?"
+
+Examples:
+- Roles
+- Permissions
+- RBAC
+
+---
+
+# 9. Identity = New Security Perimeter
+
+Modern security is no longer based on office networks.
+
+Security now focuses on:
+- User identity
+- Device trust
+- Context
+- Access behavior
+
+---
+
+# 10. Identity Infrastructure Pillars
+
+## Administration
+Manage users/devices.
+
+## Authentication
+Verify identity.
+
+## Authorization
+Control permissions.
+
+## Auditing
+Track activities and logs.
+
+---
+
+# 11. Identity Providers (IDP)
+
+## Purpose
+Centralized authentication system.
+
+Examples:
+- Microsoft Entra ID
+- Okta
+- Google Identity
+
+---
+
+## Benefits
+- Single Sign-On (SSO)
+- MFA
+- Centralized policies
+- Better monitoring
+
+---
+
+# 12. Directory Services
+
+## Active Directory (AD)
+Traditional on-prem identity management.
+
+## Microsoft Entra ID
+Cloud identity platform supporting:
+- Cloud apps
+- Hybrid environments
+- Modern authentication
+
+---
+
+# 13. Federation
+
+## Purpose
+Allows different organizations to trust each other's authentication.
+
+### Example
+Login to another company's app using your company account.
+
+## Benefits
+- No duplicate accounts
+- Better user experience
+- Stronger security
+- Easier collaboration
+
+---
+
+# Everyday Security Takeaways
+
+- Use MFA everywhere
+- Apply least privilege
+- Encrypt sensitive data
+- Monitor login activity
+- Never trust devices/users automatically
+- Keep backups
+- Assume breaches can happen
+- Identity security is critical in cloud environments
+
+---
+
+# Quick Exam Memory Lines
+
+- CIA = Confidentiality, Integrity, Availability
+- Zero Trust = Never Trust, Always Verify
+- Authentication = Who you are
+- Authorization = What you can do
+- Hashing = One-way password protection
+- Encryption = Reversible with key
+- Least Privilege = Minimum necessary access
+
 
 
