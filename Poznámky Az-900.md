@@ -9731,6 +9731,16 @@ Examples:
 
 ---
 
+
+# Balancing the CIA triad
+In practice, confidentiality, integrity, and availability can sometimes pull in different directions. For example, encrypting everything strongly protects confidentiality, but if encryption keys are lost, data becomes permanently inaccessible—hurting availability. Requiring complex authentication protects confidentiality and integrity but adds friction that can affect productivity.
+
+Security teams work to find the right balance based on the sensitivity of the data, the potential impact of a breach, and the operational requirements of the business. Understanding the tradeoffs between these three properties helps organizations make informed, risk-based security decisions.
+
+The CIA triad also helps frame the impact of attacks: attackers who steal data are targeting confidentiality, attackers who modify records are targeting integrity, and attackers who take systems offline are targeting availability. Keeping the CIA triad in mind helps organizations think about the full range of threats they need to defend against.
+
+
+
 # 4. Zero Trust
 
 ## Main Principle
@@ -9962,4 +9972,5 @@ Login to another company's app using your company account.
 - Least Privilege = Minimum necessary access
 
 
+<img width="1100" height="580" alt="image" src="https://github.com/user-attachments/assets/6bc9775b-753b-4c5d-8784-589ceff802dc" />
 
