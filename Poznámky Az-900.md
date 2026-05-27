@@ -9884,6 +9884,7 @@ Examples:
 - Permissions
 - RBAC
 
+Authorization can only happen after successful authentication. You can't determine what someone is permitted to do without first confirming their identity. And confirming identity alone—without checking permissions—leaves resources exposed. Together, authentication and authorization ensure that the right identities get the right access, and nothing more.
 ---
 
 # 9. Identity = New Security Perimeter
