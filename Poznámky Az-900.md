@@ -9819,6 +9819,14 @@ Systems should:
 - Add salts to prevent rainbow-table attacks
 
 
+Salting
+To defend against precomputed attacks, passwords are typically salted before hashing. A salt is a unique, randomly generated value created for each individual password and added to it before hashing. Because every password gets a different salt, two users with the same password produce different hashes in the database. This makes precomputed rainbow tables ineffective, because the attacker would need a separate lookup table for every possible salt value.
+
+Salting is a standard best practice in secure password storage and is required for any properly implemented authentication system.
+
+
+
+
 <img width="508" height="116" alt="image" src="https://github.com/user-attachments/assets/cde18882-1080-48cd-be25-37ed065d468c" />
 
 
