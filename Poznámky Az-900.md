@@ -9796,6 +9796,9 @@ Makes data unreadable without the correct key.
 - Public + private key pair
 - Used in HTTPS/TLS
 
+<img width="554" height="418" alt="image" src="https://github.com/user-attachments/assets/131baeed-e6ee-43ed-8714-d5593d763b9b" />
+
+
 ---
 
 # 6. Hashing
@@ -9814,6 +9817,10 @@ Used mainly for password protection.
 Systems should:
 - Store hashed passwords
 - Add salts to prevent rainbow-table attacks
+
+
+<img width="508" height="116" alt="image" src="https://github.com/user-attachments/assets/cde18882-1080-48cd-be25-37ed065d468c" />
+
 
 ---
 
