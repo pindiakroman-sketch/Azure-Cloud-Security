@@ -9643,7 +9643,7 @@ prešiel som všetko na 80% ale ešte musím preopakovať praktikum
 ## SC-900 - Začiatok druhého kurzu na ktorom budem stavať dva hlavné AZ-104-AZ-500
 
 # Introduction to Security,Compliance and indentity concepts
-# SC-900 — Security, Compliance & Identity Concepts
+# SC-900 — 1 - Security, Compliance & Identity Concepts
 
 ## 1. Shared Responsibility Model
 
@@ -9999,4 +9999,607 @@ You learned how authentication proves who you are—through credentials, multifa
 You learned how identity providers centralize authentication, issue security tokens, and enable single sign-on. You explored directory services—from on-premises Active Directory Domain Services to Microsoft Entra ID as its cloud-native evolution. Finally, you learned how federation uses trust relationships so users can access resources across organizational boundaries using the identities they already have.
 
 <img width="1100" height="580" alt="image" src="https://github.com/user-attachments/assets/6bc9775b-753b-4c5d-8784-589ceff802dc" />
+
+
+## Introduction to Microsoft entra -SC900
+
+# SC-900 — 2 - Introduction to Microsoft Entra 
+
+# 1. What is Microsoft Entra ID?
+
+## Definition
+Microsoft Entra ID is Microsoft's cloud-based:
+- Identity Management
+- Access Management
+- Authentication platform
+
+It controls:
+- Who can sign in
+- What they can access
+- Under what conditions
+
+---
+
+## Main Purpose
+Provide one secure identity across:
+- Cloud apps
+- Microsoft 365
+- Azure
+- On-prem systems
+- Devices
+
+---
+
+## Key Benefits
+- Single Sign-On (SSO)
+- Centralized identity management
+- Better security
+- Hybrid identity support
+- Zero Trust integration
+
+---
+
+# 2. Entra Tenant / Directory
+
+## Tenant
+A tenant = your organization's identity container.
+
+Stores:
+- Users
+- Groups
+- Devices
+- Applications
+- Policies
+
+---
+
+## Important Concept
+One organization can have:
+- Single tenant
+- Multiple tenants
+- Multi-tenant environments
+
+Used for:
+- Subsidiaries
+- Different regions
+- Regulatory separation
+
+---
+
+# 3. Identity Types in Entra
+
+# Human Identities
+
+## Members
+Internal employees.
+
+Examples:
+- Staff
+- IT admins
+- HR employees
+
+Usually get:
+- Full company access
+- Long-term permissions
+
+---
+
+## Guests
+External users.
+
+Examples:
+- Vendors
+- Consultants
+- Business partners
+
+Usually get:
+- Limited access
+- Temporary/project-based permissions
+
+---
+
+# Device Identities
+
+Examples:
+- Laptops
+- Phones
+- Tablets
+
+Purpose:
+- Verify trusted devices
+- Enable BYOD
+- Apply security policies
+
+---
+
+# Workload Identities
+
+## Service Principals
+Identity for applications.
+
+Used when apps need secure access to:
+- Microsoft Graph
+- APIs
+- Azure resources
+
+---
+
+## Managed Identities
+Identity automatically managed by Azure.
+
+Purpose:
+- Remove stored credentials
+- Secure service-to-service authentication
+
+Example:
+- VM accessing Azure Key Vault securely
+
+---
+
+# 4. Hybrid Identity
+
+## Definition
+Single identity across:
+- On-prem Active Directory
+- Cloud services
+
+---
+
+## How it Works
+Synchronization between:
+- Active Directory
+- Microsoft Entra ID
+
+Using:
+- Entra Connect
+- Cloud Sync
+
+---
+
+## Benefits
+- One login everywhere
+- Reduced identity sprawl
+- Consistent security policies
+- Easier migration to cloud
+
+---
+
+# 5. Authentication in Entra
+
+## Authentication = Verify Identity
+
+Traditional:
+- Username/password
+
+Modern:
+- MFA
+- Biometrics
+- Passkeys
+- Authenticator apps
+
+---
+
+# Authentication Methods
+
+## Password-Based
+- Weakest option
+- Still supported
+
+---
+
+## Phone-Based
+- SMS
+- Voice calls
+
+---
+
+## One-Time Passcodes
+- OATH tokens
+- Temporary codes
+
+---
+
+## Passwordless Authentication
+
+### Windows Hello
+- Face scan
+- Fingerprint
+- PIN
+
+### Microsoft Authenticator
+- Push approval
+
+### FIDO2 Security Keys
+- Hardware security keys
+
+### Certificate-Based Authentication
+- Trusted certificates
+
+---
+
+## Why Passwordless?
+Reduces:
+- Phishing
+- Password spray attacks
+- Credential theft
+
+Improves:
+- User experience
+- Security
+
+---
+
+# 6. Multifactor Authentication (MFA)
+
+## Definition
+Requires multiple verification factors.
+
+---
+
+## Three Factor Types
+
+### Something You Know
+- Password
+- PIN
+
+### Something You Have
+- Phone
+- Security key
+
+### Something You Are
+- Fingerprint
+- Face scan
+
+---
+
+## Why MFA Matters
+Even if passwords leak:
+- Attackers still cannot log in easily
+
+---
+
+## Security Defaults
+Microsoft baseline protections include:
+- MFA for admins
+- Risk-based MFA prompts
+
+Good for:
+- Small organizations
+- Simpler deployments
+
+---
+
+# 7. Password Protection
+
+## Purpose
+Block weak passwords automatically.
+
+---
+
+## Global Banned Password List
+Microsoft blocks:
+- Common passwords
+- Predictable variations
+
+Examples:
+- Password123
+- CompanyName2025
+
+---
+
+## Custom Password Lists
+Organizations can block:
+- Company names
+- Product names
+- Internal terminology
+
+---
+
+## Protection Against
+- Password spray attacks
+- Weak credential usage
+
+---
+
+# 8. Conditional Access
+
+# Core Idea
+Conditional Access = smart IF-THEN security rules.
+
+---
+
+## Example
+
+IF:
+- User logs in from unknown country
+- Device is non-compliant
+- Risk is high
+
+THEN:
+- Require MFA
+- Block access
+- Force password reset
+
+---
+
+# Signals Used
+
+## User
+Who is signing in?
+
+## Device
+Trusted or compliant?
+
+## Location
+Known or risky location?
+
+## Risk Level
+Suspicious activity detected?
+
+## Application
+Which app is being accessed?
+
+---
+
+# Access Outcomes
+
+## Allow Access
+
+## Block Access
+
+## Allow with Conditions
+Examples:
+- Require MFA
+- Require compliant device
+- Limit session actions
+
+---
+
+# Benefits
+- Adaptive security
+- Lower friction for safe users
+- Stronger Zero Trust enforcement
+
+---
+
+# 9. Global Secure Access
+
+## Purpose
+Secure access to:
+- Internet apps
+- Private corporate apps
+
+Without relying on VPNs.
+
+---
+
+# Components
+
+## Entra Internet Access
+Protects:
+- SaaS apps
+- Web traffic
+
+---
+
+## Entra Private Access
+Secure access to:
+- Internal corporate resources
+
+Can replace:
+- Traditional VPNs
+
+---
+
+# Benefits
+- Better visibility
+- Identity-driven security
+- Reduced lateral movement
+- Remote work support
+
+---
+
+# 10. Role-Based Access Control (RBAC)
+
+## Main Principle
+Give users only the permissions they need.
+
+---
+
+# Built-In Roles
+
+## Global Administrator
+Full control.
+
+## User Administrator
+Manage users/groups.
+
+## Billing Administrator
+Manage subscriptions/billing.
+
+---
+
+# Benefits
+- Least privilege
+- Reduced risk
+- Easier auditing
+- Better control
+
+---
+
+# Important Difference
+
+## Entra RBAC
+Controls:
+- Identity resources
+
+---
+
+## Azure RBAC
+Controls:
+- Azure infrastructure
+- VMs
+- Storage
+- Networking
+
+---
+
+# 11. Identity Governance
+
+## Goal
+Ensure:
+- Right people
+- Right access
+- Right time
+- Right duration
+
+---
+
+# Join-Move-Leave Model
+
+## Join
+Create account + grant access.
+
+## Move
+Adjust permissions.
+
+## Leave
+Remove access.
+
+---
+
+# Governance Features
+
+## Dynamic Groups
+Automatic group membership based on attributes.
+
+## Access Reviews
+Periodic review of:
+- Group access
+- App access
+- Roles
+
+---
+
+# Why Access Reviews Matter
+Prevent:
+- Old permissions
+- Forgotten guest accounts
+- Overprivileged users
+
+---
+
+# 12. Privileged Identity Management (PIM)
+
+## Purpose
+Protect admin roles.
+
+---
+
+# Problem
+Permanent admin access = dangerous.
+
+---
+
+# PIM Solution
+Use:
+- Just-In-Time access
+- MFA
+- Approval workflows
+- Time-limited admin access
+
+---
+
+## Example
+Admin activates Global Admin role:
+- Only when needed
+- For limited time
+- Fully audited
+
+---
+
+# Benefits
+- Reduced attack surface
+- Better auditing
+- Stronger admin security
+
+---
+
+# 13. Identity Protection
+
+## Purpose
+Detect risky identities and sign-ins.
+
+---
+
+# Detects
+- Leaked credentials
+- Suspicious sign-ins
+- Impossible travel
+- Risky users
+- Risky workload identities
+
+---
+
+# Automated Responses
+
+## Require MFA
+
+## Force Password Reset
+
+## Block Access
+
+---
+
+# Integration
+Works with:
+- Conditional Access
+- Microsoft Security Copilot
+
+---
+
+# 14. Microsoft Security Copilot + Entra
+
+## Purpose
+Help security analysts investigate faster.
+
+---
+
+# Capabilities
+- Natural language analysis
+- Risk summaries
+- Investigation guidance
+- Threat explanations
+
+---
+
+# Benefits
+- Faster incident response
+- Easier investigations
+- Better visibility
+
+---
+
+# Everyday Practical Takeaways
+
+- MFA should always be enabled
+- Passwordless > passwords
+- Use Conditional Access for adaptive security
+- Apply least privilege everywhere
+- Avoid permanent admin access
+- Review guest access regularly
+- Monitor risky sign-ins continuously
+- Identity is the new security perimeter
+
+---
+
+# Quick Memory Notes
+
+- Entra ID = Cloud identity platform
+- MFA = Multiple verification factors
+- Conditional Access = IF-THEN access rules
+- RBAC = Permission control by role
+- PIM = Just-In-Time admin access
+- Identity Protection = Detect/respond to identity threats
+- Passwordless = Stronger + easier authentication
 
