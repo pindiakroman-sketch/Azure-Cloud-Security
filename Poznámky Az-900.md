@@ -9897,6 +9897,8 @@ Security now focuses on:
 - Context
 - Access behavior
 
+<img width="1430" height="975" alt="image" src="https://github.com/user-attachments/assets/43f99d0c-36c5-4b19-b4df-181d0d732bad" />
+
 ---
 
 # 10. Identity Infrastructure Pillars
@@ -9962,6 +9964,10 @@ Login to another company's app using your company account.
 - Stronger security
 - Easier collaboration
 
+- <img width="949" height="568" alt="image" src="https://github.com/user-attachments/assets/caf3cb14-d678-49ae-a054-5f9c77e3c5ac" />
+
+
+
 ---
 
 # Everyday Security Takeaways
@@ -9987,6 +9993,10 @@ Login to another company's app using your company account.
 - Encryption = Reversible with key
 - Least Privilege = Minimum necessary access
 
+
+You learned how authentication proves who you are—through credentials, multifactor authentication, and passwordless methods—while authorization determines what you're allowed to do. You explored why identity is the new security perimeter and how organizations manage it through four pillars: administration, authentication, authorization, and auditing.
+
+You learned how identity providers centralize authentication, issue security tokens, and enable single sign-on. You explored directory services—from on-premises Active Directory Domain Services to Microsoft Entra ID as its cloud-native evolution. Finally, you learned how federation uses trust relationships so users can access resources across organizational boundaries using the identities they already have.
 
 <img width="1100" height="580" alt="image" src="https://github.com/user-attachments/assets/6bc9775b-753b-4c5d-8784-589ceff802dc" />
 
