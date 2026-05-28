@@ -10018,6 +10018,8 @@ It controls:
 - What they can access
 - Under what conditions
 
+<img width="1227" height="748" alt="image" src="https://github.com/user-attachments/assets/0da2a233-49b3-4ccc-80ad-38e6cd9598e1" />
+
 ---
 
 ## Main Purpose
