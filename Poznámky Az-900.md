@@ -10179,6 +10179,8 @@ Modern:
 - Passkeys
 - Authenticator apps
 
+<img width="1639" height="768" alt="image" src="https://github.com/user-attachments/assets/36cd910e-a3dc-4c58-bc5e-d65c5077cc76" />
+
 ---
 
 # Authentication Methods
