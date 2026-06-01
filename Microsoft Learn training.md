@@ -7,3 +7,6 @@
  
  # Describe access management capabilities of Microsoft Entra 
  <img width="872" height="909" alt="image" src="https://github.com/user-attachments/assets/98413b05-dacc-4fd0-b4ab-999a4ce0dbba" />
+
+# Describe the identity protection and governance capabilities of Microsoft Entra 
+<img width="863" height="864" alt="image" src="https://github.com/user-attachments/assets/128222c7-4f29-48b3-9548-2fa79d6f6887" />
