@@ -10609,3 +10609,463 @@ Help security analysts investigate faster.
 - Identity Protection = Detect/respond to identity threats
 - Passwordless = Stronger + easier authentication
 
+
+# Introduction to Microsoft security solutions: Part 1
+
+# SC-900 Notes — Microsoft Security Solutions (Part 1)
+
+> Video: [Introduction to Microsoft Security Solutions: Part 1 | SC-900 | Episode 4](https://www.youtube.com/watch?v=wpOwHKL5DpQ&utm_source=chatgpt.com)
+
+---
+
+# 🤖 Microsoft Security Copilot
+
+## What is it?
+
+Microsoft Security Copilot is an AI-powered security assistant.
+
+It combines:
+
+* Large Language Models (LLMs)
+* Microsoft security data
+* Threat intelligence
+* Security tools (Defender, Sentinel, Entra, etc.)
+
+Goal:
+
+> Help security teams investigate threats faster and make better decisions.
+
+---
+
+## Main Use Cases
+
+### Incident Summarization
+
+Instead of reading hundreds of alerts:
+
+* summarizes incidents
+* highlights affected users
+* identifies impacted devices
+
+### Impact Analysis
+
+Shows:
+
+* affected users
+* affected systems
+* affected data
+
+Helps prioritize response efforts.
+
+### Script Analysis
+
+Can explain:
+
+* PowerShell scripts
+* Bash scripts
+* Malware commands
+
+In plain English.
+
+### Guided Response
+
+Provides:
+
+* investigation steps
+* containment recommendations
+* remediation guidance
+
+---
+
+# Security Copilot Concepts
+
+| Term         | Meaning                          |
+| ------------ | -------------------------------- |
+| Session      | One conversation                 |
+| Prompt       | Question or instruction          |
+| Plugin       | Connection to security tools     |
+| Workspace    | Separate environment for teams   |
+| Orchestrator | AI engine coordinating responses |
+| Agent        | Autonomous AI assistant          |
+
+---
+
+# Workspaces
+
+A workspace is an isolated Copilot environment.
+
+Useful for:
+
+* Security teams
+* SOC teams
+* Compliance teams
+* Different departments
+
+Benefits:
+
+* Separate permissions
+* Separate plugins
+* Separate billing/capacity
+* Data residency control
+
+---
+
+# Agents
+
+Agents automate repetitive tasks.
+
+Examples:
+
+* Phishing investigations
+* Threat analysis
+* Identity investigations
+* Data security tasks
+
+Agents:
+
+✅ Can work automatically
+
+✅ Use plugins
+
+✅ Follow permissions
+
+✅ Learn from feedback
+
+---
+
+# Good Prompt Structure
+
+A strong prompt should include:
+
+### 1. Goal
+
+What do you want?
+
+Example:
+
+> Summarize this incident.
+
+---
+
+### 2. Context
+
+Why do you need it?
+
+Example:
+
+> Create a report for management.
+
+---
+
+### 3. Expectations
+
+Desired output.
+
+Example:
+
+> Give me 5 bullet points.
+
+---
+
+### 4. Source
+
+Where should Copilot look?
+
+Example:
+
+> Use Defender XDR alerts.
+
+---
+
+# ☁️ Azure Security Services
+
+---
+
+# Azure DDoS Protection
+
+Protects internet-facing applications from:
+
+* Volumetric attacks
+* Protocol attacks
+* Resource exhaustion attacks
+
+Features:
+
+* Always-on monitoring
+* Automatic mitigation
+* Traffic analysis
+* Azure Monitor alerts
+
+---
+
+## Protection Types
+
+### Basic
+
+Free.
+
+Basic platform protection.
+
+### Network Protection
+
+Advanced protection for VNets.
+
+### IP Protection
+
+Protection for specific public IP addresses.
+
+---
+
+# Azure Firewall
+
+Managed cloud firewall.
+
+Provides:
+
+### Layer 3/4 Protection
+
+* IP filtering
+* TCP/UDP filtering
+
+### Layer 7 Protection
+
+* Application filtering
+* URL filtering
+* Threat intelligence filtering
+
+---
+
+## Common Deployment
+
+Hub-and-Spoke Architecture
+
+```text
+Internet
+    |
+Azure Firewall
+    |
+-----------------
+|       |       |
+VNet1 VNet2 VNet3
+```
+
+Benefits:
+
+* Centralized security
+* Easier management
+* Better visibility
+
+---
+
+# Azure Web Application Firewall (WAF)
+
+Protects web applications.
+
+Defends against:
+
+* SQL Injection
+* Cross-Site Scripting (XSS)
+* Application-layer DDoS attacks
+
+Can be used with:
+
+* Azure Application Gateway
+* Azure Front Door
+* Azure CDN
+
+---
+
+# 🌐 Azure Virtual Network (VNet)
+
+A VNet is your private network in Azure.
+
+Provides:
+
+* Isolation
+* Connectivity
+* Segmentation
+
+Think of it as:
+
+> Your company's private network inside Azure.
+
+---
+
+# Network Segmentation
+
+Purpose:
+
+* Reduce attack surface
+* Limit lateral movement
+* Support Zero Trust
+
+Example:
+
+```text
+VNet
+ ├── Web Subnet
+ ├── App Subnet
+ └── Database Subnet
+```
+
+---
+
+# Network Security Groups (NSGs)
+
+Traffic filtering inside a VNet.
+
+Rules evaluate:
+
+* Source IP
+* Destination IP
+* Port
+* Protocol
+* Direction
+
+---
+
+## Example
+
+Allow:
+
+```text
+TCP 443
+Internet → Web Server
+```
+
+Block:
+
+```text
+All other inbound traffic
+```
+
+---
+
+## Key Exam Fact
+
+Rules are processed:
+
+> Lowest number = Highest priority
+
+Example:
+
+```text
+100 Allow RDP
+65000 Deny All
+```
+
+Rule 100 wins.
+
+---
+
+# Azure Bastion
+
+Secure remote access to VMs.
+
+Supports:
+
+* RDP
+* SSH
+
+Without:
+
+❌ Public IPs
+
+❌ Opening ports to the Internet
+
+---
+
+## Benefits
+
+* Reduced attack surface
+* Protection from port scanning
+* Browser-based access
+
+---
+
+# 🔑 Azure Key Vault
+
+Secure storage for:
+
+* Secrets
+* Passwords
+* API keys
+* Certificates
+* Cryptographic keys
+
+---
+
+## Why Use It?
+
+Bad:
+
+```text
+Password inside source code
+```
+
+Good:
+
+```text
+Password stored in Key Vault
+```
+
+---
+
+## Key Vault Tiers
+
+### Standard
+
+Software-based encryption.
+
+### Premium
+
+Hardware Security Module (HSM)
+
+Higher security.
+
+---
+
+# SC-900 Exam Takeaways
+
+Remember:
+
+### Security Copilot
+
+* AI-powered security assistant
+* Uses prompts
+* Works with plugins
+* Supports agents
+
+### Azure DDoS Protection
+
+* Protects against DDoS attacks
+
+### Azure Firewall
+
+* Layer 3/4 + Layer 7 protection
+
+### WAF
+
+* Protects web applications
+
+### VNet
+
+* Private Azure network
+
+### NSG
+
+* Traffic filtering rules
+
+### Bastion
+
+* Secure VM access
+
+### Key Vault
+
+* Secure secret management
+
+---
+
+
+
+
