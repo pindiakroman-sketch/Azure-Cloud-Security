@@ -10806,6 +10806,19 @@ Neither service alone covers all attack vectors.
 Design for resilience:Build applications with redundancy so that if one component is temporarily impacted, the overall application can continue serving users.
 Enable telemetry and alerting: Configure Azure Monitor alerts for DDoS metrics so that your security team is notified immediately when an attack is detected.
 Plan for incidents: Have an incident response plan in place before an attack occurs, so your team knows how to respond quickly and coordinate effectively.
+
+Common attacks WAF protects against
+WAF defends against a wide range of threats defined in the Open Web Application 
+Security Project (OWASP) core rule set—a set of generic attack detection rules designed as a baseline for any WAF. 
+
+
+Common attacks WAF protects against include:
+
+SQL injection: Attackers insert malicious SQL code into input fields to manipulate or extract data from the application's backend database. SQL injection can expose sensitive data or allow attackers to modify or delete database records.
+Cross-site scripting (XSS): Attackers inject malicious scripts into web pages that other users view. The scripts can steal session tokens, credentials, or sensitive data from the affected user's browser.
+HTTP floods: High volumes of HTTP requests overwhelm a web application at the application layer. This type of distributed denial of service (DDoS) attack targets layer 7 (the application layer), which Azure DDoS Protection alone doesn't cover. Azure WAF detects and blocks abnormal traffic patterns at this layer.
+Remote file inclusion: Attackers trick a web application into including a malicious remote file, which then executes on the server and can give the attacker unauthorized access.
+By using a centralized WAF, you can patch newly discovered vulnerabilities in one place rather than updating protection on every individual web application. This simplifies security management and reduces the window of exposure when new threats emerge.
 ---
 
 ## Protection Types
