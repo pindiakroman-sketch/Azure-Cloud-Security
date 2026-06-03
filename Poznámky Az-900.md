@@ -10796,6 +10796,16 @@ Features:
 * Traffic analysis
 * Azure Monitor alerts
 
+Best practices for DDoS protection
+A multi-layered approach to DDoS protection is most effective:
+
+Combine DDoS Protection with WAF: 
+Use Azure DDoS Protection for network-layer (layers 3 and 4) protection and 
+a WAF for application-layer (layer 7) protection. 
+Neither service alone covers all attack vectors.
+Design for resilience:Build applications with redundancy so that if one component is temporarily impacted, the overall application can continue serving users.
+Enable telemetry and alerting: Configure Azure Monitor alerts for DDoS metrics so that your security team is notified immediately when an attack is detected.
+Plan for incidents: Have an incident response plan in place before an attack occurs, so your team knows how to respond quickly and coordinate effectively.
 ---
 
 ## Protection Types
@@ -11065,6 +11075,269 @@ Remember:
 * Secure secret management
 
 ---
+
+# Introduction to Microsoft security solutions: Part 2 | SC-900 | Episode 5 - YouTube
+
+## 📘 GitHub Notes — SC-900 (Microsoft Security Solutions Part 2)
+
+---
+
+# 🛡️ Microsoft Defender for Cloud
+
+## 🔍 Purpose
+
+* Cloud security management platform for Azure, hybrid, and multi-cloud
+* Helps you **improve security posture + protect workloads**
+
+---
+
+## 🧠 Core pillars
+
+### 1. CSPM (Cloud Security Posture Management)
+
+* Continuously scans environment for misconfigurations
+* Shows **Secure Score**
+* Uses **Microsoft Cloud Security Benchmark (MCSB)**
+* Provides recommendations (fixes to improve security)
+
+### 2. CWPP (Cloud Workload Protection Platform)
+
+* Protects running workloads:
+
+  * Virtual Machines
+  * Databases
+  * Containers
+* Detects vulnerabilities + threats in real time
+* Uses Defender plans per workload type
+
+### 3. DevSecOps
+
+* Security in development pipelines (CI/CD)
+* Integrates with GitHub / Azure DevOps
+* Finds:
+
+  * insecure code
+  * exposed secrets
+  * misconfigurations in infrastructure-as-code
+* Helps fix issues before production
+
+---
+
+## 📊 Security Initiatives
+
+* Collection of policies applied to resources
+* Default: **Microsoft Cloud Security Benchmark (MCSB)**
+* Evaluates compliance across subscriptions/resources
+* Generates **recommendations automatically**
+
+---
+
+## 📈 Secure Score
+
+* Overall security rating of environment
+* Improves by fixing recommendations
+* Helps prioritize security work
+
+---
+
+## 🧾 Example issues detected
+
+* Unencrypted SQL databases
+* Public storage access enabled
+* Open management ports on VMs
+
+---
+
+## 🧩 Key capabilities in Defender for Cloud
+
+* Asset discovery
+* Continuous security assessment
+* Regulatory compliance tracking
+* Threat recommendations
+* Integration with Microsoft Security Copilot
+
+---
+
+## 🖥️ Workload protection examples
+
+* VM endpoint protection
+* Vulnerability scanning
+* Container security
+* Database protection
+* Multi-cloud (AWS / GCP support)
+
+---
+
+## ⚙️ Environment settings
+
+* Enable/disable security plans per resource type
+* Control coverage per subscription
+* Choose between:
+
+  * Free CSPM features
+  * Paid advanced protection plans
+
+---
+
+# 📊 Microsoft Sentinel (SIEM + SOAR)
+
+## 🧠 What it is
+
+* Cloud-native **SIEM + SOAR platform**
+* Used for:
+
+  * threat detection
+  * investigation
+  * automated response
+
+---
+
+## 🔍 SIEM (Security Information & Event Management)
+
+* Collects logs from:
+
+  * Azure resources
+  * on-prem systems
+  * multi-cloud
+* Correlates events into alerts/incidents
+* Detects anomalies and suspicious behavior
+
+---
+
+## ⚙️ SOAR (Security Orchestration & Automated Response)
+
+* Automates response actions:
+
+  * disable user accounts
+  * block IP addresses
+  * create tickets (e.g., ServiceNow)
+* Reduces manual work + response time
+
+---
+
+## 🔄 Sentinel workflow
+
+### 1. Collect
+
+* Ingest logs from many sources:
+
+  * Entra ID
+  * Azure Activity Logs
+  * firewalls, endpoints, etc.
+
+### 2. Detect
+
+* Analytics rules find threats
+* Uses:
+
+  * threat intelligence
+  * MITRE ATT&CK mapping
+* Groups alerts into **incidents**
+
+### 3. Investigate
+
+* Incident = full case file
+* Tools:
+
+  * Hunting (manual investigation)
+  * KQL queries
+  * Notebooks
+  * Workbooks (visual dashboards)
+
+### 4. Respond
+
+* Automation rules + playbooks
+* Actions:
+
+  * isolate machines
+  * disable accounts
+  * send alerts
+* Built using Azure Logic Apps
+
+---
+
+## 🔎 Key features
+
+### 🧪 Hunting
+
+* Manual threat investigation
+* Uses KQL queries
+* Hypothesis-based security search
+
+### 📊 Workbooks
+
+* Dashboards for visualization
+* Show trends, anomalies, activity
+
+### ⚡ Analytics rules
+
+* Detect suspicious behavior
+* Trigger alerts/incidents
+
+### 🤖 Automation
+
+* Runs playbooks automatically on incidents
+* Improves response speed
+
+---
+
+## 🧠 Example attack scenario
+
+* Impossible travel login detected
+* Privileged role assigned from unknown IP
+* Sentinel:
+
+  * correlates events
+  * creates incident
+  * triggers playbook:
+
+    * disable account
+    * revoke sessions
+    * notify security team
+
+---
+
+## 🧩 MITRE ATT&CK integration
+
+* Maps detections to attacker techniques
+* Helps understand:
+
+  * attack type
+  * stage of attack
+  * behavior patterns
+
+---
+
+## 🤖 Security Copilot integration
+
+* Natural language queries in Sentinel
+* Can:
+
+  * summarize incidents
+  * generate KQL queries
+  * explain alerts in plain English
+
+---
+
+## 🔌 Data connectors
+
+* Connect Sentinel to:
+
+  * Microsoft Defender
+  * Azure services
+  * external tools (Syslog, APIs)
+
+---
+
+## 📌 Key takeaway
+
+* **Defender for Cloud = prevent + harden**
+* **Sentinel = detect + respond**
+* Together they provide full security lifecycle coverage
+
+---
+
+
 
 
 
