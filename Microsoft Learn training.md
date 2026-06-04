@@ -10,3 +10,8 @@
 
 # Describe the identity protection and governance capabilities of Microsoft Entra 
 <img width="863" height="864" alt="image" src="https://github.com/user-attachments/assets/128222c7-4f29-48b3-9548-2fa79d6f6887" />
+
+# Describe core infrastructure security services in Azure 
+<img width="750" height="880" alt="image" src="https://github.com/user-attachments/assets/47df9c86-8bcc-432e-913f-0438e04f879d" />
+
+
