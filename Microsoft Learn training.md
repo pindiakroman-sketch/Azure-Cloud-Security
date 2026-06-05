@@ -14,4 +14,6 @@
 # Describe core infrastructure security services in Azure 
 <img width="750" height="880" alt="image" src="https://github.com/user-attachments/assets/47df9c86-8bcc-432e-913f-0438e04f879d" />
 
+# Describe the security management capabilities in Azure 
+<img width="717" height="910" alt="image" src="https://github.com/user-attachments/assets/77f66fe6-6da3-4e99-bcad-872387f737ce" />
 
