@@ -17,3 +17,5 @@
 # Describe the security management capabilities in Azure 
 <img width="717" height="910" alt="image" src="https://github.com/user-attachments/assets/77f66fe6-6da3-4e99-bcad-872387f737ce" />
 
+# Describe security capabilities of Microsoft Sentinel 
+<img width="785" height="877" alt="image" src="https://github.com/user-attachments/assets/d468970d-b756-45ba-8d57-1d5e400eab43" />
