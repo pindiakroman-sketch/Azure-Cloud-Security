@@ -11374,6 +11374,665 @@ Azure Key Vault centralizes the storage and management of secrets, keys, and cer
 Together, these services support a defense-in-depth strategy that layers multiple security controls to reduce the risk and impact of security breaches.
 
 
+# SC-900 — Microsoft Security Solutions (Part 3)
+
+*GitHub Notes | Exam-focused + Practical*
+
+---
+
+# Microsoft Defender XDR
+
+## What is it?
+
+**Microsoft Defender XDR** is a unified security platform that:
+
+* Prevents attacks
+* Detects threats
+* Investigates incidents
+* Responds automatically
+
+It correlates signals from multiple Defender products and presents them in a **single incident view**.
+
+### Integrated Products
+
+| Product                           | Protects              |
+| --------------------------------- | --------------------- |
+| Defender for Endpoint             | Devices               |
+| Defender for Office 365           | Email & collaboration |
+| Defender for Identity             | Identities            |
+| Defender for Cloud Apps           | SaaS applications     |
+| Defender Vulnerability Management | Vulnerabilities       |
+| Microsoft Sentinel                | SIEM/SOAR integration |
+
+---
+
+## Key Benefit
+
+Instead of seeing:
+
+* Email alert
+* Identity alert
+* Endpoint alert
+
+You see:
+
+✅ **One correlated incident**
+
+This provides the complete attack story.
+
+---
+
+## Example Attack Chain
+
+```text
+Phishing Email
+      ↓
+Credential Theft
+      ↓
+Suspicious Sign-in
+      ↓
+Malware on Device
+```
+
+Defender XDR automatically correlates all activities into one incident.
+
+---
+
+# Microsoft Defender for Office 365
+
+## Purpose
+
+Protects against:
+
+* Phishing
+* Malware
+* Malicious links
+* Malicious attachments
+* Teams threats
+* SharePoint threats
+
+---
+
+## Key Features
+
+### Safe Attachments
+
+* Opens attachment in sandbox
+* Checks for malicious behavior
+* Blocks dangerous files
+
+### Safe Links
+
+* Checks URLs before opening
+
+### Anti-Phishing
+
+* Detects spoofed emails
+* Detects impersonation attacks
+
+### Anti-Malware
+
+* Blocks malicious files
+
+---
+
+## Investigation Tools
+
+### Explorer
+
+Used to:
+
+* Investigate emails
+* Find affected users
+* Track campaigns
+
+### Message Trace
+
+Track email delivery.
+
+### Audit Log Search
+
+Review user/admin actions.
+
+---
+
+## Exam Example
+
+```text
+User receives malicious invoice.
+
+Safe Attachments detonates file.
+
+File identified as malware.
+
+Email quarantined.
+```
+
+Result:
+
+✅ User never opens malware
+
+---
+
+## ZAP
+
+### Zero-hour Auto Purge
+
+Automatically removes malicious emails already delivered to mailboxes.
+
+---
+
+# Microsoft Defender for Endpoint
+
+## Purpose
+
+Protects:
+
+* Laptops
+* Workstations
+* Servers
+* Endpoints
+
+---
+
+## How it Works
+
+Uses:
+
+* Behavioral sensors
+* Cloud analytics
+* Threat intelligence
+
+to detect suspicious activity.
+
+---
+
+## Capabilities
+
+### Prevention
+
+Blocks attacks before execution.
+
+### Detection
+
+Detects suspicious behavior.
+
+### Investigation
+
+Automatically investigates incidents.
+
+### Response
+
+Supports remediation actions.
+
+---
+
+## Example
+
+```text
+User downloads malware
+      ↓
+Defender detects exploit attempt
+      ↓
+Attack blocked
+      ↓
+Investigation starts automatically
+```
+
+---
+
+# Microsoft Defender for Cloud Apps
+
+## Purpose
+
+Protect SaaS applications.
+
+Examples:
+
+* Microsoft 365
+* Salesforce
+* Dropbox
+* Google Workspace
+
+---
+
+## Main Goals
+
+### Cloud Discovery
+
+Discover applications used by employees.
+
+### Shadow IT Detection
+
+Find unauthorized apps.
+
+### Data Protection
+
+Protect sensitive data.
+
+### Threat Detection
+
+Detect risky activities.
+
+---
+
+## Example
+
+```text
+Employee uploads customer data
+to unauthorized cloud storage.
+```
+
+Defender for Cloud Apps:
+
+1. Discovers app
+2. Classifies app as risky
+3. Blocks access
+4. Alerts security team
+
+---
+
+## Cloud Discovery
+
+Analyzes network traffic and identifies:
+
+* Apps in use
+* Risk level
+* Compliance status
+
+---
+
+## Cloud App Catalog
+
+Database of ~37,000 cloud applications.
+
+Provides:
+
+* Security score
+* Compliance score
+* Risk assessment
+
+---
+
+## Policy Management
+
+Used to create policies such as:
+
+```text
+Alert when terminated employee logs in
+```
+
+or
+
+```text
+Block risky downloads
+```
+
+---
+
+# Microsoft Defender for Identity
+
+## Purpose
+
+Protect on-premises Active Directory environments.
+
+---
+
+## Detects
+
+* Credential theft
+* Lateral movement
+* Privilege escalation
+* Suspicious authentication
+
+---
+
+## How it Works
+
+Sensors installed on:
+
+```text
+Domain Controllers
+```
+
+collect signals and send them to Defender.
+
+---
+
+## Example
+
+```text
+Attacker steals credentials
+      ↓
+Attempts lateral movement
+      ↓
+Defender detects activity
+      ↓
+Account disabled
+```
+
+---
+
+# Microsoft Defender Vulnerability Management
+
+## Purpose
+
+Find and reduce vulnerabilities before attackers exploit them.
+
+---
+
+## Discovers
+
+* Devices
+* Applications
+* Operating systems
+* Configurations
+
+---
+
+## Detects
+
+* Missing patches
+* Outdated software
+* Weak configurations
+* Security misconfigurations
+
+---
+
+## Key Concept
+
+### Risk-Based Prioritization
+
+Not all vulnerabilities are equally important.
+
+Microsoft prioritizes:
+
+* Actively exploited vulnerabilities
+* High-risk vulnerabilities
+* Critical assets
+
+---
+
+## Supported Platforms
+
+* Windows
+* Linux
+* macOS
+* Mobile devices
+* Network devices
+
+---
+
+## Benefits
+
+✅ Reduce attack surface
+
+✅ Prioritize remediation
+
+✅ Track remediation progress
+
+---
+
+# Microsoft Defender Threat Intelligence
+
+## Purpose
+
+Provide intelligence about:
+
+* Threat actors
+* Campaigns
+* Indicators of compromise (IoCs)
+* Vulnerabilities
+
+---
+
+## Main Components
+
+### Threat Analytics
+
+Analyze current attack campaigns.
+
+### Intel Explorer
+
+Search:
+
+* Threat actors
+* CVEs
+* Indicators
+
+### Projects
+
+Organize investigations.
+
+---
+
+## Security Copilot Integration
+
+Can:
+
+* Summarize threats
+* Prioritize vulnerabilities
+* Assist investigations
+
+---
+
+# Microsoft Defender Portal
+
+## Purpose
+
+Single pane of glass for Microsoft Security.
+
+Portal:
+
+```text
+security.microsoft.com
+```
+
+---
+
+## What You Can Manage
+
+### Identities
+
+Defender for Identity
+
+### Devices
+
+Defender for Endpoint
+
+### Email
+
+Defender for Office 365
+
+### Cloud Apps
+
+Defender for Cloud Apps
+
+### Threat Intelligence
+
+Threat Analytics
+
+### Sentinel
+
+SIEM/SOAR
+
+---
+
+# Secure Score
+
+Measures overall security posture.
+
+Higher score = better security.
+
+Used to:
+
+* Track improvements
+* Prioritize actions
+* Reduce risk
+
+---
+
+# Exposure Management
+
+Provides visibility into:
+
+* Attack paths
+* Assets
+* Risks
+* Weaknesses
+
+---
+
+# Advanced Hunting
+
+Used for:
+
+* Custom investigations
+* KQL queries
+* Threat hunting
+
+---
+
+## Example
+
+Security analyst suspects:
+
+```text
+Suspicious sign-ins
+```
+
+Uses:
+
+```text
+Advanced Hunting
+```
+
+to search logs with KQL.
+
+---
+
+# Microsoft Security Copilot
+
+## Purpose
+
+AI assistant for security operations.
+
+---
+
+## What It Can Do
+
+### Incident Summaries
+
+Explain:
+
+* What happened
+* Why it matters
+* Affected assets
+
+### Guided Response
+
+Suggest:
+
+* Investigation steps
+* Containment actions
+* Remediation actions
+
+### Generate KQL
+
+Convert natural language into KQL queries.
+
+Example:
+
+```text
+Show suspicious sign-ins today
+```
+
+→ Generates KQL automatically
+
+---
+
+# SC-900 Exam Essentials
+
+## Defender XDR
+
+**Correlates alerts into one incident.**
+
+---
+
+## Defender for Office 365
+
+Protects:
+
+* Email
+* Links
+* Attachments
+* Teams
+* SharePoint
+
+---
+
+## Safe Attachments
+
+Sandbox for email attachments.
+
+---
+
+## ZAP
+
+Zero-hour Auto Purge removes malicious emails after delivery.
+
+---
+
+## Defender for Endpoint
+
+Protects devices and endpoints.
+
+---
+
+## Defender for Cloud Apps
+
+Protects SaaS applications and detects Shadow IT.
+
+---
+
+## Defender for Identity
+
+Protects Active Directory identities.
+
+---
+
+## Defender Vulnerability Management
+
+Discovers and prioritizes vulnerabilities.
+
+---
+
+## Defender Threat Intelligence
+
+Provides intelligence about threats and attackers.
+
+---
+
+## Security Copilot
+
+Uses AI to:
+
+* Summarize incidents
+* Generate KQL
+* Assist investigations
+
+---
+
+## Microsoft Defender Portal
+
+```text
+security.microsoft.com
+```
+
+Unified portal for all Defender solutions.
+
+
+
 
 
 
