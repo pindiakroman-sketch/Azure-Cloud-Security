@@ -12031,8 +12031,344 @@ security.microsoft.com
 
 Unified portal for all Defender solutions.
 
+_______________________________________________________
 
+# Microsoft Purview — GitHub Notes (SC-900 / Real-World Practical Use)
 
+> **Goal:** Understand what Microsoft Purview does, when to use it, and what is important for exams and real-world cloud security roles.
+
+---
+
+# What is Microsoft Purview?
+
+Microsoft Purview is Microsoft's **data governance, compliance, and data protection platform**.
+
+Think of it as:
+
+> **"Microsoft Purview protects and manages data wherever it lives."**
+
+It helps organizations:
+
+* Discover data
+* Classify data
+* Protect sensitive information
+* Meet compliance requirements
+* Prevent data leaks
+
+---
+
+# Why Does It Exist?
+
+Companies store sensitive data everywhere:
+
+* Emails
+* Teams chats
+* SharePoint
+* OneDrive
+* Databases
+* Cloud applications
+
+Purview helps answer:
+
+* Where is our sensitive data?
+* Who has access to it?
+* Is it being shared improperly?
+* Are we compliant with regulations?
+
+---
+
+# Core Capabilities
+
+## 1. Data Discovery
+
+Automatically finds:
+
+* Credit card numbers
+* Personal information (PII)
+* Health records
+* Financial data
+
+### Example
+
+Purview scans SharePoint and finds:
+
+```text
+Customer_List.xlsx
+Contains:
+- Names
+- Emails
+- Credit card numbers
+```
+
+Purview identifies it as sensitive data.
+
+---
+
+## 2. Sensitivity Labels
+
+Allows organizations to classify information.
+
+### Examples
+
+```text
+Public
+Internal
+Confidential
+Highly Confidential
+```
+
+---
+
+### Example
+
+A document is labeled:
+
+```text
+Highly Confidential
+```
+
+Purview can:
+
+* Encrypt it
+* Restrict sharing
+* Prevent downloads
+* Prevent printing
+
+---
+
+# 3. Data Loss Prevention (DLP)
+
+Prevents sensitive information from leaving the organization.
+
+---
+
+### Example
+
+User tries to send:
+
+```text
+Credit Card Number
+```
+
+through:
+
+* Outlook
+* Teams
+* SharePoint
+
+Purview can:
+
+* Block it
+* Warn the user
+* Alert administrators
+
+---
+
+### Exam Keyword
+
+```text
+DLP = Prevent data leakage
+```
+
+---
+
+# 4. Insider Risk Management
+
+Detects risky user behavior.
+
+---
+
+### Example
+
+Employee:
+
+* Downloads thousands of files
+* Copies data to USB
+* Sends confidential files externally
+
+Purview can generate alerts.
+
+---
+
+### Exam Keyword
+
+```text
+Insider Risk = Risk from trusted users
+```
+
+---
+
+# 5. eDiscovery
+
+Used during:
+
+* Investigations
+* Audits
+* Legal cases
+
+---
+
+### Example
+
+Legal team requests:
+
+```text
+All emails from John Doe
+between Jan and March
+```
+
+Purview can locate and export them.
+
+---
+
+### Exam Keyword
+
+```text
+eDiscovery = Search and collect evidence
+```
+
+---
+
+# 6. Records Management
+
+Controls:
+
+* Retention
+* Deletion
+* Archiving
+
+---
+
+### Example
+
+Policy:
+
+```text
+Keep invoices for 7 years
+```
+
+Purview automatically enforces it.
+
+---
+
+# Compliance Manager
+
+Provides compliance tracking against standards such as:
+
+* GDPR
+* ISO 27001
+* NIST
+* HIPAA
+
+---
+
+### Helps Answer
+
+```text
+Are we compliant?
+What still needs improvement?
+```
+
+---
+
+# Purview vs Defender for Cloud Apps
+
+| Service                 | Purpose                                  |
+| ----------------------- | ---------------------------------------- |
+| Defender for Cloud Apps | Monitor and secure cloud app usage       |
+| Purview                 | Protect and govern data                  |
+| Defender for Cloud      | Secure cloud resources and workloads     |
+| Sentinel                | SIEM/SOAR, threat detection and response |
+
+---
+
+# SC-900 Exam Focus
+
+Know these terms:
+
+```text
+Sensitivity Labels
+Data Loss Prevention (DLP)
+eDiscovery
+Insider Risk Management
+Compliance Manager
+Information Protection
+```
+
+---
+
+# Real-World Use Cases
+
+## Financial Company
+
+Purview:
+
+* Finds credit card data
+* Labels sensitive files
+* Blocks sharing outside company
+
+---
+
+## Healthcare Organization
+
+Purview:
+
+* Protects patient records
+* Enforces retention policies
+* Supports HIPAA compliance
+
+---
+
+## Legal Investigation
+
+Purview:
+
+* Searches emails
+* Collects evidence
+* Supports litigation requests
+
+---
+
+# Does Purview Matter for AZ-104?
+
+Not much.
+
+AZ-104 focuses on:
+
+* Virtual Machines
+* Networking
+* Storage
+* RBAC
+* Entra ID
+* Monitoring
+
+Purview is more important for:
+
+* SC-900
+* SC-400
+* Security/Compliance roles
+
+---
+
+# For Your Learning Path
+
+### Learn Deeply
+
+✅ Entra ID
+✅ RBAC
+✅ Conditional Access
+✅ Defender for Cloud
+✅ Defender for Cloud Apps
+✅ Sentinel
+
+### Learn Basic Concepts
+
+✅ Purview
+✅ DLP
+✅ Sensitivity Labels
+✅ eDiscovery
+
+You don't need to become a Purview expert for AZ-104, but you should understand the concepts because they appear frequently in Microsoft security certifications.
 
 
 
