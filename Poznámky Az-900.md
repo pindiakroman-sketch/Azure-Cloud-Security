@@ -12372,3 +12372,4 @@ You don't need to become a Purview expert for AZ-104, but you should understand 
 
 
 
+<img width="1195" height="761" alt="image" src="https://github.com/user-attachments/assets/01910286-6130-438c-b2bc-324bfda7568a" />
