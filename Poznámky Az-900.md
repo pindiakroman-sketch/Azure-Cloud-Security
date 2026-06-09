@@ -12373,3 +12373,12 @@ You don't need to become a Purview expert for AZ-104, but you should understand 
 
 
 <img width="1195" height="761" alt="image" src="https://github.com/user-attachments/assets/01910286-6130-438c-b2bc-324bfda7568a" />
+
+
+Insider risk levels
+At the center of adaptive protection are insider risk levels, which are calculated by Insider Risk Management based on each user's behavior and the risk indicators defined in the organization's policies. Adaptive protection uses three risk levels:
+
+Elevated risk level: Assigned to users with high severity alerts or users with multiple high-severity activity sequences. The strongest protective controls apply to users at this level.
+Moderate risk level: Assigned to users with medium severity alerts or users with multiple high-severity data exfiltration activities. Moderate controls help balance security with productivity.
+Minor risk level: Assigned to users with low severity alerts or users with at least one high-severity exfiltration activity. Light controls such as policy tips and educational reminders apply to influence positive behavior without disrupting work.
+Insider risk levels update continuously and automatically based on users' ongoing activity. When a user's risk level decreases, the protective controls applied to them also relax. When risk increases, controls tighten automatically—without any manual action from an admin.
