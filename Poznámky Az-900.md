@@ -12378,7 +12378,16 @@ You don't need to become a Purview expert for AZ-104, but you should understand 
 Insider risk levels
 At the center of adaptive protection are insider risk levels, which are calculated by Insider Risk Management based on each user's behavior and the risk indicators defined in the organization's policies. Adaptive protection uses three risk levels:
 
-Elevated risk level: Assigned to users with high severity alerts or users with multiple high-severity activity sequences. The strongest protective controls apply to users at this level.
-Moderate risk level: Assigned to users with medium severity alerts or users with multiple high-severity data exfiltration activities. Moderate controls help balance security with productivity.
-Minor risk level: Assigned to users with low severity alerts or users with at least one high-severity exfiltration activity. Light controls such as policy tips and educational reminders apply to influence positive behavior without disrupting work.
+# Elevated risk level: Assigned to users with high severity alerts or users with multiple high-severity activity sequences. The strongest protective controls apply to users at this level.
+# Moderate risk level: Assigned to users with medium severity alerts or users with multiple high-severity data exfiltration activities. Moderate controls help balance security with productivity.
+# Minor risk level: Assigned to users with low severity alerts or users with at least one high-severity exfiltration activity. Light controls such as policy tips and educational reminders apply to influence positive behavior without disrupting work.
 Insider risk levels update continuously and automatically based on users' ongoing activity. When a user's risk level decreases, the protective controls applied to them also relax. When risk increases, controls tighten automatically—without any manual action from an admin.
+
+
+# Adaptive protection integrates with Microsoft Entra Conditional Access to restrict application access based on insider risk levels. Organizations configure Conditional Access policies that respond automatically to a user's current risk level. For example:
+
+Users with a Minor risk level might be required to acknowledge a Terms of Use agreement before accessing certain applications.
+Users with a Moderate risk level might be blocked from accessing specific high-sensitivity applications.
+Users with an Elevated risk level might be completely blocked from accessing organizational applications until their risk level is resolved.
+Because Conditional Access policies and DLP policies both respond dynamically to the insider risk levels managed by Insider Risk Management, the organization achieves a layered, coordinated response to insider risk—without needing to manually update multiple policies whenever a user's behavior changes.
+
