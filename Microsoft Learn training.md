@@ -19,3 +19,6 @@
 
 # Describe security capabilities of Microsoft Sentinel 
 <img width="785" height="877" alt="image" src="https://github.com/user-attachments/assets/d468970d-b756-45ba-8d57-1d5e400eab43" />
+
+# Describe the data security solutions of Microsoft Purview 
+<img width="791" height="894" alt="image" src="https://github.com/user-attachments/assets/00bc7d53-36e9-443c-871e-980e4daa2ffd" />
