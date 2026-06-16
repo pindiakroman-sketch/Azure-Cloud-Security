@@ -23,5 +23,5 @@
 # Describe the data security solutions of Microsoft Purview 
 <img width="791" height="894" alt="image" src="https://github.com/user-attachments/assets/00bc7d53-36e9-443c-871e-980e4daa2ffd" />
 
-# PRactise exam
+# Practice exam
 <img width="930" height="712" alt="image" src="https://github.com/user-attachments/assets/ad8570eb-4652-4f45-9529-8c44eb5a1b1c" />
