@@ -12391,3 +12391,666 @@ Users with a Moderate risk level might be blocked from accessing specific high-s
 Users with an Elevated risk level might be completely blocked from accessing organizational applications until their risk level is resolved.
 Because Conditional Access policies and DLP policies both respond dynamically to the insider risk levels managed by Insider Risk Management, the organization achieves a layered, coordinated response to insider risk—without needing to manually update multiple policies whenever a user's behavior changes.
 
+
+
+# SC-900 Exam Cheat Sheet (GitHub Notes)
+
+> Goal: Pass SC-900 and understand Microsoft's security ecosystem at a high level.
+
+---
+
+# 1. Microsoft Security, Compliance & Identity
+
+Microsoft's security portfolio is built around 3 pillars:
+
+| Area                    | Product            |
+| ----------------------- | ------------------ |
+| Identity & Access       | Microsoft Entra    |
+| Security                | Microsoft Defender |
+| Compliance & Governance | Microsoft Purview  |
+
+Remember:
+
+```text
+Who are you?      -> Entra
+Are you safe?     -> Defender
+Is your data compliant? -> Purview
+```
+
+---
+
+# 2. Microsoft Entra
+
+Formerly Azure AD.
+
+Used for:
+
+* Authentication
+* Authorization
+* Identity Management
+
+Examples:
+
+* User signs into Microsoft 365
+* MFA verification
+* Conditional Access
+* SSO
+
+---
+
+## Authentication vs Authorization
+
+### Authentication
+
+```text
+Who are you?
+```
+
+Examples:
+
+* Password
+* MFA
+* Windows Hello
+
+### Authorization
+
+```text
+What can you access?
+```
+
+Examples:
+
+* Files
+* Applications
+* Azure resources
+
+---
+
+## Multi-Factor Authentication (MFA)
+
+Requires:
+
+```text
+Something you know
++ Something you have
+OR
+Something you are
+```
+
+Examples:
+
+* Password + Authenticator App
+* Password + Fingerprint
+
+---
+
+## Conditional Access
+
+```text
+IF conditions are met
+THEN allow access
+```
+
+Example:
+
+```text
+User outside company network
+→ Require MFA
+```
+
+---
+
+## Zero Trust
+
+Never trust.
+
+Always verify.
+
+Principles:
+
+```text
+Verify Explicitly
+Least Privilege
+Assume Breach
+```
+
+---
+
+# 3. Microsoft Defender
+
+Security platform protecting identities, endpoints, cloud workloads, apps and email.
+
+---
+
+## Microsoft Defender XDR
+
+Extended Detection & Response.
+
+Combines signals from:
+
+* Endpoints
+* Identity
+* Email
+* Applications
+
+Goal:
+
+```text
+Detect attacks faster
+```
+
+---
+
+## Defender Products
+
+### Defender for Endpoint
+
+Protects:
+
+* PCs
+* Laptops
+* Servers
+
+Detects:
+
+* Malware
+* Ransomware
+* Suspicious behavior
+
+---
+
+### Defender for Office 365
+
+Protects:
+
+* Email
+* Teams
+* SharePoint
+
+Detects:
+
+* Phishing
+* Malicious links
+* Malicious attachments
+
+---
+
+### Defender for Identity
+
+Protects:
+
+* Active Directory
+* Identity infrastructure
+
+Detects:
+
+* Credential theft
+* Lateral movement
+
+---
+
+### Defender for Cloud Apps
+
+Cloud Access Security Broker (CASB)
+
+Provides:
+
+* Visibility
+* Data Security
+* Threat Protection
+* Compliance
+
+---
+
+### SC-900 Question
+
+**Which CASB area identifies and controls sensitive information?**
+
+✅ **Data Security**
+
+---
+
+# 4. Microsoft Defender for Cloud
+
+Protects Azure, Hybrid and Multi-Cloud resources.
+
+---
+
+## Three Main Capabilities
+
+### CSPM
+
+Cloud Security Posture Management
+
+Focus:
+
+```text
+Misconfigurations
+Security posture
+Recommendations
+```
+
+Examples:
+
+* Open management ports
+* Public storage accounts
+* Missing encryption
+
+---
+
+### CWPP
+
+Cloud Workload Protection Platform
+
+Focus:
+
+```text
+Protect workloads
+```
+
+Examples:
+
+* Virtual Machines
+* Containers
+* Databases
+
+---
+
+### DevSecOps
+
+Integrates security into development.
+
+Examples:
+
+* GitHub scanning
+* Secret detection
+* IaC scanning
+
+---
+
+## Secure Score
+
+Measures security posture.
+
+Higher score:
+
+```text
+More secure environment
+```
+
+---
+
+## Security Recommendations
+
+Defender for Cloud continuously checks:
+
+* Resources
+* Subscriptions
+* Configurations
+
+Then provides:
+
+```text
+Recommendations
+```
+
+---
+
+# 5. Microsoft Sentinel
+
+Cloud-native:
+
+```text
+SIEM + SOAR
+```
+
+---
+
+## SIEM
+
+Security Information and Event Management
+
+Purpose:
+
+```text
+Collect
+Analyze
+Detect
+```
+
+Examples:
+
+* Sign-in logs
+* Firewall logs
+* Azure logs
+
+---
+
+## SOAR
+
+Security Orchestration Automation and Response
+
+Purpose:
+
+```text
+Automate responses
+```
+
+Examples:
+
+* Disable account
+* Create ticket
+* Block IP
+
+---
+
+## Sentinel Workflow
+
+```text
+Collect
+↓
+Detect
+↓
+Investigate
+↓
+Respond
+```
+
+---
+
+## Incident Investigation
+
+Contains:
+
+* Alerts
+* Users
+* Devices
+* Evidence
+
+---
+
+### Exam Question
+
+Security analyst wants:
+
+* Incident summary
+* Related alerts
+* Reputation scores
+* Users
+* Devices
+
+Answer:
+
+✅ **Incident Page / Incident Investigation Experience**
+
+(Security Copilot can enhance summaries)
+
+---
+
+## Hunting
+
+Used when:
+
+```text
+You suspect something happened
+```
+
+Uses:
+
+```text
+KQL Queries
+```
+
+---
+
+## MITRE ATT&CK
+
+Sentinel maps detections to:
+
+```text
+MITRE ATT&CK Framework
+```
+
+Used to understand attacker tactics.
+
+---
+
+# 6. Microsoft Purview
+
+Compliance & Governance platform.
+
+---
+
+## Purpose
+
+Govern:
+
+* Data
+* Compliance
+* Privacy
+* Risk
+
+---
+
+## Sensitive Information Types
+
+Can detect:
+
+* Credit Card Numbers
+* Passport Numbers
+* IBAN
+* National IDs
+
+---
+
+### SC-900 Question
+
+How to identify credit card numbers?
+
+✅ **Sensitive Information Types (SITs)**
+
+---
+
+## Data Loss Prevention (DLP)
+
+Prevents:
+
+```text
+Sensitive data leaving organization
+```
+
+Examples:
+
+* Emailing credit card numbers
+* Uploading confidential documents
+
+---
+
+## Information Protection
+
+Uses:
+
+* Labels
+* Encryption
+
+Examples:
+
+```text
+Public
+Internal
+Confidential
+Highly Confidential
+```
+
+---
+
+## Data Governance
+
+### What is Data Governance?
+
+Organizing, annotating and publishing data so it can be:
+
+* Found
+* Reused
+* Protected
+
+Answer:
+
+✅ **Data Governance**
+
+---
+
+# 7. Azure Security Basics
+
+---
+
+## Azure Bastion
+
+Provides secure RDP/SSH access through Azure Portal.
+
+Benefits:
+
+* No Public IP required
+* No exposed RDP
+* No exposed SSH
+
+Remember:
+
+```text
+Bastion = Secure VM Access
+```
+
+---
+
+# 8. Security Copilot
+
+AI-powered security assistant.
+
+Helps:
+
+* Summarize incidents
+* Generate KQL
+* Explain alerts
+* Investigate faster
+
+---
+
+# 9. Shared Responsibility Model
+
+Who secures what?
+
+---
+
+## SaaS
+
+Microsoft manages almost everything.
+
+Examples:
+
+* Microsoft 365
+
+Customer mainly manages:
+
+* Users
+* Data
+
+---
+
+## PaaS
+
+Microsoft manages:
+
+* Infrastructure
+
+Customer manages:
+
+* Data
+* Applications
+
+---
+
+## IaaS
+
+Customer manages:
+
+* Operating Systems
+* Applications
+* Data
+
+Microsoft manages:
+
+* Physical infrastructure
+
+---
+
+# 10. Exam Memorization Sheet
+
+```text
+Entra = Identity
+
+MFA = Strong Authentication
+
+Conditional Access = IF/THEN access control
+
+Zero Trust = Verify Explicitly
+
+Defender = Threat Protection
+
+Defender for Endpoint = Devices
+
+Defender for Identity = Active Directory
+
+Defender for Office 365 = Email
+
+Defender for Cloud Apps = CASB
+
+CASB Data Security = Sensitive Data Protection
+
+Defender for Cloud = Azure Security
+
+CSPM = Posture Management
+
+CWPP = Workload Protection
+
+Secure Score = Security Health
+
+Sentinel = SIEM + SOAR
+
+SIEM = Detect
+
+SOAR = Respond
+
+KQL = Hunting Queries
+
+MITRE ATT&CK = Attack Mapping
+
+Purview = Compliance
+
+DLP = Prevent Data Leaks
+
+SIT = Detect Credit Cards
+
+Labels = Protect Documents
+
+Data Governance = Organize & Publish Data
+
+Azure Bastion = Secure RDP/SSH
+```
+
+---
+
+# Last-Minute Exam Strategy
+
+For SC-900, focus on understanding **what each product does**, not deep configuration.
+
+If you can answer:
+
+```text
+Entra = Identity
+Defender = Security
+Purview = Compliance
+Sentinel = SIEM/SOAR
+Defender for Cloud = Azure Security
+```
+
+you already cover a large portion of the exam.
