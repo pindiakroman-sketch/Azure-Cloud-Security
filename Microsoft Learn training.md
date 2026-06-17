@@ -25,3 +25,26 @@
 
 # Practice exam
 <img width="930" height="712" alt="image" src="https://github.com/user-attachments/assets/ad8570eb-4652-4f45-9529-8c44eb5a1b1c" />
+
+<img width="1375" height="620" alt="image" src="https://github.com/user-attachments/assets/8c5952a7-6ae3-4e80-87e8-7ccc0358f1d0" />
+
+<img width="1213" height="528" alt="image" src="https://github.com/user-attachments/assets/9cb9fcc1-e6d6-4a09-b5f5-a138ff5ad3a9" />
+
+<img width="1417" height="421" alt="image" src="https://github.com/user-attachments/assets/1e9edd1b-967d-4543-b68e-b08a4470b2df" />
+
+<img width="1327" height="336" alt="image" src="https://github.com/user-attachments/assets/c8519e36-46e0-4fdf-bf1b-05e925a5bb95" />
+
+<img width="1337" height="538" alt="image" src="https://github.com/user-attachments/assets/4403ca68-e915-4f92-ad72-ebc4e5c2591a" />
+
+<img width="1538" height="686" alt="image" src="https://github.com/user-attachments/assets/477a7335-8c6e-498d-aea9-facea0a5d5c5" />
+
+<img width="1266" height="363" alt="image" src="https://github.com/user-attachments/assets/fc647ddc-3e96-469b-8864-363e4bd04f6b" />
+
+<img width="1481" height="616" alt="image" src="https://github.com/user-attachments/assets/5685fa18-23a5-4dbd-ab53-31566da2cc9a" />
+
+<img width="948" height="356" alt="image" src="https://github.com/user-attachments/assets/33e97cd5-bd8a-44d5-b479-b78195082e41" />
+
+<img width="1398" height="425" alt="image" src="https://github.com/user-attachments/assets/03e71713-5b8a-4aa2-af1e-8e89caf5a541" />
+
+
+
