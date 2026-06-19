@@ -13054,3 +13054,220 @@ Defender for Cloud = Azure Security
 ```
 
 you already cover a large portion of the exam.
+
+
+
+Toto mätie skoro každého začiatočníka v Azure. 😄
+
+V skutočnosti existujú **3 hlavné spôsoby**, ako používať Azure CLI:
+
+# 1. Azure Portal (GUI)
+
+To je klasika:
+
+```text
+portal.azure.com
+```
+
+Klikáš:
+
+```text
+Create VM
+Create Storage
+Create VNet
+```
+
+### Kedy?
+
+* keď sa učíš Azure prvýkrát,
+* keď chceš vidieť, kde sa čo nachádza,
+* na AZ-104 úplný základ.
+
+---
+
+# 2. Azure CLI na svojom PC
+
+Nainštaluješ si Azure CLI:
+
+```bash
+az login
+az group list
+az vm list
+```
+
+Beží:
+
+* CMD
+* PowerShell
+* Windows Terminal
+
+### Výhody
+
+✅ vieš robiť skripty
+
+✅ automatizácia
+
+✅ používaš vlastný počítač
+
+### Nevýhody
+
+❌ musíš inštalovať
+
+❌ musíš sa prihlasovať
+
+---
+
+# 3. Azure Cloud Shell
+
+Toto je to, čo si videl v Azure portáli.
+
+Vpravo hore:
+
+```text
+>_
+Cloud Shell
+```
+
+Keď ho otvoríš, Microsoft ti vytvorí malý Linux kontajner v Azure.
+
+Už obsahuje:
+
+* Azure CLI
+* PowerShell
+* Git
+* kubectl
+* Terraform
+
+---
+
+### Cloud Shell CLI
+
+Príkazy sú rovnaké:
+
+```bash
+az vm list
+az group list
+az storage account list
+```
+
+Len bežia priamo v Azure.
+
+---
+
+# Rozdiel
+
+### Azure CLI na PC
+
+```text
+Tvoj notebook
+↓
+Internet
+↓
+Azure
+```
+
+### Cloud Shell
+
+```text
+Azure
+↓
+Azure
+```
+
+Preto nemusíš nič inštalovať.
+
+---
+
+# Čo používajú admini v práci?
+
+Najčastejšie:
+
+```text
+Portal + CLI + PowerShell
+```
+
+kombinovane.
+
+Príklad:
+
+1. vytvoria VM cez Portal
+2. spravia konfiguráciu cez CLI
+3. automatizujú cez PowerShell
+
+---
+
+# Čo je lepšie pre AZ-104?
+
+Pre teba:
+
+### 70 %
+
+Azure Portal
+
+Musíš vedieť:
+
+* VNET
+* NSG
+* Storage
+* VM
+* RBAC
+
+v GUI.
+
+---
+
+### 20 %
+
+Cloud Shell
+
+Keď bude Microsoft Learn hovoriť:
+
+```bash
+az group create
+```
+
+otvoríš Cloud Shell a skúšaš.
+
+Nemusíš nič inštalovať.
+
+---
+
+### 10 %
+
+Lokálne Azure CLI
+
+To rieš až neskôr.
+
+---
+
+# Čo by som robil na tvojom mieste
+
+Keďže:
+
+* učíš sa AZ-104,
+* máš vlastný Azure účet,
+* nechceš platiť veľa,
+
+rob toto:
+
+```text
+Azure Portal
++
+Cloud Shell
+```
+
+To je presne kombinácia, ktorú Microsoft používa v laboch a Microsoft Learn.
+
+Keď vytvoríš napríklad VM cez Portal, potom si otvor Cloud Shell a skús:
+
+```bash
+az vm list --output table
+```
+
+Keď vytvoríš Storage Account:
+
+```bash
+az storage account list --output table
+```
+
+Takto sa najrýchlejšie naučíš Azure aj CLI naraz bez inštalácií a bez ďalších nákladov.
