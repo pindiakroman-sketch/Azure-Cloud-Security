@@ -1,5 +1,9 @@
 # Az-900-John Savils youtube+Microsoft Learn 06.05.2026
 
+<img width="898" height="575" alt="image" src="https://github.com/user-attachments/assets/b4fd90d0-0ed1-4dff-b2c3-1f512eb7af31" />
+
+
+  
 ### Kurz Az-900
 Video n.:20
 https://www.youtube.com/watch?v=jNBcXnMTo9s&list=PLlVtbbG169nED0_vMEniWBQjSoxTsBYS3&index=22
