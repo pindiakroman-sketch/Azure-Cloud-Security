@@ -324,6 +324,8 @@ Azure SQL Database
         ▼
 Azure App Service Dashboard
 
+A smart factory solution uses Azure IoT Edge to collect and process sensor data locally, Azure IoT Hub to securely ingest telemetry, Azure Functions to process events and generate alerts, Azure SQL Database to store historical data, and Azure App Service to present dashboards. IoT Edge reduces latency, IoT Hub provides secure device management, Functions offer serverless event processing, SQL Database provides reliable storage, and App Service simplifies web application hosting.
+
 
 | Service      | Purpose                           |
 | ------------ | --------------------------------- |
