@@ -304,6 +304,27 @@ Video.n.23
 https://www.youtube.com/watch?v=22z9ARaKlbU&list=PLlVtbbG169nED0_vMEniWBQjSoxTsBYS3&index=23
 Benefits and Usage of Azure IoT Services
 
+
+Create a short architecture walkthrough that combines compute hosting with one AI or IoT Edge service and explains why each component was chosen
+
+Sensors on machines
+        │
+        ▼
+Azure IoT Edge
+        │
+        ▼
+Azure IoT Hub
+        │
+        ▼
+Azure Function
+        │
+        ▼
+Azure SQL Database
+        │
+        ▼
+Azure App Service Dashboard
+
+
 | Service      | Purpose                           |
 | ------------ | --------------------------------- |
 | IoT Hub      | Custom IoT communication platform |
