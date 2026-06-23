@@ -32,6 +32,10 @@ To build a concept map that connects regions, Availability Zones, datacenters, r
    - Management groups are used to organize subscriptions into a hierarchy for unified policy and access management across multiple subscriptions.
 
 This hierarchy allows for efficient management and organization of Azure resources, ensuring scalability, security, and compliance across your cloud environment.
+
+ # Understand VM size families and names
+<img width="982" height="909" alt="image" src="https://github.com/user-attachments/assets/170c0eaf-5de1-4fe0-a6c5-f0ec35c12e6a" />
+
   
 ### Kurz Az-900
 Video n.:20
