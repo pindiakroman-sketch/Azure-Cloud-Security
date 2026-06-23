@@ -4,6 +4,8 @@
 
 <img width="908" height="404" alt="image" src="https://github.com/user-attachments/assets/b958b5d7-61d3-4606-9ffa-73368006e572" />
 
+<img width="933" height="558" alt="image" src="https://github.com/user-attachments/assets/1b842904-71da-4b9a-abc4-60cc3490287f" />
+
   
 ### Kurz Az-900
 Video n.:20
