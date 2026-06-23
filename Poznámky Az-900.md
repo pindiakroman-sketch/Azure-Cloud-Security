@@ -6,6 +6,32 @@
 
 <img width="933" height="558" alt="image" src="https://github.com/user-attachments/assets/1b842904-71da-4b9a-abc4-60cc3490287f" />
 
+# Describe the core architectural components of Azure 
+
+To build a concept map that connects regions, Availability Zones, datacenters, resources, resource groups, subscriptions, and management groups in Azure, consider the following structure:
+
+1. **Regions**: 
+   - Azure regions are geographic areas that contain multiple datacenters. Each region is designed to provide high availability and resilience.
+
+2. **Availability Zones**:
+   - Within a region, there are Availability Zones, which are physically separate datacenters. These zones provide redundancy and isolation from failures in other zones.
+
+3. **Datacenters**:
+   - Datacenters are the physical facilities within Availability Zones where Azure's infrastructure is housed.
+
+4. **Resources**:
+   - Resources are the individual services and components you deploy in Azure, such as virtual machines, databases, and storage accounts.
+
+5. **Resource Groups**:
+   - Resource groups are containers that hold related resources for an Azure solution. They help manage and organize resources by lifecycle and permissions.
+
+6. **Subscriptions**:
+   - Subscriptions are used to manage billing and access to Azure services. They act as a boundary for resource management and policy application.
+
+7. **Management Groups**:
+   - Management groups are used to organize subscriptions into a hierarchy for unified policy and access management across multiple subscriptions.
+
+This hierarchy allows for efficient management and organization of Azure resources, ensuring scalability, security, and compliance across your cloud environment.
   
 ### Kurz Az-900
 Video n.:20
