@@ -1,5 +1,14 @@
 # Az-900-John Savils youtube+Microsoft Learn 06.05.2026
 
+Which service best use ,,,
+
+| Workload                                                | Virtual Machine   | Container               | Azure Functions   | Azure App Service |
+| ------------------------------------------------------- | ----------------- | ----------------------- | ----------------- | ----------------- |
+| Legacy účtovná aplikácia bežiaca na Windows Server 2012 | ✅ Najlepšia voľba | ❌ Zbytočne komplikované | ❌ Nevhodné        | ❌ Nevhodné        |
+| Moderný e-shop s mikroservismi                          | ⚠️ Možné          | ✅ Najlepšia voľba       | ⚠️ Niektoré úlohy | ⚠️ Frontend       |
+| Spracovanie nahratých obrázkov po uploadnutí            | ❌ Overkill        | ⚠️ Možné                | ✅ Najlepšia voľba | ❌ Nevhodné        |
+
+
 <img width="898" height="575" alt="image" src="https://github.com/user-attachments/assets/b4fd90d0-0ed1-4dff-b2c3-1f512eb7af31" />
 
 <img width="908" height="404" alt="image" src="https://github.com/user-attachments/assets/b958b5d7-61d3-4606-9ffa-73368006e572" />
