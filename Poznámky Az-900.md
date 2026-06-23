@@ -1,12 +1,20 @@
 # Az-900-John Savils youtube+Microsoft Learn 06.05.2026
 
-Which service best use ,,,
+## Which service best use ,,,
 
 | Workload                                                | Virtual Machine   | Container               | Azure Functions   | Azure App Service |
 | ------------------------------------------------------- | ----------------- | ----------------------- | ----------------- | ----------------- |
 | Legacy účtovná aplikácia bežiaca na Windows Server 2012 | ✅ Najlepšia voľba | ❌ Zbytočne komplikované | ❌ Nevhodné        | ❌ Nevhodné        |
 | Moderný e-shop s mikroservismi                          | ⚠️ Možné          | ✅ Najlepšia voľba       | ⚠️ Niektoré úlohy | ⚠️ Frontend       |
 | Spracovanie nahratých obrázkov po uploadnutí            | ❌ Overkill        | ⚠️ Možné                | ✅ Najlepšia voľba | ❌ Nevhodné        |
+
+
+## veľa ľudí si pletie Availability Set, Availability Zone a Scale Set.
+| Feature                          | Chráni pred                             | Hlavný účel            |
+| -------------------------------- | --------------------------------------- | ---------------------- |
+| Availability Set                 | Zlyhanie servera alebo plánovaná údržba | Vysoká dostupnosť VM   |
+| Availability Zone                | Zlyhanie celého datacentra              | Disaster resilience    |
+| Virtual Machine Scale Set (VMSS) | Nárast záťaže a zlyhanie VM             | Automatické škálovanie |
 
 
 <img width="898" height="575" alt="image" src="https://github.com/user-attachments/assets/b4fd90d0-0ed1-4dff-b2c3-1f512eb7af31" />
