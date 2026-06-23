@@ -47,4 +47,5 @@
 <img width="1398" height="425" alt="image" src="https://github.com/user-attachments/assets/03e71713-5b8a-4aa2-af1e-8e89caf5a541" />
 
 
-
+# Describe the core architectural components of Azure 
+<img width="1071" height="731" alt="image" src="https://github.com/user-attachments/assets/3e9a35b7-9b6e-4177-9b1b-2590c48c2b3b" />
