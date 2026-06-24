@@ -49,3 +49,7 @@
 
 # Describe the core architectural components of Azure 
 <img width="1071" height="731" alt="image" src="https://github.com/user-attachments/assets/3e9a35b7-9b6e-4177-9b1b-2590c48c2b3b" />
+
+# Describe Azure networking services
+<img width="1133" height="880" alt="image" src="https://github.com/user-attachments/assets/c4ca6eb8-55b4-4b16-a295-d2e721438069" />
+
