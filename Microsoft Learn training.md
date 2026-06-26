@@ -53,3 +53,6 @@
 # Describe Azure networking services
 <img width="1133" height="880" alt="image" src="https://github.com/user-attachments/assets/c4ca6eb8-55b4-4b16-a295-d2e721438069" />
 
+
+# Describe Azure storage services
+<img width="1135" height="736" alt="image" src="https://github.com/user-attachments/assets/c2b2d5bf-0b98-4d71-84e8-f7382ce2d145" />
