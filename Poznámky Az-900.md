@@ -124,6 +124,7 @@ _____________________________________________________
 ## Video n.21:-Data Movement and Migration Options-
 https://www.youtube.com/watch?v=jNBcXnMTo9s&list=PLlVtbbG169nED0_vMEniWBQjSoxTsBYS3&index=22
 
+<img width="1050" height="399" alt="image" src="https://github.com/user-attachments/assets/59c43f61-3a5f-493a-b504-ab45123d2cd9" />
 
 
 
