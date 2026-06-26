@@ -124,6 +124,322 @@ _____________________________________________________
 ## Video n.21:-Data Movement and Migration Options-
 https://www.youtube.com/watch?v=jNBcXnMTo9s&list=PLlVtbbG169nED0_vMEniWBQjSoxTsBYS3&index=22
 
+
+Toto je výborná AZ-104 úloha. Microsoft chce overiť, či rozumieš **Azure Storage Redundancy** a vieš vybrať správny typ podľa potrieb firmy.
+
+# Azure Storage Redundancy Decision Matrix
+
+| Redundancy                            | Copies                              | Protects Against               | Availability | Cost     | Best For                                  |
+| ------------------------------------- | ----------------------------------- | ------------------------------ | ------------ | -------- | ----------------------------------------- |
+| **LRS (Locally Redundant Storage)**   | 3 copies in one datacenter          | Disk/server failure            | ⭐⭐⭐          | 💲       | Development, test, non-critical workloads |
+| **ZRS (Zone-Redundant Storage)**      | 3 copies across Availability Zones  | Datacenter failure             | ⭐⭐⭐⭐         | 💲💲     | Business-critical apps in one region      |
+| **GRS (Geo-Redundant Storage)**       | LRS + replication to another region | Regional disaster              | ⭐⭐⭐⭐⭐        | 💲💲💲   | Disaster recovery, backups                |
+| **GZRS (Geo-Zone-Redundant Storage)** | ZRS + replication to another region | Datacenter + regional disaster | ⭐⭐⭐⭐⭐        | 💲💲💲💲 | Mission-critical production systems       |
+
+---
+
+# Scenario
+
+Predstav si slovenskú automobilku.
+
+Aplikácia:
+
+```text
+Production Planning System
+```
+
+Obsahuje:
+
+* výrobné plány
+* objednávky
+* logistiku
+
+Ak nefunguje:
+
+```text
+Výroba sa zastaví.
+```
+
+---
+
+# 1. LRS
+
+### How it works
+
+```text
+Datacenter A
+
+Copy 1
+Copy 2
+Copy 3
+```
+
+Všetky kópie sú v jednom datacentre.
+
+### RPO
+
+Veľmi nízke.
+
+Ale:
+
+Ak zhorí celé datacentrum:
+
+```text
+❌ Dáta sú nedostupné.
+```
+
+### Budget
+
+Najlacnejšie.
+
+### Use case
+
+* Laby
+* Vývoj
+* Testovanie
+
+---
+
+# 2. ZRS
+
+### How it works
+
+```text
+Zone 1
+Copy
+
+Zone 2
+Copy
+
+Zone 3
+Copy
+```
+
+Každá kópia je v inom datacentre v rámci rovnakého Azure regiónu.
+
+### RPO
+
+Takmer nulové.
+
+### Availability
+
+Ak Zone 1 vypadne:
+
+```text
+Zone 2
+Zone 3
+```
+
+stále fungujú.
+
+### Budget
+
+Stredná cena.
+
+### Use case
+
+Produkčné aplikácie.
+
+---
+
+# 3. GRS
+
+### How it works
+
+```text
+West Europe
+↓
+North Europe
+```
+
+Azure replikuje dáta do druhého regiónu.
+
+### RPO
+
+Nie je nulové.
+
+Pri veľkej katastrofe môžeš prísť o posledných pár minút zmien (replikácia je asynchrónna).
+
+### Availability
+
+Výborná pri regionálnych katastrofách.
+
+### Budget
+
+Vyššia cena.
+
+---
+
+# 4. GZRS
+
+### How it works
+
+```text
+West Europe
+
+Zone 1
+Zone 2
+Zone 3
+
+↓
+
+North Europe
+```
+
+Kombinuje:
+
+* ZRS
+* GRS
+
+### Chráni proti:
+
+✅ výpadku servera
+
+✅ výpadku datacentra
+
+✅ výpadku celého regiónu
+
+### Budget
+
+Najdrahšie.
+
+---
+
+# Recommendation
+
+### Business-critical workload
+
+Ak firma povedala:
+
+```text
+Naša výroba nesmie stáť.
+```
+
+Odporučil by som:
+
+## ✅ GZRS
+
+### Why?
+
+### RPO
+
+Veľmi nízke.
+
+### Availability
+
+Najvyššia.
+
+### Disaster Recovery
+
+Áno.
+
+### Budget
+
+Najdrahšie, ale opodstatnené pri kritických systémoch.
+
+---
+
+# Ak by firma mala obmedzený rozpočet
+
+Odporučil by som:
+
+## ✅ ZRS
+
+Prečo?
+
+* chráni proti výpadku jedného datacentra,
+* stojí menej než GZRS,
+* je vhodná pre väčšinu produkčných aplikácií.
+
+---
+
+# AZ-104 Cheat Sheet
+
+| Requirement                              | Best Choice |
+| ---------------------------------------- | ----------- |
+| Najnižšia cena                           | **LRS**     |
+| Ochrana proti výpadku datacentra         | **ZRS**     |
+| Disaster Recovery medzi regiónmi         | **GRS**     |
+| Maximálna dostupnosť + Disaster Recovery | **GZRS**    |
+
+---
+
+## Sample Answer (GitHub Notes)
+
+```markdown
+# Azure Storage Redundancy Comparison
+
+## LRS (Locally Redundant Storage)
+- 3 copies in one datacenter
+- Lowest cost
+- Protects against disk/server failure
+- Not suitable for datacenter disasters
+
+Best for:
+- Development
+- Testing
+- Non-critical workloads
+
+---
+
+## ZRS (Zone-Redundant Storage)
+- Replicates data across Availability Zones
+- Survives datacenter failures
+- Higher availability than LRS
+- Moderate cost
+
+Best for:
+- Production applications
+- Business-critical workloads within one Azure region
+
+---
+
+## GRS (Geo-Redundant Storage)
+- Replicates data to a secondary Azure region
+- Protects against regional disasters
+- Asynchronous replication (RPO is not zero)
+- Higher cost
+
+Best for:
+- Disaster recovery
+- Long-term resilience
+
+---
+
+## GZRS (Geo-Zone-Redundant Storage)
+- Combines ZRS and GRS
+- Protects against server, datacenter, and regional failures
+- Highest availability
+- Highest cost
+
+Best for:
+- Mission-critical production systems
+- Financial services
+- Healthcare
+- Manufacturing
+
+---
+
+## Recommendation
+
+For a business-critical manufacturing system:
+
+✅ Choose **GZRS**
+
+Reason:
+- Highest availability
+- Protection against datacenter and regional failures
+- Best resilience despite higher cost
+```
+
+**Zapamätaj si jednoduchú pomôcku na skúšku:**
+
+* **LRS** = *Local* → jedno datacentrum.
+* **ZRS** = *Zones* → viac datacentier v jednom regióne.
+* **GRS** = *Geo* → druhý Azure región.
+* **GZRS** = *Geo + Zones* → najvyššia úroveň ochrany a dostupnosti.
+
+
 <img width="1050" height="399" alt="image" src="https://github.com/user-attachments/assets/59c43f61-3a5f-493a-b504-ab45123d2cd9" />
 
 | Workload Pattern           | Azure Storage Service             | Performance | Durability | Access Requirements     | Why?                                                                            |
