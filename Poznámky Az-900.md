@@ -124,6 +124,14 @@ _____________________________________________________
 ## Video n.21:-Data Movement and Migration Options-
 https://www.youtube.com/watch?v=jNBcXnMTo9s&list=PLlVtbbG169nED0_vMEniWBQjSoxTsBYS3&index=22
 
+| Tool                 | Remember This                                                     |
+| -------------------- | ----------------------------------------------------------------- |
+| **Azure Migrate**    | **Analyze and migrate servers**                                   |
+| **Azure Data Box**   | **Physical appliance for massive offline data transfers**         |
+| **AzCopy**           | **Fast command-line tool for copying data to/from Azure Storage** |
+| **Storage Explorer** | **GUI for managing Azure Storage**                                |
+| **Azure File Sync**  | **Synchronize on-premises file servers with Azure Files**         |
+
 
 Toto je výborná AZ-104 úloha. Microsoft chce overiť, či rozumieš **Azure Storage Redundancy** a vieš vybrať správny typ podľa potrieb firmy.
 
