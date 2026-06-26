@@ -126,6 +126,12 @@ https://www.youtube.com/watch?v=jNBcXnMTo9s&list=PLlVtbbG169nED0_vMEniWBQjSoxTsB
 
 <img width="1050" height="399" alt="image" src="https://github.com/user-attachments/assets/59c43f61-3a5f-493a-b504-ab45123d2cd9" />
 
+| Workload Pattern           | Azure Storage Service             | Performance | Durability | Access Requirements     | Why?                                                                            |
+| -------------------------- | --------------------------------- | ----------- | ---------- | ----------------------- | ------------------------------------------------------------------------------- |
+| Backup & Disaster Recovery | Azure Blob Storage (Cool/Archive) | ⭐⭐          | ⭐⭐⭐⭐⭐      | Občasný prístup         | Lacné, extrémne odolné úložisko na zálohy.                                      |
+| File Sharing for Employees | Azure Files                       | ⭐⭐⭐         | ⭐⭐⭐⭐       | SMB/NFS z Windows/Linux | Zdieľané sieťové disky bez vlastného file servera.                              |
+| Website Images & Videos    | Azure Blob Storage (Hot Tier)     | ⭐⭐⭐⭐        | ⭐⭐⭐⭐⭐      | HTTP/HTTPS z internetu  | Rýchle doručovanie obrázkov, videí a dokumentov.                                |
+| Virtual Machine Disks      | Azure Managed Disks               | ⭐⭐⭐⭐⭐       | ⭐⭐⭐⭐⭐      | Pripojené iba k VM      | Optimalizované pre vysoký výkon a nízku latenciu operačných systémov a databáz. |
 
 
 | Tool             | Purpose               |
