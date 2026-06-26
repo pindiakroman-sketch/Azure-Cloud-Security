@@ -124,6 +124,14 @@ _____________________________________________________
 ## Video n.21:-Data Movement and Migration Options-
 https://www.youtube.com/watch?v=jNBcXnMTo9s&list=PLlVtbbG169nED0_vMEniWBQjSoxTsBYS3&index=22
 
+💡 Na skúške AZ-104 si zapamätaj jednu jednoduchú otázku pri každom nástroji:
+
+Azure Migrate → Ako dostanem servery do Azure?
+Data Box → Čo ak mám obrovské množstvo dát a pomalý internet?
+AzCopy → Ako rýchlo prenesiem súbory cez sieť?
+Storage Explorer → Ako pohodlne spravujem Azure Storage?
+File Sync → Ako prepojím lokálny file server s Azure?
+
 | Tool                 | Remember This                                                     |
 | -------------------- | ----------------------------------------------------------------- |
 | **Azure Migrate**    | **Analyze and migrate servers**                                   |
