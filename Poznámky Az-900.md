@@ -10603,6 +10603,10 @@ Modern:
 
 # Authentication Methods
 
+<img width="891" height="433" alt="image" src="https://github.com/user-attachments/assets/b7bf4ec4-180e-4751-8f2f-63f542f19e78" />
+
+
+
 ## Password-Based
 - Weakest option
 - Still supported
