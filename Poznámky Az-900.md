@@ -3205,6 +3205,16 @@ Internet → Database ❌
 
 ---
 
+| Port | Služba     |
+| ---- | ---------- |
+| 22   | SSH        |
+| 80   | HTTP       |
+| 443  | HTTPS      |
+| 3389 | RDP        |
+| 1433 | SQL Server |
+| 445  | SMB        |
+| 53   | DNS        |
+
 # 📝 Key Exam Takeaways (AZ-900)
 
 Remember these points:
