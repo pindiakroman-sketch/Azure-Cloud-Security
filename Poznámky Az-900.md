@@ -3215,6 +3215,417 @@ Internet → Database ❌
 | 445  | SMB        |
 | 53   | DNS        |
 
+
+Toto je veľmi dobrý spôsob učenia na **AZ-104, SC-900 a AZ-500**. Nestačí vedieť číslo portu, ale aj **na čo sa používa, prečo je dôležitý a aké sú bezpečnostné riziká**.
+
+# Najdôležitejšie porty pre Azure a Security
+
+| Port | Protokol        | Použitie                    |
+| ---- | --------------- | --------------------------- |
+| 22   | SSH             | Linux administrácia         |
+| 53   | DNS             | Preklad názvov na IP adresy |
+| 80   | HTTP            | Nešifrovaný web             |
+| 443  | HTTPS           | Šifrovaný web               |
+| 3389 | RDP             | Windows vzdialená plocha    |
+| 1433 | SQL             | Microsoft SQL Server        |
+| 445  | SMB             | Zdieľanie súborov           |
+| 25   | SMTP            | Odosielanie e-mailov        |
+| 110  | POP3            | Sťahovanie e-mailov         |
+| 143  | IMAP            | Synchronizácia e-mailov     |
+| 587  | SMTP TLS        | Moderné odosielanie pošty   |
+| 636  | LDAPS           | Šifrovaný LDAP              |
+| 389  | LDAP            | Active Directory            |
+| 3306 | MySQL           | MySQL databázy              |
+| 5432 | PostgreSQL      | PostgreSQL                  |
+| 8080 | HTTP Alternate  | Web aplikácie               |
+| 8443 | HTTPS Alternate | Web administrácia           |
+| 161  | SNMP            | Monitoring zariadení        |
+
+---
+
+# TCP 22 — SSH
+
+Používa sa na správu Linux serverov.
+
+Príklad:
+
+```bash
+ssh admin@10.0.0.5
+```
+
+V Azure:
+
+* Linux VM
+* Ubuntu
+* RedHat
+
+Bezpečnosť:
+
+❌ neotvárať celému internetu
+
+✅ povoliť iba svoju IP
+
+✅ používať SSH kľúče
+
+---
+
+# TCP 53 — DNS
+
+Prekladá názvy.
+
+Napríklad:
+
+```text
+portal.azure.com
+
+↓
+
+20.190.x.x
+```
+
+Bez DNS by si musel poznať IP každej služby.
+
+Používa sa:
+
+* DNS Server
+* Azure DNS
+* Private DNS
+
+---
+
+# TCP 80 — HTTP
+
+Bežný web.
+
+```text
+http://example.com
+```
+
+Prenáša údaje otvorene.
+
+Nebezpečenstvo:
+
+```text
+heslá
+cookies
+dáta
+```
+
+môžu byť odpočúvané.
+
+Dnes sa odporúča:
+
+✅ HTTPS
+
+---
+
+# TCP 443 — HTTPS
+
+Šifrovaná komunikácia.
+
+Používa:
+
+```text
+TLS
+SSL
+```
+
+Príklady:
+
+* Microsoft 365
+* Azure Portal
+* Banking
+* eShop
+
+Takmer všetko moderné ide cez 443.
+
+---
+
+# TCP 3389 — RDP
+
+Windows vzdialená plocha.
+
+Príklad:
+
+```text
+mstsc.exe
+
+↓
+
+Windows Server
+```
+
+Azure VM:
+
+```text
+Allow TCP 3389
+```
+
+Riziká:
+
+* brute force
+* ransomware
+
+Odporúčané:
+
+✅ Azure Bastion
+
+✅ VPN
+
+✅ JIT Access
+
+---
+
+# TCP 1433 — SQL Server
+
+Používa:
+
+Microsoft SQL Server
+
+Príklad:
+
+```text
+Application
+
+↓
+
+SQL Database
+
+Port 1433
+```
+
+Azure SQL:
+
+často používa 1433.
+
+Bezpečnosť:
+
+✅ firewall
+
+✅ private endpoint
+
+---
+
+# TCP 445 — SMB
+
+Zdieľanie súborov.
+
+Používa:
+
+```text
+\\SERVER\Documents
+```
+
+Azure:
+
+```text
+Azure Files
+```
+
+Port 445 býva blokovaný niektorými ISP.
+
+---
+
+# TCP 389 — LDAP
+
+Active Directory.
+
+Používa:
+
+* overovanie používateľov
+* Group Policy
+* Domain Join
+
+Nie je šifrovaný.
+
+---
+
+# TCP 636 — LDAPS
+
+LDAP + TLS.
+
+Bezpečnejší variant.
+
+Používa:
+
+```text
+Microsoft Entra Domain Services
+```
+
+alebo klasické AD.
+
+---
+
+# TCP 3306 — MySQL
+
+Databáza.
+
+Používajú:
+
+* WordPress
+* web aplikácie
+* e-commerce
+
+---
+
+# TCP 5432 — PostgreSQL
+
+Veľmi populárna databáza.
+
+Používajú:
+
+* cloud aplikácie
+* DevOps
+* kontajnery
+
+---
+
+# TCP 25
+
+SMTP.
+
+Posielanie mailov.
+
+Veľa cloud providerov ho obmedzuje.
+
+Azure:
+
+má limity na odosielanie cez port 25.
+
+---
+
+# TCP 587
+
+Moderný SMTP.
+
+Používa:
+
+```text
+SMTP + TLS
+```
+
+Microsoft 365.
+
+Gmail.
+
+Exchange.
+
+---
+
+# TCP 110
+
+POP3.
+
+Stiahne poštu do počítača.
+
+Staršia technológia.
+
+---
+
+# TCP 143
+
+IMAP.
+
+Synchronizuje poštu.
+
+Mail ostáva na serveri.
+
+Používa ho Outlook.
+
+---
+
+# TCP 8080
+
+Alternatívny HTTP.
+
+Veľa aplikácií:
+
+* Jenkins
+* Tomcat
+* proxy servery
+
+---
+
+# TCP 8443
+
+Alternatívny HTTPS.
+
+Často:
+
+```text
+https://server:8443
+```
+
+Používa sa pre:
+
+* management rozhrania
+* Kubernetes dashboard
+
+---
+
+# UDP 161
+
+SNMP.
+
+Monitoring.
+
+Používa:
+
+* switche
+* routery
+* tlačiarne
+
+Napríklad:
+
+```text
+CPU Usage
+
+Memory
+
+Temperature
+```
+
+---
+
+# SC-900 / AZ-104 Cheat Sheet
+
+| Port | Zapamätaj si |
+| ---- | ------------ |
+| 22   | Linux        |
+| 53   | DNS          |
+| 80   | Web          |
+| 443  | Secure Web   |
+| 3389 | Windows      |
+| 1433 | SQL          |
+| 445  | Files        |
+| 389  | LDAP         |
+| 636  | Secure LDAP  |
+| 3306 | MySQL        |
+| 5432 | PostgreSQL   |
+| 25   | SMTP         |
+| 587  | Secure SMTP  |
+
+---
+
+### Pamäťová pomôcka
+
+```text
+22   → Linux
+53   → DNS
+80   → HTTP
+443  → HTTPS
+3389 → Windows
+1433 → SQL
+445  → File Server
+389  → Active Directory
+636  → Secure AD
+3306 → MySQL
+5432 → PostgreSQL
+25   → Mail
+587  → Secure Mail
+
+
+
 # 📝 Key Exam Takeaways (AZ-900)
 
 Remember these points:
