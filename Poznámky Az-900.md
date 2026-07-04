@@ -14112,3 +14112,11 @@ az storage account list --output table
 ```
 
 Takto sa najrýchlejšie naučíš Azure aj CLI naraz bez inštalácií a bez ďalších nákladov.
+
+| Tool             | Best for                           | Strengths                 | Limitations                |
+| ---------------- | ---------------------------------- | ------------------------- | -------------------------- |
+| Azure Portal     | Beginners, occasional tasks        | GUI, intuitive            | Slow for repetitive tasks  |
+| Cloud Shell      | Quick administration               | No installation required  | Temporary environment      |
+| Azure CLI        | Automation, Linux, DevOps          | Cross-platform, scripting | Requires command knowledge |
+| Azure PowerShell | Windows admins, complex automation | Object-based commands     | Steeper learning curve     |
+
