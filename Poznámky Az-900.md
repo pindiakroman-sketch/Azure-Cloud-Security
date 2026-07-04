@@ -14120,3 +14120,20 @@ Takto sa najrýchlejšie naučíš Azure aj CLI naraz bez inštalácií a bez ď
 | Azure CLI        | Automation, Linux, DevOps          | Cross-platform, scripting | Requires command knowledge |
 | Azure PowerShell | Windows admins, complex automation | Object-based commands     | Steeper learning curve     |
 
+____________________________________-
+
+
+| Task                   | Best Tool   |
+| ---------------------- | ----------- |
+| Learning Azure         | Portal      |
+| Configure NSG          | Portal      |
+| Quick troubleshooting  | Cloud Shell |
+| Deploy 100 VMs         | CLI         |
+| Daily administration   | CLI         |
+| Windows automation     | PowerShell  |
+| CI/CD pipelines        | CLI         |
+| Infrastructure as Code | CLI         |
+| Reporting              | PowerShell  |
+| Bulk resource updates  | PowerShell  |
+| Exam practice          | Cloud Shell |
+
