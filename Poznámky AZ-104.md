@@ -1,1 +1,19 @@
-12.08.2026 Začínam az 104-Mám za sebou testy 90% úspešnosť Az-900,sc-900, kanál hackni svou budoucnost,Network +
+# What is Azure
+
+00:01–07:40 – Čo je vlastne dátové centrum: John Savill najprv vysvetľuje Azure cez klasické on-premises dátové centrum. Dátové centrum poskytuje výpočtový výkon, storage a sieťovú kapacitu, nad ktorou organizácia vytvára služby ako VM, databázy, kontajnery a aplikácie. Problémom je, že firma musí riešiť hardware, OS, patchovanie, backup, DR, monitoring, bezpečnosť, elektrinu, chladenie a ľudí.
+08:19–10:49 – Azure = cloudová kapacita + služby: Azure má pod sebou obrovské množstvo compute, storage a networking kapacity, ale zákazník k nej nepristupuje priamo. Namiesto toho využíva hotové služby, napr. Virtual Machines, Storage Accounts, Managed Disks a Virtual Networks. VM je typický príklad IaaS, kde stále spravuješ OS a časť konfigurácie.
+11:39–15:40 – Najväčšia sila Azure je PaaS: Azure ponúka oveľa viac než samotné VM – napr. AKS, App Service, Functions, Logic Apps, SQL, PostgreSQL, MySQL, Cosmos DB, AI/ML a IoT služby. Pri PaaS Azure preberá veľkú časť infraštruktúrnej práce, takže zákazník sa môže sústrediť hlavne na svoju aplikáciu a business logiku. Toto je jeden z najdôležitejších konceptov pre AZ-900. Glasp podobne zdôrazňuje rozdiel medzi IaaS, PaaS a SaaS a to, koľko zodpovednosti preberá cloud provider.
+15:03–17:31 – IaaS vs PaaS vs SaaS: Savill vysvetľuje tri základné úrovne: IaaS – napr. VM, kde máš viac kontroly; PaaS – Azure spravuje väčšinu infraštruktúry; SaaS – hotová aplikácia, napr. Microsoft 365 alebo Dynamics 365. Pravidlo je: ak existuje vhodné SaaS, použi ho; ak tvoríš vlastnú aplikáciu, preferuj PaaS; VM/IaaS použi, keď potrebuješ väčšiu kontrolu alebo kompatibilitu.
+16:08–17:31 – Consumption-based model a elasticita: On-premises firma musí nakúpiť kapacitu dopredu podľa očakávaného maxima. V Azure platíš podľa využívania a môžeš zdroje škálovať hore alebo dole podľa potreby. To prináša flexibilitu a mení veľkú časť nákladov z CapEx na OpEx. Glasp tento koncept tiež uvádza ako jednu z hlavných výhod cloudu.
+17:51–22:48 – Azure Regions a globálna sieť: Azure je rozdelený do regions, ktoré pozostávajú z dátových centier. Regióny sú prepojené globálnou Microsoft sieťou. Výber regiónu ovplyvňuje napríklad latenciu, dostupnosť a umiestnenie dát. Pre pripojenie z vlastnej firmy možno použiť internet/VPN alebo privátne pripojenie cez ExpressRoute. Globálna infraštruktúra a geografická redundancia sú dôležitou súčasťou Azure.
+23:15–25:24 – Management, governance a security: Azure poskytuje Azure Portal, PowerShell, CLI a templates na správu zdrojov. Keďže cloud umožňuje self-service, musí existovať governance: Azure Policy určuje, čo je povolené, RBAC určuje, kto čo môže robiť a budgets pomáhajú kontrolovať spotrebu. K tomu patria bezpečnostné a monitoringové služby ako Microsoft Defender, Sentinel a Azure Monitor.
+25:24–27:40 – Identity a hybrid cloud: Identita je kľúčová – Azure používa Microsoft Entra ID (predtým Azure AD), ktoré umožňuje MFA, Conditional Access, Identity Protection a ďalšie kontroly. Azure Arc potom umožňuje aplikovať Azure management a governance aj na on-premises prostredia a vytvárať konzistentnejší hybridný model.
+27:40–28:27 – Najdôležitejšia definícia Azure: Azure nie je len „cudzí dátový center“. Je to obrovská cloudová infraštruktúra rozdelená do regiónov, nad ktorou Microsoft poskytuje rozsiahly ekosystém managed služieb, nástrojov, governance, security a monitoringu. Najväčšia hodnota je v tom, že nemusíš spravovať všetku základnú infraštruktúru a môžeš sa sústrediť na to, čo potrebuješ vybudovať.
+
+Pre AZ-900 si z tohto videa hlavne zapamätaj:
+Azure = cloudová infraštruktúra + služby.
+IaaS = viac správy na zákazníkovi.
+PaaS = Azure spravuje viac infraštruktúry.
+SaaS = hotový softvér.
+Cloud = elasticita + pay-as-you-go + globálny rozsah.
+Azure = regions + networking + services + governance + security.
