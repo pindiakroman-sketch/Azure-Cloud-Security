@@ -1,4 +1,4 @@
-## What is Azure 1
+## What is Azure 1 video
 
 00:01–07:40 – Čo je vlastne dátové centrum: John Savill najprv vysvetľuje Azure cez klasické on-premises dátové centrum. Dátové centrum poskytuje výpočtový výkon, storage a sieťovú kapacitu, nad ktorou organizácia vytvára služby ako VM, databázy, kontajnery a aplikácie. Problémom je, že firma musí riešiť hardware, OS, patchovanie, backup, DR, monitoring, bezpečnosť, elektrinu, chladenie a ľudí.
 08:19–10:49 – Azure = cloudová kapacita + služby: Azure má pod sebou obrovské množstvo compute, storage a networking kapacity, ale zákazník k nej nepristupuje priamo. Namiesto toho využíva hotové služby, napr. Virtual Machines, Storage Accounts, Managed Disks a Virtual Networks. VM je typický príklad IaaS, kde stále spravuješ OS a časť konfigurácie.
@@ -18,7 +18,7 @@ SaaS = hotový softvér.
 Cloud = elasticita + pay-as-you-go + globálny rozsah.
 Azure = regions + networking + services + governance + security.
 
-## Azure Master Class v3-Part1
+## Azure Master Class v3-Part1 video
 
 * **00:00–05:52 – Typy cloudov:** John Savill vysvetľuje **private, public, community a hybrid cloud**. Azure je public cloud; hybrid cloud kombinuje cloud s on-premises infraštruktúrou. Pri hybride Azure umožňuje napr. **Azure Arc** spravovať zdroje mimo Azure podobným spôsobom ako Azure zdroje. ([Glasp][1])
 
@@ -40,4 +40,99 @@ Azure = regions + networking + services + governance + security.
 
 **Najdôležitejšie pre tvoje AZ-900:** zapamätaj si hlavne **Public/Private/Hybrid + IaaS/PaaS/SaaS + 5 charakteristík cloudu + elasticity + consumption-based pricing + shared responsibility + availability/reliability**. Glasp zhrnutia tiež zdôrazňujú, že pri AZ-900 je lepšie chápať **kategórie, účel a príklady služieb** než memorovať každý SKU. ([Glasp][3])
 
-## Master the Azure Pricing Calculator
+
+## Master the Azure Pricing Calculator-video
+Jasné. Toto si **ulož ako základnú definíciu pre AZ-104**. Keď budeš neskôr vytvárať Azure VM, presne tieto pojmy budeš riešiť.
+
+## 🖥️ Azure VM – základná definícia
+
+Pri vytváraní **virtuálneho počítača (VM)** v Azure vyberáš najmä:
+
+### 1. vCPU → procesorový výkon ⚙️
+
+**vCPU (virtual CPU)** určuje, koľko virtuálneho procesorového výkonu VM dostane.
+
+Napríklad:
+
+> **2 vCPU**
+
+znamená, že VM má pridelené 2 virtuálne CPU.
+
+**Viac vCPU → väčší výpočtový výkon.**
+
+---
+
+### 2. RAM → pracovná pamäť 🧠
+
+RAM je pamäť, ktorú VM používa na **aktuálne spustené programy a operácie**.
+
+Napríklad:
+
+> **8 GiB RAM**
+
+VM má 8 GiB pracovnej pamäte.
+
+**Viac RAM → VM zvládne viac programov/dát naraz.**
+
+RAM sa používa počas behu VM a nie je to miesto určené na trvalé uloženie dát.
+
+---
+
+### 3. OS Disk → úložisko 💾
+
+**OS disk** je virtuálny disk, na ktorom je uložený operačný systém VM.
+
+Napríklad:
+
+> **128 GiB OS disk**
+
+Na ňom môže byť napríklad:
+
+* Windows Server
+* Linux
+* systémové súbory
+* nainštalované aplikácie
+
+Po vypnutí VM **dáta na disku zostávajú**.
+
+---
+
+### 4. Data Disk → ďalšie úložisko 📦
+
+Ak potrebuješ viac priestoru, môžeš k VM pridať **data disks**.
+
+Napríklad:
+
+```text
+Azure VM
+│
+├── 4 vCPU        → výkon CPU
+├── 16 GiB RAM    → pracovná pamäť
+│
+├── OS Disk       → Windows/Linux
+│   └── 128 GiB
+│
+└── Data Disk     → dáta aplikácie
+    └── 512 GiB
+```
+
+---
+
+## 🧠 Zapamätaj si toto
+
+> **CPU = ako rýchlo VM počíta**
+> **RAM = koľko môže VM naraz pracovať**
+> **Disk = koľko môže VM uložiť**
+
+### Príklad
+
+Ak v Azure vyberieš:
+
+**4 vCPU + 16 GiB RAM + 128 GiB OS disk**
+
+znamená to:
+
+> VM dostane **4 virtuálne CPU**, **16 GiB pracovnej pamäte** a **128 GiB trvalého úložiska pre operačný systém**.
+
+A toto je presne ten základ, ktorý budeš potrebovať, keď začneš v **AZ-104** riešiť vytváranie a konfiguráciu virtuálnych strojov.
+
