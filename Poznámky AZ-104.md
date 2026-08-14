@@ -1,4 +1,4 @@
-# What is Azure
+# What is Azure 1
 
 00:01–07:40 – Čo je vlastne dátové centrum: John Savill najprv vysvetľuje Azure cez klasické on-premises dátové centrum. Dátové centrum poskytuje výpočtový výkon, storage a sieťovú kapacitu, nad ktorou organizácia vytvára služby ako VM, databázy, kontajnery a aplikácie. Problémom je, že firma musí riešiť hardware, OS, patchovanie, backup, DR, monitoring, bezpečnosť, elektrinu, chladenie a ľudí.
 08:19–10:49 – Azure = cloudová kapacita + služby: Azure má pod sebou obrovské množstvo compute, storage a networking kapacity, ale zákazník k nej nepristupuje priamo. Namiesto toho využíva hotové služby, napr. Virtual Machines, Storage Accounts, Managed Disks a Virtual Networks. VM je typický príklad IaaS, kde stále spravuješ OS a časť konfigurácie.
@@ -17,3 +17,26 @@ PaaS = Azure spravuje viac infraštruktúry.
 SaaS = hotový softvér.
 Cloud = elasticita + pay-as-you-go + globálny rozsah.
 Azure = regions + networking + services + governance + security.
+
+# Azure Master Class v3-Part1
+
+* **00:00–05:52 – Typy cloudov:** John Savill vysvetľuje **private, public, community a hybrid cloud**. Azure je public cloud; hybrid cloud kombinuje cloud s on-premises infraštruktúrou. Pri hybride Azure umožňuje napr. **Azure Arc** spravovať zdroje mimo Azure podobným spôsobom ako Azure zdroje. ([Glasp][1])
+
+* **06:34–11:38 – 5 charakteristík cloudu podľa NIST:** cloud poskytuje **on-demand self-service, broad network access, resource pooling, rapid elasticity a measured service**. Dôležité je, že cloud je založený na zdieľaní zdrojov, automatickom škálovaní a meraní spotreby.
+
+* **12:09–20:24 – IaaS, PaaS, SaaS a shared responsibility:** hlavná myšlienka je **presúvanie zodpovednosti na cloud providera**. Pri IaaS (napr. VM) spravuješ OS a aplikácie; pri PaaS (napr. App Service) sa staráš hlavne o aplikáciu a dáta; pri SaaS (napr. Microsoft 365) provider spravuje takmer všetko. Toto je zároveň jedna z kľúčových oblastí AZ-900. ([Glasp][2])
+
+* **20:24–22:34 – Identita zostáva dôležitá:** bez ohľadu na model služby zákazník stále nesie zodpovednosť za veci ako **identity, účty, MFA, Conditional Access a správne nastavenie prístupov**. Pri Azure sa na identitu používa **Microsoft Entra ID**.
+
+* **22:34–32:50 – Prečo používať public cloud:** hlavné výhody sú **elasticita, škálovateľnosť, globálny dosah, flexibilita, disaster recovery a pay-as-you-go**. Výborným príkladom je pizza počas Super Bowlu: nepotrebuješ obrovskú kapacitu celý rok, ale iba počas špičky. Cloud umožní kapacitu zvýšiť a následne znížiť.
+
+* **30:00–36:43 – Typické scenáre pre Azure:** cloud je vhodný na **predictable/unpredictable bursting, startupy, vývoj a testovanie, disaster recovery, verejne dostupné služby/DMZ, globálne aplikácie a krátkodobé špeciálne projekty**, napríklad AI workloady.
+
+* **37:04–49:47 – Azure služby, účty a náklady:** Azure ponúka obrovské množstvo služieb pre **compute, storage, networking, databázy, AI/ML, security, DevOps a IoT**. Dôležité sú tiež subscriptions, management groups, pay-as-you-go, Enterprise Agreement, CSP, **quotas/limits a SKUs**. Pri učení treba dávať pozor na spotrebu a vypínať nepotrebné resources.
+
+* **50:11–54:39 – Reliability v cloude:** namiesto spoliehania sa na jeden veľmi odolný server sa cloudové aplikácie navrhujú s **viacerými inštanciami distribuovanými cez fault/update domains a availability zones**. Spoľahlivosť teda musí byť súčasťou architektúry aplikácie, nie iba vlastnosťou hardvéru.
+
+* **55:06–59:28 – Prečo Azure:** Savill zdôrazňuje silnú kombináciu **IaaS + PaaS, identity, security, governance a hybridných možností**. Azure Arc umožňuje rozšíriť Azure management mimo samotného Azure. Pri výbere cloudu však odporúča pozerať nielen na jednu konkrétnu funkciu, ale na **integráciu celého ekosystému**. ([Glasp][1])
+
+**Najdôležitejšie pre tvoje AZ-900:** zapamätaj si hlavne **Public/Private/Hybrid + IaaS/PaaS/SaaS + 5 charakteristík cloudu + elasticity + consumption-based pricing + shared responsibility + availability/reliability**. Glasp zhrnutia tiež zdôrazňujú, že pri AZ-900 je lepšie chápať **kategórie, účel a príklady služieb** než memorovať každý SKU. ([Glasp][3])
+
