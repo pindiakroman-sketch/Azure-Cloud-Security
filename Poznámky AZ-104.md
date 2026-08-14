@@ -406,9 +406,29 @@ If you want the **exam-focused version**, remember these:
 
 ---
 
-## 🧠 One sentence to memorize
+## Key takeaways
 
-> **First understand what you are deploying, then determine the resource size, region and expected usage, and finally use the Azure Pricing Calculator to estimate the cost.**
+- **Use Cost Management for existing deployments:** Azure Cost Analysis shows spending by subscription, resource, service, region, resource group, and over time. Budgets can trigger alerts based on actual or projected costs. [00:26–02:26]
 
-For **AZ-104**, you don't need to memorize specific VM prices because prices change. You need to understand **what factors determine Azure costs and how to estimate them**.
+- **Start with a well-defined architecture:** The pricing calculator is only as accurate as its inputs—identify all resources, SKUs, sizes, quantities, usage patterns, and interactions before estimating costs. [02:26–02:50]
+
+- **Include indirect costs:** Some resources are free, such as virtual networks and resource groups, but their use can create costs through peering, private endpoints, data transfer, or related services. [02:50–03:49]
+
+- **Account for usage rather than just resource count:** Auto-scaling services may run different numbers of instances for different durations, so estimate total instance-hours instead of assuming everything runs continuously. [04:48–06:16]
+
+- **Consider supporting services:** Disks, snapshots, backups, security tools, monitoring, networking, load balancers, public IPs, databases, and disaster recovery can significantly affect the total cost. [06:16–12:36]
+
+- **Pay attention to data-related charges:** Costs may depend on storage transactions, data churn, retention, replication, bandwidth, and egress—especially for monitoring, backups, disks, ExpressRoute, and internet traffic. [06:16–10:17]
+
+- **Azure AD licensing is generally separate:** Licenses such as P1/P2, Conditional Access, Identity Protection, PIM, and MFA are tenant-level costs and are not typically included in a project estimate from the calculator. [12:36–13:03]
+
+- **Sign in to save and manage estimates:** The calculator supports multiple estimates, saved estimates, sharing through a URL, and exporting to Excel. [13:03–14:03] [26:53–28:31]
+
+- **Use example scenarios when helpful:** Prebuilt scenarios can suggest the products commonly needed for architectures such as container CI/CD, modern data warehouses, and web apps. [14:03–14:57]
+
+- **Apply pricing options accurately:** Region, operating system, licensing, reserved instances, Azure Hybrid Benefit, Dev/Test pricing, and agreement type can materially change the estimate. [15:25–17:21] [27:23–27:57]
+
+- **Treat the result as an estimate:** A good architecture can usually produce a reasonable initial range—roughly within 10–20%—which should be refined after observing real workloads. [12:11–12:36]
+
+
 
