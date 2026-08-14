@@ -41,7 +41,7 @@ Azure = regions + networking + services + governance + security.
 **Najdôležitejšie pre tvoje AZ-900:** zapamätaj si hlavne **Public/Private/Hybrid + IaaS/PaaS/SaaS + 5 charakteristík cloudu + elasticity + consumption-based pricing + shared responsibility + availability/reliability**. Glasp zhrnutia tiež zdôrazňujú, že pri AZ-900 je lepšie chápať **kategórie, účel a príklady služieb** než memorovať každý SKU. ([Glasp][3])
 
 
-## Master the Azure Pricing Calculator-video
+## Master the Azure Pricing Calculator-video-dôležité
 Jasné. Toto si **ulož ako základnú definíciu pre AZ-104**. Keď budeš neskôr vytvárať Azure VM, presne tieto pojmy budeš riešiť.
 
 ## 🖥️ Azure VM – základná definícia
