@@ -431,4 +431,5 @@ If you want the **exam-focused version**, remember these:
 - **Treat the result as an estimate:** A good architecture can usually produce a reasonable initial range—roughly within 10–20%—which should be refined after observing real workloads. [12:11–12:36]
 
 
+## Azure Master Class v3 - Part 2 - Identity -6 video
 
