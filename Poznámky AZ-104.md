@@ -874,3 +874,114 @@ The module’s central message is that identity is the foundation for cloud secu
 6. Automate onboarding, role changes, and offboarding. [02:18:50]
 7. Separate workforce, partner, and customer identity scenarios. [02:14:21]
 8. Use managed identities and federation instead of storing workload secrets. [48
+
+
+
+
+
+## video 7.The Line Between AD and Azure AD!
+
+
+## Deeper explanation
+
+### 1. They solve different identity problems
+
+**Active Directory (AD DS)** is primarily a directory and authentication system for a controlled corporate network. Devices join a domain, receive computer accounts, and establish shared secrets with domain controllers. Those relationships support Kerberos authentication and access to internal resources. [01:21–02:36]
+
+**Azure AD** is a cloud identity provider and application-access broker. It is built to authenticate users to web and SaaS applications over HTTPS using modern protocols rather than to provide traditional domain services. [12:30–13:45]
+
+### 2. The protocol difference is fundamental
+
+Traditional AD communicates using protocols such as:
+
+- Kerberos
+- NTLM
+- LDAP
+- DNS-based domain discovery [01:21–02:36]
+
+Azure AD instead focuses on:
+
+- OAuth 2.0 for delegated authorization
+- OpenID Connect for authentication
+- SAML and WS-Federation for federation
+- SCIM for user and group provisioning [13:10–14:17]
+
+Therefore, Azure AD cannot simply replace a domain controller for a server that expects LDAP queries or Kerberos tickets. [14:17–14:50]
+
+### 3. AD authenticates to the domain; Azure AD issues application tokens
+
+In AD, a domain-joined computer has a corresponding computer object and shared secret. A domain controller can issue tokens that internal servers trust. [02:05–04:06]
+
+In Azure AD, applications request tokens for particular resources. Access tokens are short-lived—about 60 minutes by default—while refresh tokens provide a longer-lived rolling session. Libraries such as MSAL handle token acquisition and renewal for applications. [15:30–16:25]
+
+This means Azure AD authorization is generally **application- and resource-oriented**, rather than based on a user simply being inside the corporate network. [11:29–12:30]
+
+### 4. Federation moves trust between organizations
+
+Before cloud identity providers became common, companies often deployed AD FS or another federation service. The cloud application and the company’s federation service exchanged configuration, certificates, claims, and token-format information. [07:34–08:34]
+
+During sign-in, the user was redirected to the company’s federation service, authenticated—often using Kerberos—and then sent back to the cloud application with a signed SAML token. [08:34–09:30]
+
+Azure AD reduces this operational burden by providing many application integrations directly, so organizations do not need to deploy and maintain federation infrastructure for every application. [09:56–10:56] [16:25–18:41]
+
+### 5. Azure AD is more than single sign-on
+
+Its major value is not just “one login.” Azure AD can evaluate context before granting access, including:
+
+- User, group, or role
+- Application
+- Location
+- Device platform and compliance
+- Sign-in or user risk
+- MFA requirements
+- Terms of use
+- Session duration [23:38–26:50]
+
+For example, access can be blocked, or the user can be required to perform MFA and use an Intune-compliant device. [26:24–27:16]
+
+### 6. Security decisions can happen after the initial login
+
+The presenter distinguishes the initial authentication from ongoing access decisions. Once a user receives a token, Azure AD’s Conditional Access policies and related security features help determine whether access should be allowed under current conditions. [36:44–37:09]
+
+Identity Protection can detect signals such as leaked credentials, impossible travel, unusual locations, abnormal working times, and suspicious IP behavior. [25:32–25:57] [27:45–28:18]
+
+### 7. Synchronization does not merge the directories
+
+With Azure AD Connect or Cloud Sync, an on-premises AD user is synchronized to a corresponding but separate object in Azure AD. The identity appears consistent to the user, but the two directories remain different systems. [34:07–35:10]
+
+The normal direction of authority is:
+
+```text
+Active Directory → synchronization → Azure AD → cloud applications
+```
+
+AD remains the source of truth in the normal hybrid design; Azure AD generally does not write ordinary directory objects back into AD. [44:56–45:30]
+
+### 8. Seamless SSO is a special bridge, not proof that Azure AD is AD
+
+Seamless sign-on can make a domain-connected user appear automatically authenticated to Azure AD. Behind the scenes, Azure AD uses a special computer account in AD to obtain a Kerberos token. [35:10–36:44]
+
+This is a carefully limited integration mechanism. It does not mean Azure AD generally supports Kerberos, NTLM, or LDAP. [14:17–14:50] [35:38–36:44]
+
+### 9. Device identity is also changing
+
+A traditional AD-joined device depends on the corporate domain and commonly uses Group Policy and related management systems. [37:35–38:05]
+
+An Azure AD–joined device authenticates directly with the cloud identity and can be managed through Intune, including policy, application deployment, and updates from Microsoft services. [37:35–38:33]
+
+Hybrid join allows organizations to retain traditional AD relationships while also registering devices with Azure AD to use cloud-based controls. [39:04–40:02]
+
+### 10. “AD in Azure” means something different
+
+If an Azure virtual machine needs LDAP, Kerberos, or NTLM, there are two main approaches:
+
+1. **Extend existing AD into Azure** using network connectivity, custom DNS, VPN, ExpressRoute, or domain controllers deployed as Azure virtual machines. [42:41–44:56]
+2. **Use Azure AD Domain Services**, which provides Microsoft-managed domain controllers that replicate selected identities from Azure AD and support legacy protocols. [45:30–47:48]
+
+Azure AD Domain Services is therefore the service that more closely resembles traditional AD domain functionality in Azure—not Azure AD itself. [46:04–46:40]
+
+### Bottom line
+
+- **AD DS:** domain controllers, internal servers, domain-joined machines, Kerberos, NTLM, LDAP, and Group Policy. [03:06–04:06]
+- **Azure AD:** cloud identities, SaaS applications, modern authentication, tokens, SSO, Conditional Access, MFA, and external identities. [13:10–14:17] [21:36–27:16]
+- **Hybrid architecture:** keep AD for legacy and on-premises requirements, synchronize identities to Azure AD, and use Azure AD for cloud access and modern security controls. [33:08–35:10] [48:19–49:20]
