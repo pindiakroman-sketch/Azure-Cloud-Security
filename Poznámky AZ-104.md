@@ -1100,5 +1100,16 @@ A vedel rozdiel:
 **Group** → organizovanie/prístup používateľov
 **Administrative Unit** → **obmedzenie rozsahu administrátorských oprávnení**
 
+- **Administrative units (AUs) provide scoped delegation in Azure AD.** They let administrators assign roles over a subset of users or groups—such as a department or branch—instead of the entire tenant. [02:20–04:40]
+- **They address Azure AD’s otherwise flat structure.** Without AUs, roles such as User Administrator generally apply across the whole Azure AD instance. [00:37–02:20]
+- **Users can belong to multiple AUs, but AUs cannot be nested.** [03:31–04:07]
+- **Only Global Administrators or Privileged Role Administrators can create AUs.** [02:55–03:31]
+- **Delegated administrators need an Azure AD Premium P1-or-higher license; AU members do not need additional licensing and may use the free tier.** [04:40–05:22]
+- **Adding a group to an AU controls only the group object—not its members.** The delegated administrator can manage the group’s properties and membership, but cannot manage users merely because they belong to that group. [07:51–09:23]
+- **This restriction is a security safeguard** that prevents administrators from escalating privileges by adding users to a group they control. [08:24–09:23]
+- **Available delegated roles include** Authentication Administrator, Groups Administrator, Helpdesk Administrator, License Administrator, Password Administrator, and User Administrator. [10:47–11:17]
+- **AUs support bulk management** through the portal, CSV files, PowerShell, scripting, and REST APIs. [09:47–10:17]
+- **The feature applies to regular Azure AD, not Azure AD B2C**, and includes a separate “My Staff” portal for delegated user-management tasks. [04:40–05:22] [07:22–07:51]
+
 Toto je presne ten typ veci, ktorý sa ti **oplatí vedieť na AZ-104/AZ-500**, ale nie je to téma, na ktorej by som trávil veľa času oproti napr. **RBAC, Entra ID, Conditional Access, networking, NSG, private endpoints, Azure Policy, Defender for Cloud a Key Vault**.
 
