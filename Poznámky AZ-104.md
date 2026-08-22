@@ -1075,3 +1075,30 @@ Use the enhanced B2B-oriented External Identities capabilities when external use
 Use B2C when users are **customers**, should remain outside the organization’s primary Azure AD tenant, or when the application needs extensive branding, onboarding customization, local accounts, and a large range of social identity providers. [04:16–05:55]
 
 The central takeaway is that External Identities unifies the branding and management model, while the underlying architectural distinction remains: **B2B extends access into your tenant; B2C provides customer identity for applications in a separate directory.** [27:12–28:19]
+
+Azure
+
+## Azure AD Administrative Units Overview video.9
+
+
+* **Administrative Unit (AU)** = logické rozdelenie používateľov, skupín alebo zariadení.
+* Hlavný účel je **delegovaná administrácia**.
+* Napríklad firma má 3 regióny → vytvoríš AU `Slovakia`, `Germany`, `France`.
+* Admin pre Slovensko môže dostať napr. **User Administrator** iba v scope `Slovakia`, takže nemá rovnaké oprávnenia nad celým tenantom. ([Microsoft Learn][1])
+* AU teda súvisí priamo s **RBAC, least privilege a security** – preto je to relevantné aj pre cloud security. Microsoft ich dokonca uvádza ako mechanizmus pre delegated administration a izoláciu. ([Microsoft Learn][2])
+* V roku 2026 sa stále dajú spravovať cez **Entra admin center, PowerShell a Microsoft Graph**. ([Microsoft Learn][3])
+* Novšie dokumenty Microsoftu z roku 2026 ich stále aktívne dokumentujú, takže nejde o nejakú zastaranú Azure AD funkciu. ([Microsoft Learn][4])
+
+
+
+Stačí, aby si dokonale chápal:
+
+> **Administrative Unit = časť Entra tenantu + scoped admin permissions.**
+
+A vedel rozdiel:
+
+**Group** → organizovanie/prístup používateľov
+**Administrative Unit** → **obmedzenie rozsahu administrátorských oprávnení**
+
+Toto je presne ten typ veci, ktorý sa ti **oplatí vedieť na AZ-104/AZ-500**, ale nie je to téma, na ktorej by som trávil veľa času oproti napr. **RBAC, Entra ID, Conditional Access, networking, NSG, private endpoints, Azure Policy, Defender for Cloud a Key Vault**.
+
