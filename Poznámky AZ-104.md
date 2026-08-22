@@ -985,3 +985,93 @@ Azure AD Domain Services is therefore the service that more closely resembles tr
 - **AD DS:** domain controllers, internal servers, domain-joined machines, Kerberos, NTLM, LDAP, and Group Policy. [03:06–04:06]
 - **Azure AD:** cloud identities, SaaS applications, modern authentication, tokens, SSO, Conditional Access, MFA, and external identities. [13:10–14:17] [21:36–27:16]
 - **Hybrid architecture:** keep AD for legacy and on-premises requirements, synchronize identities to Azure AD, and use Azure AD for cloud access and modern security controls. [33:08–35:10] [48:19–49:20]
+
+
+## 8-video. What are Azure AD External Identities?
+
+## Deeper explanation
+
+### 1. “External Identities” is primarily a product grouping
+
+External Identities is not a completely new directory type replacing B2B or B2C. It is an umbrella that brings the two scenarios under one product family: **B2B collaboration** and **B2C customer identity**. [07:35–08:13]
+
+The important distinction is where the external users live:
+
+- **B2B:** users become guest objects in the organization’s normal Azure AD tenant. [01:31–02:09]
+- **B2C:** customers use a separate Azure AD B2C directory rather than being placed in the organization’s main tenant. [04:16–04:45]
+
+### 2. B2B is for known collaborators; B2C is for customers
+
+B2B is intended for partners, vendors, contractors, or other people an organization collaborates with. They may authenticate using Azure AD, Microsoft accounts, Google, federation, or one-time passcodes. [00:54–01:31]
+
+B2C is intended for an application’s customer population. Customers can use numerous social identity providers or create local accounts in the B2C directory. [04:45–05:19]
+
+A useful architectural rule is:
+
+> If the person needs to be treated like a guest in your organization, think B2B. If the person is simply a customer of your application, think B2C. [04:16–04:45]
+
+### 3. The new B2B features reduce dependence on invitation-based onboarding
+
+Traditional B2B onboarding is centered on sending an invitation to an email address and having the recipient redeem it. [01:31–02:09]
+
+External Identities adds **guest self-service sign-up through user flows**, allowing an external person to start onboarding through an application rather than receiving a direct invitation. [08:46–09:15]
+
+This is especially important for identity providers such as Facebook: Facebook cannot simply be invited in the same way as an email-based identity, so the sign-up must occur through a configured application and user flow. [10:24–11:30]
+
+### 4. Facebook is added to regular B2B, but with a limitation
+
+Facebook becomes an available identity provider for B2B users. [10:24–12:05]
+
+However, it is not a general invitation mechanism. The organization must:
+
+1. Create and configure a Facebook developer application. [12:05–12:32]
+2. Add the Facebook application ID and secret to Azure AD. [12:05–12:32]
+3. Enable self-service sign-up through a custom application and user flow. [11:02–11:30]
+
+After sign-up, the user is still represented as a normal guest in the organization’s Azure AD tenant, with Facebook recorded as the identity issuer and self-service sign-up recorded as the creation method. [12:32–13:03]
+
+### 5. User flows are the mechanism that ties the experience together
+
+A user flow determines:
+
+- Which identity providers are available, such as Google, Facebook, or Microsoft accounts. [16:23–16:57]
+- Which built-in attributes the user must provide. [16:23–16:57]
+- Which custom attributes should be collected during registration. [16:57–17:28]
+- How the registration page is ordered and presented. [17:28–17:57]
+
+For example, the demonstration collects a user’s name, city, and shirt size, then presents shirt size as a single-select radio control rather than a free-text field. [17:28–17:57]
+
+The user flow is then associated with a registered application, so the sign-up experience is launched in the context of that application. [18:26–19:34]
+
+### 6. Custom attributes make B2B identities more application-aware
+
+External Identities allows administrators to define custom user attributes, such as a shirt size or another application-specific value. [13:03–14:10]
+
+These values are stored as extension attributes on the automatically created Azure AD application and can be retrieved through Microsoft Graph. [14:10–15:53]
+
+This means the external identity can carry more than authentication information; it can also contain data used by the application during authorization or personalization. [13:40–15:53]
+
+The page does not describe a complete automatic provisioning workflow after sign-up. It notes that dynamic groups could potentially be used, but there is no built-in flow that automatically adds users to groups or provisions all related resources. [23:48–24:09]
+
+### 7. The licensing model can change significantly
+
+Historically, Azure AD guest access to premium capabilities followed a ratio model: one licensed user could cover five guest users. [02:09–02:44]
+
+External Identities can instead use a **monthly active user** billing model by linking the Azure AD tenant to an Azure subscription. [24:38–25:45]
+
+Under that model:
+
+- The first 50,000 monthly active users are free. [06:54–07:35]
+- Billing is based on users who authenticate during the month, rather than simply the number of directory objects. [06:25–06:54]
+- MFA usage is billed separately. [06:54–07:35]
+- Guests inherit the highest Azure AD licensing level available in the tenant, such as P1 or P2, rather than requiring individual guest licenses. [26:18–27:12]
+
+This can be valuable for organizations with many occasional external users, but the page emphasizes that MFA charges remain additional. [26:18–26:48]
+
+### 8. The practical decision is still B2B versus B2C
+
+Use the enhanced B2B-oriented External Identities capabilities when external users are **partners or collaborators** who need access to resources in the organization’s tenant. [03:45–04:16]
+
+Use B2C when users are **customers**, should remain outside the organization’s primary Azure AD tenant, or when the application needs extensive branding, onboarding customization, local accounts, and a large range of social identity providers. [04:16–05:55]
+
+The central takeaway is that External Identities unifies the branding and management model, while the underlying architectural distinction remains: **B2B extends access into your tenant; B2C provides customer identity for applications in a separate directory.** [27:12–28:19]
