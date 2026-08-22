@@ -431,7 +431,7 @@ If you want the **exam-focused version**, remember these:
 - **Treat the result as an estimate:** A good architecture can usually produce a reasonable initial range—roughly within 10–20%—which should be refined after observing real workloads. [12:11–12:36]
 
 
-## Azure Master Class v3 - Part 2 - Identity -6 video
+## Azure Master Class v3 - Part 2 - Identity -6 video-veľa vecí setup v platených verziách--- preto odporučam vrátiť sa k tomu neskôr.
 
 
 # Deeper explanation of the key takeaways
@@ -879,7 +879,7 @@ The module’s central message is that identity is the foundation for cloud secu
 
 
 
-## video 7.The Line Between AD and Azure AD!
+## video 7.The Line Between AD and Azure AD!-veľa vecí setup v platených verziách--- preto odporučam vrátiť sa k tomu neskôr.
 
 
 ## Deeper explanation
