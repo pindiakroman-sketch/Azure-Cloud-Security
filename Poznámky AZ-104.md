@@ -1113,3 +1113,275 @@ A vedel rozdiel:
 
 Toto je presne ten typ veci, ktorý sa ti **oplatí vedieť na AZ-104/AZ-500**, ale nie je to téma, na ktorej by som trávil veľa času oproti napr. **RBAC, Entra ID, Conditional Access, networking, NSG, private endpoints, Azure Policy, Defender for Cloud a Key Vault**.
 
+## Microsoft Azure Managed Identity Deep Dive video.10
+
+# Managed identities: deep explanation and key takeaways
+
+## 1. The problem managed identities solve
+
+An application running inside an Azure resource—such as a VM, Function, or Web App—may need to access another resource, such as Storage or Key Vault. The target resource uses Azure RBAC to decide what an authenticated security principal is allowed to do. Therefore, the application needs an identity and an access token. [00:39] [01:18]
+
+The traditional solution is to create an app registration and its corresponding service principal, then authenticate with either a client secret or certificate. The problem is that the application must store that credential somewhere and handle its expiration, rotation, protection, and deployment. [02:28] [08:44]
+
+Even storing the credential in Key Vault does not fully solve the initial problem: the application must first authenticate to Key Vault in order to retrieve the credential. This creates the “chicken and egg” problem managed identities are designed to avoid. [01:59]
+
+---
+
+## 2. What a managed identity actually is
+
+A managed identity is an Azure-managed identity that appears in Azure AD as a **service principal**. Because it is a service principal, it can receive RBAC role assignments on resources such as Storage accounts, Key Vaults, and other Azure services. [10:23] [11:46]
+
+The important difference is that a managed identity is **not backed by an application registration**. It is managed by Azure’s managed identity resource provider rather than by the application owner directly. [22:19] [25:14]
+
+Although a managed identity has an application ID/client ID-like value, the video explains that this value is randomly generated for consistency with the service-principal model; it does not correspond to a real app registration. [23:56] [25:14]
+
+Managed identities are also tenant-scoped: they exist only in the Azure AD tenant in which they were created and are not multi-tenant identities. [22:19]
+
+---
+
+## 3. System-assigned managed identity
+
+A **system-assigned managed identity** is enabled directly on an Azure resource. Azure creates a service principal representing that resource. [10:23]
+
+For example, if the resource is called `res1`, its system-assigned identity is associated with that resource and can be granted permissions on other resources. [11:01]
+
+Its characteristics are:
+
+- **One-to-one relationship:** one resource can have one system-assigned identity, and that identity belongs to one resource. [13:28]
+- **Shared lifecycle:** deleting the Azure resource also deletes its system-assigned identity. [11:01]
+- **No application-managed secret or certificate:** the application can request tokens without storing credentials itself. [11:01]
+- **Resource-specific permissions:** you grant RBAC roles to that resource’s identity, such as Storage Blob Data Reader or a Key Vault role. [11:46]
+
+### When to use it
+
+Use a system-assigned identity when a single resource needs its own distinct permissions and the identity should naturally disappear with that resource. [46:06]
+
+For example:
+
+```text
+Virtual machine A
+  └── System-assigned identity A
+        └── Storage Blob Data Reader on Storage account X
+```
+
+If the VM is deleted, its identity and its associated identity object are also removed. [11:01]
+
+---
+
+## 4. User-assigned managed identity
+
+A **user-assigned managed identity** is created independently as its own Azure resource. It is not automatically tied to the lifecycle of any particular VM, Function, or Web App. [14:18] [17:07]
+
+Its characteristics are:
+
+- It can be assigned to multiple Azure resources. [15:58]
+- A single resource can use multiple user-assigned identities. [15:58]
+- It has an independent lifecycle. [17:07]
+- Its RBAC permissions are defined once and reused by every authorized resource using that identity. [17:07]
+- It can coexist with a system-assigned identity on the same resource. [18:13]
+
+For example:
+
+```text
+User-assigned identity MI1
+  ├── VM A
+  ├── VM B
+  └── Web App C
+
+MI1
+  ├── Storage Blob Data Reader
+  └── Key Vault Secrets User
+```
+
+Every assigned resource can obtain tokens as `MI1` and use the permissions granted to `MI1`. [17:07] [18:52]
+
+### When to use it
+
+User-assigned identities are particularly useful for a group or fleet of resources that need identical permissions—for example, a farm of web servers or middle-tier servers. Without one, you would need to create many system-assigned identities and repeat the same role assignments for each resource. [16:37] [17:07]
+
+They are also useful when permissions should be prepared before the compute resource is created or when the identity should survive replacement of the resource. [46:33]
+
+---
+
+## 5. System-assigned versus user-assigned
+
+| Characteristic | System-assigned | User-assigned |
+|---|---|---|
+| Created by | Enabling identity on a resource [10:23] | Creating a separate managed identity resource [14:18] |
+| Relationship | One identity to one resource [13:28] | One identity can be assigned to many resources [15:58] |
+| Resource can use multiple identities | No additional system-assigned identity, but can also use user-assigned identities [18:13] | Yes, multiple user-assigned identities are possible [15:58] |
+| Lifecycle | Tied to the resource [11:01] | Independent lifecycle [17:07] |
+| Best fit | One resource with its own permissions [46:06] | Many resources sharing the same permissions [46:06] |
+| Permissions | Assigned to the identity [11:46] | Assigned once and reused by assigned resources [17:07] |
+
+A resource may have both a system-assigned identity and one or more user-assigned identities. [18:13]
+
+---
+
+## 6. How authorization works
+
+Managed identity provides **authentication**, not automatic authorization. The identity still needs an appropriate RBAC role assignment on the target resource. [01:18] [11:46]
+
+The general process is:
+
+1. Enable or create the managed identity. [10:23] [14:18]
+2. Grant that identity an appropriate role on the target resource. [20:04]
+3. The application requests an access token as that identity. [35:52]
+4. The application presents the token to the target Azure service. [37:43]
+5. The target service evaluates the identity’s RBAC permissions. [20:43]
+
+For example, the video grants a VM’s identity the **Storage Blob Data Reader** role and then successfully copies a file from Blob Storage using the VM’s current identity. [30:13] [31:23]
+
+The same pattern is demonstrated with Key Vault: the VM’s system-assigned identity can read one secret because it has permission for that secret, but it cannot read another secret for which it has no permission. [33:27] [34:10] [38:13]
+
+This demonstrates that merely having a managed identity does not grant broad access. Permissions remain controlled by RBAC and scope. [20:43] [38:13]
+
+---
+
+## 7. How an application obtains a token
+
+The application does not need to know a client secret or certificate. It requests a token through the mechanism exposed by its hosting resource. [27:38] [37:43]
+
+For a VM, the flow uses the **Instance Metadata Service** at the link-local address `169.254.169.254`. [35:52] [41:24]
+
+Conceptually, the flow is:
+
+```text
+Application
+   │ requests an access token
+   ▼
+Instance Metadata Service
+   │ asks for the resource identity
+   ▼
+Managed Identity Resource Provider
+   │ supplies the service-principal identity and certificate material
+   ▼
+Azure AD
+   │ authenticates the managed identity and issues a token
+   ▼
+Instance Metadata Service
+   │ returns the token
+   ▼
+Application
+```
+
+The certificate used behind the scenes is issued and periodically rolled by the managed identity resource provider. The application does not manage that certificate. [26:01] [26:37]
+
+Other Azure services use different endpoints or mechanisms—for example, Functions and Web Apps expose their own way to request tokens—but the overall pattern is similar. [41:24] [41:55]
+
+---
+
+## 8. Choosing between identities at runtime
+
+If a resource has a system-assigned identity, requesting a token without specifying an identity uses that system-assigned identity by default. [28:26]
+
+The video describes the following behavior:
+
+- **System-assigned identity exists:** it is selected by default. [28:26]
+- **No system-assigned identity and exactly one user-assigned identity:** that user-assigned identity is selected. [28:26]
+- **No system-assigned identity and multiple user-assigned identities:** the application must specify which identity to use; otherwise token acquisition fails because Azure cannot choose one automatically. [28:26]
+
+When explicitly selecting a user-assigned identity, the application needs identifying information such as that identity’s client ID. [39:27] [39:57]
+
+This is important when a resource has several identities with different permissions. For example, one identity may read Storage blobs while another may read Key Vault secrets. [38:48] [39:57]
+
+---
+
+## 9. Key Vault’s role in the architecture
+
+Managed identities are preferable when the target Azure service supports Azure AD authentication and RBAC. [12:53]
+
+However, some external or legacy systems may still require a password, signature, API key, or certificate. In that situation, Key Vault can be used as a secondary credential store:
+
+```text
+Application
+   │ authenticates using managed identity
+   ▼
+Key Vault
+   │ returns a protected secret or certificate
+   ▼
+Application
+   │ uses that credential with a system that lacks Azure AD/RBAC support
+```
+
+The managed identity solves authentication to Key Vault, while Key Vault protects the credential needed by the downstream system. [32:11] [32:57]
+
+This is different from using Key Vault to bootstrap the application’s own Azure authentication, which would recreate the original credential-storage problem. [01:59]
+
+---
+
+## 10. Security benefits
+
+Managed identities improve security because:
+
+- Applications do not need embedded client secrets. [08:44]
+- Applications do not need to store certificates for Azure authentication. [08:44]
+- Credential rotation is handled by Azure’s managed identity infrastructure. [26:01] [26:37]
+- Access is governed through Azure RBAC rather than manually distributed credentials. [11:46]
+- A compromised application receives only the permissions granted to its selected identity. [33:27] [38:13]
+
+The identity should still be given the minimum role and scope necessary. The video shows that different identities can have different permissions and that access to one Key Vault secret does not imply access to another. [33:27] [38:13]
+
+---
+
+## 11. Reliability benefits
+
+The video presents managed identity as more than a security convenience; it also improves resilience. [45:04]
+
+Managed identity uses a regional version of Azure’s security token service, reducing dependence on global gateways and services. [43:31] [43:57]
+
+The access token is described as having a default lifetime of approximately 24 hours, with proactive renewal around the halfway point. This means the identity service attempts to refresh the token before it becomes near-expiry. [43:57] [44:33]
+
+The practical result is that a short Azure AD disruption may not immediately affect the application, because it can continue using a still-valid token. [44:33] [45:04]
+
+The video contrasts this with a short-lived one-hour token flow, where a longer authentication outage could cause more immediate failures. [44:33]
+
+---
+
+## 12. Managed identity versus a normal service principal
+
+A normal service principal generally comes from an application registration. The application registration is the global application definition, while the service principal is its tenant-specific instance. [03:40] [05:47]
+
+A managed identity is also represented as a service principal, but:
+
+- It is not tied to an application registration. [22:19]
+- It is managed by Azure. [23:56] [25:14]
+- Its credentials are handled and rotated by the managed identity resource provider. [26:01] [26:37]
+- It is associated with Azure resources rather than being independently authenticated using an application secret or certificate. [10:23] [11:46]
+
+So the useful mental model is:
+
+```text
+Normal application:
+App registration → Service principal → Secret/certificate → Token
+
+Managed identity:
+Azure resource → Managed identity service principal → Azure-managed credential → Token
+```
+
+---
+
+## 13. Practical decision guide
+
+Use a **system-assigned identity** when:
+
+- One Azure resource needs access to other Azure resources. [46:06]
+- The identity should be deleted along with the resource. [11:01]
+- There is no need to share the identity with other resources. [13:28]
+
+Use a **user-assigned identity** when:
+
+- Multiple resources need the same permissions. [16:37]
+- You want to define RBAC permissions once and reuse them. [17:07]
+- The identity must have an independent lifecycle. [17:07]
+- You want to provision permissions before attaching the identity to a resource. [46:33]
+- A resource must choose between multiple permission sets. [38:48] [39:57]
+
+Use **Key Vault with managed identity** when:
+
+- The application must access a password, API key, certificate, or other secret. [32:11]
+- The downstream service does not support Azure AD/RBAC authentication. [47:56]
+
+## Bottom line
+
+Managed identity lets an Azure-hosted application obtain Azure access tokens without managing its own Azure credentials. System-assigned identities are resource-specific and lifecycle-bound; user-assigned identities are reusable and independently managed. After assigning the correct RBAC roles, the application can securely access supported Azure services such as Storage and Key Vault, while Azure handles the underlying credentials and token renewal. [47:29]
