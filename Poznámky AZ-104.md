@@ -1385,3 +1385,196 @@ Use **Key Vault with managed identity** when:
 ## Bottom line
 
 Managed identity lets an Azure-hosted application obtain Azure access tokens without managing its own Azure credentials. System-assigned identities are resource-specific and lifecycle-bound; user-assigned identities are reusable and independently managed. After assigning the correct RBAC roles, the application can securely access supported Azure services such as Storage and Key Vault, while Azure handles the underlying credentials and token renewal. [47:29]
+
+
+## Azure Master Class v3 - Part 3 - Governance-video 11
+Azure Master Class v3 - Part 3 - Governance - YouTube
+https://www.youtube.com/watch?v=t-i4XrygWCc
+
+Here are the comprehensive, deeply technical, and structured study notes in English, directly mapped to the lifecycle and logical flow of the architectural training document you provided.
+------------------------------
+## 📑 ADVANCED ARCHITECTURAL NOTES: AZURE GOVERNANCE## 1. Paradigm Shift & Requirement Analysis## 🔄 On-Premises vs. Cloud Governance Models
+
+* On-Premises Infrastructure: An operations team acts as a human proxy between the application owner and physical deployment. They manually interpret organizational guidelines via emails, forms, or calls before provisioning infrastructure.
+* Cloud Architecture: Application owners interact directly with the Cloud API/Control Plane via the Azure Portal, CLI, Infrastructure as Code (IaC), or CI/CD pipelines.
+* The Governance Mandate: Because there is no human standing in the chain of deployment, governance must be enforced programmatically as automated guardrails directly embedded within the control plane. This mitigates risks concerning data exfiltration, target infiltration, unexpected service interruptions, and catastrophic financial overhead.
+
+## ⚖️ Compliance Tracking Tools
+
+* Shared Responsibility Model: As you move from IaaS to PaaS and SaaS, customer-managed responsibilities decrease, but compliance configuration, identities, and data always remain the customer's burden.
+* Microsoft Service Trust Portal: The central repository for downloading regulatory compliance reports, independent third-party audit attestations (e.g., ISO, PCI DSS, FedRAMP), and regional compliance deep dives.
+* Microsoft Purview Compliance Manager: A operational portal used to track real-time compliance posture via an aggregated Compliance Score. It categorizes points based on the Shared Responsibility Model: actions managed by Microsoft vs. actions managed by the customer. It functions as an internal audit ledger where you can assign owners, modify implementation statuses, track testing dates, and attach verification notes.
+
+------------------------------
+## 2. The Core Azure Hierarchical constructs
+Azure Governance operates on a strict Top-Down Inherited Model. Any policy, role assignment, or resource lock applied at a higher scope automatically cascades down through all child entities.
+
+[Microsoft Entra Tenant]
+          │
+  [Root Management Group]
+          │
+  [Management Groups] (Up to 6 levels deep below Root)
+          │
+    [Subscriptions]
+          │
+   [Resource Groups]
+          │
+      [Resources]
+
+## 🏢 Management Groups (MGs)
+
+* Definition: Logical containers designed to apply baseline governance, access control, and policies at scale across multiple subscriptions.
+* Architectural Boundaries:
+* Supports up to 10,000 management groups per Entra ID tenant.
+   * The custom hierarchy can extend up to 6 levels deep (excluding the Root Management Group).
+   * A Management Group or Subscription can have exactly one parent.
+* The Root Management Group: Dynamically generated upon tenant creation. It cannot be deleted or relocated, but its display name can be modified. By default, all newly created subscriptions trust this root.
+* Break-Glass Privilege Elevation: A Global Administrator in Microsoft Entra ID can toggle "Access management for Azure resources" to Yes. This injects a special inherited User Access Administrator role assignment at the Root Management Group level. This is used exclusively as an emergency operational backdoor to regain control of subscriptions if local owners leave the organization.
+* Design Strategy: Organize custom management group levels logically by Geography (regional compliance laws), Business Units (separate accounting/operational pillars), or Environments (Non-Production vs. Production).
+
+## 💳 Subscriptions
+
+* Definition: The fundamental unit for billing aggregation, security scoping, and resource management.
+* Modern Architectural Pattern: The traditional guidance to minimize subscriptions is obsolete. Current best practices dictate using individual subscriptions per workload unit. Because subscriptions act as an isolation barrier for components like Virtual Networks, separating workloads prevents limit exhaustion and resolves service health alert ambiguity (e.g., distinguishing which of 20 apps triggered a localized health event).
+* Tenant Alignment Risks: Moving an active subscription to a different Entra ID tenant strips away all local RBAC role assignments, disrupts Managed Identities, and breaks data plane access. It must be avoided in production environments.
+* Tenant Policy Controls: Entra administrators can configure advanced subscription joining/leaving rules under "Manage Policies". This can lock down the tenant to permit no one to add or remove subscriptions except explicitly exempted break-glass users.
+
+## 📦 Resource Groups (RGs)
+
+* Definition: Flat, non-nested lifecycle boundaries within a single subscription.
+* Operational Constraints:
+* Every resource must belong to exactly one Resource Group.
+   * Resource Groups cannot be nested inside one another.
+   * They cannot be renamed. Remediation requires creating a new target RG and migrating components manually.
+   * The Metadata Region: The region specified during RG creation dictates solely where the resource group's metadata is stored. Components placed inside that group can safely reside in entirely different geographical regions.
+   * No Network or Functional Isolation: An RG is not a communication barrier. For example, an AKS cluster in App-RG can natively connect to a Core-VNet residing inside a specialized Network-RG managed by a dedicated network team.
+
+------------------------------
+## 3. Naming and Tagging Strategy## 🏷️ Naming Standards
+
+* Guided by the Cloud Adoption Framework (CAF), organizations must enforce uniform naming schemas.
+* Standard Component Layout: [Resource Type]-[Workload/Application Name]-[Environment]-[Azure Region]-[Instance Number]. This ensures seamless readability across hybrid on-premises and multi-cloud nodes.
+
+## 🏷️ Tagging Architecture
+
+* Tags are metadata pairs comprised of a Key and a Value.
+* Supported across resources, resource groups, and subscriptions (not supported on Management Groups).
+* Technical Limits: Typically capped at 50 tags per resource (a few legacy skus limit to 15). Tag keys are capped at 512 characters; values are capped at 256 characters.
+* The Non-Inheritance Rule: Tags are not naturally inherited by child resources from a parent subscription or resource group. Dedi-inheritance must be programmatically forced via Azure Policy (e.g., using "inherit from resource group if missing" policy rules).
+* Advanced Rich Content: To bypass the physical tag count limit, a tag value can contain a minified JSON document. Programmatic code or automation systems can then extract deep telemetry strings such as complex firewall configurations or anti-malware versions.
+
+------------------------------
+## 4. Identity and Access Control (RBAC & ABAC)## 🛡️ Role-Based Access Control (RBAC)
+
+* Core Rule: Grant role permissions exclusively to groups, never to individual users, to maintain scale and control role assignment quotas (capped at 4,000 assignments per subscription).
+* No Inheritance Blocking: You cannot block inherited permissions from a higher scope. If an identity is a subscription owner, an app owner cannot remove that access at the resource group level; doing so would compromise enterprise governance.
+* Control Plane vs. Data Plane Scoping:
+* Control Plane (ARM): Handled by standard roles like Owner, Contributor, and Reader. Contributor can change resource properties but cannot manipulate access control or permissions.
+   * Data Plane: Modern services (such as Azure Storage or Cosmos DB) expose inner data properties via Entra ID data roles (e.g., Storage Blob Data Contributor). This eliminates the need for hardcoded Access Keys, enabling secure auditing and direct access for Managed Identities.
+* Custom Roles: Leveraged when built-in roles violate the Principle of Least Privilege. Limited to 5,000 per tenant. Configured precisely using JSON blocks defining Actions, NotActions, DataActions, and NotDataActions. Broadly scoped custom roles should use high-level AssignableScopes (like Management Groups) to avoid token duplication across individual resource groups.
+
+## 🔐 Privileged Identity Management (PIM)
+
+* Natively integrated within the Azure Portal's role assignment engine.
+* Rather than provisioning a user with permanent active roles, PIM configures roles as Eligible. Users must actively elevate their accounts on-demand, satisfy justification rules, and clear timed constraints. Note: Requires an Entra ID P2 license feature set.
+
+## 🧩 Attribute-Based Access Control (ABAC)
+
+* ABAC allows you to inject conditional expressions onto an active RBAC assignment, preventing role inflation.
+* The "Clark Kent" Enterprise Use Case:
+1. A security group (Justice League) is assigned the Storage Blob Data Reader role on a central Storage Account.
+   2. An ABAC conditional expression is appended: The authorization engine verifies that the requester's Custom Security Attribute matches the target file's explicit Blob Index Tag.
+   3. Clark Kent holds a custom Entra ID attribute of primary project = Alpha. When he queries the storage container, files tagged with Alpha evaluate successfully and display. Files tagged with Bravo return a hard permission block, despite residing within the exact same blob container.
+* Environmental Modifiers: Conditions can also evaluate request contextual parameters, including incoming request private subnets, private endpoints, or explicit UTC time-windows.
+
+------------------------------
+## 5. Guardrails via Azure Policy
+Azure Policy acts as an intercept engine inside the Azure Resource Manager (ARM) pipeline, inspecting every lifecycle request against specific resource properties.
+## 🛠️ Evaluation Engine Mechanics
+
+* Uses Aliases to map internal JSON properties of resource configurations to policy evaluation rules.
+* Follows a predictable logical path: IF a resource matches targeted types/conditions, THEN execute a designated Effect.
+* Implementation Blueprint: Always begin by assigning custom policies with the Audit effect. Evaluate the compliance footprint and coordinate change-management windows with development teams before shifting the rule to an aggressive Deny enforcement model.
+
+## ⚡ Core Policy Effects
+
+* Audit: Emits a compliance flag in dashboard reports but permits resource deployment.
+* Deny: Intercepts the configuration request at the ARM layer and blocks execution, returning a 403 Forbidden API code to the user or pipeline.
+* Append / Modify: Alters or adds missing fields, attributes, or tag pairs during execution.
+* DeployIfNotExists (DINE): Executes an embedded ARM/Bicep template if a required child component is missing after deployment. Commonly used to automatically inject Log Analytics workspace diagnostic extensions or monitoring agents onto newly provisioned infrastructure.
+
+## 📋 Initiatives, Exclusions, and Exemptions
+
+* Initiatives: Regulatory or organizational wrappers that bundle hundreds of individual policy definitions into a single point of assignment (e.g., the built-in PCI DSS v4 initiative contains 719 policies).
+* Not Scopes (Exclusions): Defined directly during the initial assignment of a policy or initiative. It explicitly removes sub-scopes (such as a legacy development resource group) from the policy's evaluation tree. Max 400 per assignment.
+* Exemptions: Used on an active deployment to handle exceptional business cases. Rather than changing the overarching policy assignment, an explicit Waiver or Mitigated exception is applied to a specific resource. The component is marked as exempt and will no longer distort the parent initiative's overall compliance percentage. Requires administrative permissions at the initial policy assignment scope.
+
+------------------------------
+## 6. Financial Operations (FinOps) & Budget Management## 📈 Cost Analytics & Allocation
+
+* Machine Learning Smart Views: Automatically process tenant consumption patterns to spot deviations and unexpected daily spend anomalies (e.g., a sudden 72% run-rate spike).
+* Cost Allocation Architecture: Solves the challenge of shared common operational resources (e.g., an ExpressRoute circuit or active directory domain controller cluster). FinOps teams can designate a shared resource group as a Source, and distribute its expenses across targeted business unit subscriptions as an Allocated Cost. This distribution can be executed via an even split, a fixed custom percentage, or a proportional split based on the target scopes' compute, storage, or network consumption profiles.
+
+## 💰 Budget Automation
+
+* Budgets can be applied at any scope and narrowed down via custom tag filters.
+* Thresholds can evaluate Actual or Forecasted spend trajectories. This lets you trigger reactive steps before an over-budget event actually happens.
+* Action Groups: When a financial threshold is breached, the budget engine moves beyond simple email alerts. It passes telemetry payloads to automated Action Groups capable of firing Webhooks, triggering Azure Functions, invoking Logic Apps, or instantly opening operational tickets in an external ITSM system.
+
+------------------------------
+## 7. Compute Financial optimization & Capacity Guardrails
+
+| Financial Instrument | Flexibility Profile | Execution Mechanics |
+|---|---|---|
+| Azure Reservations | Low Flexibility (Highly Specific) | A 1- or 3-year financial commitment tied to a hyper-specific VM family instance size (e.g., D2 v5) within a designated geographic region (e.g., West US 3). The billing engine applies deep discounts every hour. Unused hours cannot be recovered. |
+| Azure Compute Savings Plan | High Flexibility (Broad Coverage) | A 1- or 3-year commitment based on a fixed hourly monetary spend. It automatically covers multiple compute engines (including VMs, Azure Container Instances, Dedicated Hosts, and Container Apps) across any global region. It provides lower baseline discounts than reservations but handles dynamic architecture shifts seamlessly. |
+| Azure Hybrid Benefit (AHUB) | Licensing Optimization | Allows organizations to bring pre-existing on-premises Windows Server or SQL Server licenses into Azure. This strips the operating system licensing fee out of the consumption matrix, reducing the billing charge down to the raw compute hardware rate. |
+
+⚠️ CRITICAL ARCHITECTURAL WARNING: An Azure Reservation does NOT guarantee or reserve physical hardware capacity inside an Azure Datacenter. It is strictly an accounting mechanism. During regional high-demand anomalies, a VM can still throw a Capacity Failure error on startup even if it is fully backed by a valid reservation.
+## 🔒 On-Demand Capacity Reservations
+
+* To secure a legally backed SLA guarantee that physical compute capacity will always be available for critical workloads, you must deploy an On-Demand Capacity Reservation.
+* You are billed for the hardware slot the moment the capacity reservation is initialized, regardless of whether a VM is actively deployed inside it.
+* The FinOps Pattern: Layer an On-Demand Capacity Reservation directly over a hyper-specific Azure Billing Reservation. This strategy locks in the maximum possible pricing discount while simultaneously ensuring the physical compute hardware is physically allocated to you at the hypervisor layer.
+
+------------------------------
+## 8. Enterprise Observability Nastavenia## 🔒 Control Plane Resource Locks
+
+* Implemented at the ARM layer; has zero visibility or enforcement power over internal Data Plane actions.
+* CanNotDelete: Allows configurations to be modified or updated but blocks any API command to drop or delete the resource block.
+* ReadOnly: Halts any configuration state change or deletion request.
+* Operational Catch: Placing a CanNotDelete lock on a Storage Account prevents an administrator from accidentally dropping the Azure Storage resource from the portal. However, a database user or application using valid connection strings can still completely purge files, drop rows, and wipe data structures from inside that storage plane.
+
+## 🥞 Deployment Stacks
+
+* Fully replaces the legacy Azure Blueprints engine.
+* Manages an active collection of resources across multiple resource groups or subscriptions as a cohesive lifecycle boundary.
+* Built using native template formats (such as Bicep or ARM) but deployed via specialized stack arguments (az stack group).
+* Native Deny Assignments: Includes granular lock settings that override traditional subscription Owner permissions. These block unauthorized out-of-band updates and can cascade down to child structures while explicitly exempting automation or break-glass identities.
+* When a stack is deleted, it offers a cleanup mechanism: it can either permanently purge every managed resource across all subscriptions or cleanly detach them as unmanaged components without interrupting their runtime states.
+
+## 🔍 Azure Resource Graph (ARG)
+
+* A high-performance lookup system operating on a separate, optimized tracking database that exposes current Azure Control Plane states.
+* Programmed via the Kusto Query Language (KQL).
+* Bypasses traditional ARM throttling limits (which are capped around 12,000 reads per hour). It handles multi-tenant, complex queries (e.g., counting resources across all enterprise subscriptions) in milliseconds while validating user access rights.
+
+## 🕒 Change Analysis
+
+* Built directly on the Azure Resource Graph engine to track configuration drift across a rolling 14-day history window.
+* Exposes the precise Change Actor, the client footprint utilized (e.g., Azure Portal vs. CLI), and the exact API transaction invoked.
+* Provides an interactive "Before/After" side-by-side JSON property diff. This allows operators to quickly pinpoint why a service failed by isolating exactly what changed at a specific timestamp.
+
+## 💡 Azure Advisor
+
+* An automated scanning system that evaluates cloud infrastructure across five pillars: Cost, Security, Reliability, Operational Excellence, and Performance.
+* Scores your tenant (Advisor Score) and flags actionable optimizations, such as right-sizing idle VMs or restructuring local storage accounts to Zone-Redundant Storage (ZRS).
+* Supports automated digest distribution schedules and maps directly into Action Groups to automatically alert operations teams or open tickets when new optimization risks are found.
+
+------------------------------
+To proceed with tailoring these architectural notes to your specific project needs, please let me know:
+
+* Do you want to see a complete JSON template example for an advanced Azure Policy definition?
+* Do you need a Bicep template example illustrating how to deploy a Deployment Stack with native Deny Settings?
+
+
