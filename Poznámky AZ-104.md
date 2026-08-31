@@ -1578,3 +1578,960 @@ To proceed with tailoring these architectural notes to your specific project nee
 * Do you need a Bicep template example illustrating how to deploy a Deployment Stack with native Deny Settings?
 
 
+## Azure Master Class v3 - Part 4 - Resiliency-video 13
+
+Jasné — teraz **to isté ako predtým, ale celé v angličtine**. Spravím to **prakticky, jednoducho a tak, aby si rozumel, čo by si reálne riešil v Azure**, nie len definície na skúšku.
+
+# Azure Resiliency – Practical Notes
+
+## 1. What does resiliency mean?
+
+**Resiliency means that your application can continue working, or recover quickly, when something fails.**
+
+In Azure, failures can happen at different levels:
+
+* a VM can fail
+* a physical server can fail
+* a rack can fail
+* an Availability Zone can fail
+* an entire Azure region can fail
+* data can be accidentally deleted
+* an application update can break the system
+
+The goal is not necessarily to prevent every failure.
+
+The goal is:
+
+> **Assume that failures will happen and design the system so that the business can continue operating.**
+
+The module focuses on disaster recovery, Availability Zones, redundancy, replication, multi-region architectures, backups, and protection against destructive actions. 
+
+---
+
+# 2. Disaster Recovery: Planned vs Unplanned
+
+## Planned failover
+
+You know that something bad may happen.
+
+Example:
+
+> A major storm is approaching the region where your datacenter or infrastructure is located.
+
+You can move your workload to another location **before the disaster happens**.
+
+Because you have time to prepare:
+
+* data can be replicated
+* services can be shut down cleanly
+* failover can be controlled
+* data loss should be minimal or zero
+
+### Practical example
+
+You have an application running in:
+
+```text
+West Europe
+```
+
+You know there will be a major planned maintenance or a serious external risk.
+
+You manually fail over the application to:
+
+```text
+North Europe
+```
+
+Users are redirected to the secondary environment.
+
+---
+
+## Unplanned failover
+
+Something suddenly fails.
+
+Example:
+
+```text
+Azure region becomes unavailable
+```
+
+You did not have time to prepare.
+
+This can result in:
+
+* data loss
+* unexpected downtime
+* longer recovery time
+
+The important difference is:
+
+> **In a planned failover, you control the switch. In an unplanned failover, the failure controls when you need to switch.**
+
+
+
+---
+
+# 3. Disaster Recovery must be tested
+
+Having a DR plan on paper is not enough.
+
+Imagine this:
+
+```text
+Production
+    ↓
+Everything works
+```
+
+You have a secondary environment:
+
+```text
+Disaster Recovery Site
+```
+
+But you never test it.
+
+Then one day production fails.
+
+You try to fail over and discover:
+
+```text
+❌ Database replication is broken
+❌ DNS configuration is wrong
+❌ Application configuration is missing
+❌ Required permissions do not exist
+```
+
+Now you are discovering problems during a real disaster.
+
+That is exactly what you want to avoid.
+
+### Better approach
+
+Test the DR process regularly.
+
+Some organizations even switch production between locations periodically.
+
+Example:
+
+```text
+Month 1:
+West Europe = Active
+
+Month 2:
+North Europe = Active
+```
+
+This gives you confidence that both environments actually work.
+
+> **A Disaster Recovery plan that has never been tested is not a reliable Disaster Recovery plan.**
+
+Also, the DR plan must change when production changes. If you add a new application, resource, or configuration to production, you must consider its impact on DR as part of change control. 
+
+---
+
+# 4. SLA – Don't look at one resource only
+
+Imagine you have:
+
+```text
+Web Application
+```
+
+with:
+
+```text
+99% SLA
+```
+
+That sounds okay.
+
+But your application also depends on:
+
+```text
+Web App
+   ↓
+Database
+   ↓
+Key Vault
+   ↓
+Load Balancer
+   ↓
+Microsoft Entra ID
+```
+
+Your application only works if the required dependencies are available.
+
+This is called a **composite SLA**.
+
+---
+
+## AND relationship
+
+Imagine:
+
+```text
+Web Tier = 99%
+Database = 99%
+```
+
+Both must work.
+
+So:
+
+```text
+0.99 × 0.99 = 0.9801
+```
+
+Overall availability:
+
+```text
+98.01%
+```
+
+Adding dependencies can actually reduce your overall SLA.
+
+The practical lesson:
+
+> **Every dependency matters.**
+
+You cannot look only at the SLA of your main application. You must consider everything the application depends on. 
+
+---
+
+# 5. OR relationship – redundancy improves availability
+
+Now imagine:
+
+```text
+VM 1 = 99%
+VM 2 = 99%
+```
+
+But your application only needs **one VM to be available**.
+
+Architecture:
+
+```text
+          ┌── VM 1 ──┐
+Users ────┤          ├── Application
+          └── VM 2 ──┘
+```
+
+If VM 1 fails:
+
+```text
+Users → VM 2
+```
+
+If VM 2 fails:
+
+```text
+Users → VM 1
+```
+
+Both VMs would need to fail at the same time for the service to become unavailable.
+
+This is why redundancy improves resiliency.
+
+The general principle is:
+
+> **Avoid single points of failure.**
+
+If one component fails and your entire application stops working, that component is a single point of failure. 
+
+---
+
+# 6. Don't build unnecessary complexity
+
+More redundancy usually means:
+
+```text
+More resources
++
+More complexity
++
+More cost
+```
+
+So you should not automatically make everything highly redundant.
+
+Instead ask:
+
+> **What level of availability does the business actually need?**
+
+For example:
+
+### Internal test application
+
+Maybe this is acceptable:
+
+```text
+Single region
+Single instance
+Backup available
+```
+
+### Online banking application
+
+You may need:
+
+```text
+Multiple instances
+Availability Zones
+Load balancing
+Multi-region architecture
+Database replication
+Automated failover
+Backups
+```
+
+The architecture should match the business requirements and required SLA. 
+
+---
+
+# 7. Regional vs Zonal vs Zone-Redundant
+
+This is very important in Azure.
+
+## Regional resource
+
+The resource exists somewhere inside an Azure region.
+
+Example:
+
+```text
+West Europe
+```
+
+But you may not control which Availability Zone it is placed in.
+
+Conceptually:
+
+```text
+West Europe
+
+[Azure infrastructure]
+
+Your resource is somewhere here
+```
+
+---
+
+## Zonal resource
+
+You explicitly choose an Availability Zone.
+
+Example:
+
+```text
+West Europe
+
+Availability Zone 1 → VM 1
+Availability Zone 2 → VM 2
+Availability Zone 3 → VM 3
+```
+
+You control where individual resources are placed.
+
+---
+
+## Zone-redundant resource
+
+Azure distributes the resource across multiple Availability Zones.
+
+Example:
+
+```text
+                Azure Region
+
+      Zone 1        Zone 2        Zone 3
+        │             │             │
+      Instance      Instance      Instance
+```
+
+If one zone fails, the service can continue operating in another zone.
+
+A single instance cannot provide real zone redundancy by itself—you need the architecture and instance placement to survive the loss of a zone. 
+
+---
+
+# 8. Practical example: Storage redundancy
+
+Azure Storage can use different redundancy models.
+
+For example:
+
+### Locally Redundant Storage
+
+Copies of data exist within a local infrastructure boundary.
+
+Conceptually:
+
+```text
+Region
+ └── Storage infrastructure
+      ├── Copy 1
+      ├── Copy 2
+      └── Copy 3
+```
+
+### Zone-Redundant Storage
+
+Copies are distributed across Availability Zones.
+
+```text
+Region
+
+Zone 1 → Data Copy
+Zone 2 → Data Copy
+Zone 3 → Data Copy
+```
+
+This protects you against the failure of an individual Availability Zone. 
+
+---
+
+# 9. The weakest dependency can break your resilient architecture
+
+Imagine this architecture:
+
+```text
+        Zone 1          Zone 2          Zone 3
+
+        AKS             AKS             AKS
+         │               │               │
+         └─────── Network dependency ───┘
+                        │
+                   Single resource
+```
+
+Your AKS deployment may be highly resilient.
+
+But if all instances depend on one non-redundant resource, that resource becomes a:
+
+> **Single Point of Failure**
+
+Example from the practical architecture discussion: a zone-redundant workload can still lose network connectivity if it relies on a dependency that exists only in one zone.
+
+The lesson:
+
+> **Your entire architecture must be designed at a consistent resiliency level.**
+
+Do not build:
+
+```text
+Highly resilient application
+        +
+Single non-redundant dependency
+```
+
+because the weakest dependency can determine the resilience of the whole system. 
+
+---
+
+# 10. Synchronous vs Asynchronous Replication
+
+## Synchronous replication
+
+When data is written:
+
+```text
+Application
+      ↓
+Primary Database
+      ↓
+Replica
+      ↓
+Success returned
+```
+
+The system waits until both locations have the data before confirming success.
+
+### Advantage
+
+```text
+Very low or no data loss
+```
+
+### Disadvantage
+
+```text
+Potentially slower performance
+```
+
+This approach is typically suitable where the replica is close enough to avoid excessive latency.
+
+---
+
+## Asynchronous replication
+
+The primary system confirms the operation first:
+
+```text
+Application
+      ↓
+Primary Database
+      ↓
+Success returned
+```
+
+Replication happens afterwards:
+
+```text
+Primary Database
+       ↓
+Secondary Region
+```
+
+### Advantage
+
+```text
+Better performance
+Long-distance replication is possible
+```
+
+### Disadvantage
+
+If the primary suddenly fails before replication finishes:
+
+```text
+Possible data loss
+```
+
+A key practical point is that synchronous replication prioritizes consistency, while asynchronous replication accepts some possible data loss in exchange for lower latency and easier cross-region replication. 
+
+---
+
+# 11. Availability Zones vs Multiple Regions
+
+These protect you against different types of failures.
+
+## Availability Zones
+
+```text
+West Europe
+
+Zone 1
+Zone 2
+Zone 3
+```
+
+Protect against failures affecting part of a region.
+
+---
+
+## Multiple Regions
+
+```text
+West Europe
+      +
+North Europe
+```
+
+Protect against a larger regional failure.
+
+Example:
+
+```text
+                Global Users
+                     │
+             Traffic Management
+                /          \
+               /            \
+       West Europe       North Europe
+          Active            Standby
+```
+
+For stronger disaster recovery against regional outages, the architecture needs resources in more than one region. 
+
+---
+
+# 12. Active-Passive Architecture
+
+Example:
+
+```text
+West Europe
+   ACTIVE
+      │
+      │ Replication
+      ▼
+North Europe
+   PASSIVE
+```
+
+Normally:
+
+```text
+Users → West Europe
+```
+
+If West Europe fails:
+
+```text
+Users → North Europe
+```
+
+### Advantages
+
+* easier to manage
+* simpler architecture
+* easier data consistency
+
+### Disadvantages
+
+* secondary environment may sit mostly unused
+* failover may take time
+* you still need to keep the secondary environment ready
+
+---
+
+# 13. Active-Active Architecture
+
+Both regions are actively serving users.
+
+```text
+                Users
+                  │
+          Global Load Balancing
+              /           \
+             /             \
+     West Europe      North Europe
+        ACTIVE            ACTIVE
+```
+
+Both regions process traffic.
+
+### Advantages
+
+* higher availability
+* better geographic performance
+* potentially faster recovery
+
+### Disadvantages
+
+* much more complex
+* data synchronization is harder
+* conflicts can happen if data is modified in multiple places
+
+The choice between active-passive and active-active is strongly influenced by the application's data model and the complexity of replication. 
+
+---
+
+# 14. Global Azure services
+
+Some Azure services are global rather than tied to one specific region.
+
+Examples discussed include:
+
+* Microsoft Entra ID
+* Azure Front Door
+* Azure Traffic Manager
+* Azure DNS zones
+
+These services handle certain aspects of global availability differently from ordinary regional resources.
+
+This is important when designing your architecture because you need to understand:
+
+> **Which resources are regional, which are zonal, and which are global.**
+
+
+
+---
+
+# 15. Application-level resiliency patterns
+
+Resiliency is not only about Azure infrastructure.
+
+Your application can also help itself survive failures.
+
+## Retry logic
+
+If a request fails temporarily:
+
+```text
+Request
+   ↓
+❌ Temporary failure
+   ↓
+Retry
+   ↓
+✅ Success
+```
+
+But retries must be controlled.
+
+You don't want:
+
+```text
+Failure
+ ↓
+Retry × 1,000,000
+```
+
+because that could make the outage worse.
+
+---
+
+## Circuit Breaker
+
+Imagine a backend service is failing repeatedly.
+
+Instead of constantly sending requests:
+
+```text
+Application
+     ↓
+Broken Service
+     ❌
+     ❌
+     ❌
+```
+
+The application detects repeated failures and temporarily stops sending requests.
+
+```text
+Application
+     │
+     X
+Circuit Open
+```
+
+Later it can test whether the service has recovered.
+
+---
+
+## Bulkhead pattern
+
+Separate parts of the application so one failure does not destroy everything.
+
+Example:
+
+```text
+Payment System ❌
+
+Customer Portal ✅
+Product Search  ✅
+```
+
+The goal is to prevent one overloaded or failed component from causing a chain reaction throughout the entire application.
+
+These are examples of client and application-side techniques that complement infrastructure redundancy. 
+
+---
+
+# 16. Backup protection: Assume an attacker can have permissions
+
+A very important security concept.
+
+Imagine an attacker compromises:
+
+```text
+Backup Administrator
+```
+
+If that administrator can:
+
+```text
+Delete backups
+Disable protection
+Change retention
+```
+
+the attacker could destroy your recovery capability.
+
+So Azure can use additional protection mechanisms where critical operations require authorization involving another identity or privileged workflow.
+
+Conceptually:
+
+```text
+Backup Admin
+     │
+     │ Requests critical action
+     ▼
+Additional protection / authorization
+     │
+     ▼
+Critical operation allowed
+```
+
+This helps prevent one compromised administrator account from being enough to destroy the backup environment. 
+
+---
+
+# 17. Immutable backups
+
+Immutable means:
+
+> **Once the backup protection and retention are locked, the data cannot simply be deleted before the retention period expires.**
+
+Conceptually:
+
+```text
+Backup Created
+      │
+      ▼
+Immutable Lock
+      │
+      ▼
+Cannot be deleted before retention expires
+```
+
+This is very useful against ransomware.
+
+Even if someone gains high-level permissions, the goal is to prevent backups from being immediately destroyed.
+
+But there is an important warning:
+
+```text
+Immutable + long retention
+        =
+More storage cost
+```
+
+And once certain settings are locked, they cannot simply be undone.
+
+So:
+
+> **Test the configuration before permanently locking immutability settings.**
+
+
+
+---
+
+# Practical Azure Resiliency Checklist
+
+When designing an Azure workload, ask yourself:
+
+### 1. What can fail?
+
+```text
+VM?
+Zone?
+Region?
+Database?
+Network?
+Identity service?
+Application update?
+Human error?
+Ransomware?
+```
+
+### 2. Do I have a single point of failure?
+
+```text
+One VM?
+One database?
+One zone?
+One network dependency?
+One administrator?
+```
+
+### 3. What level of availability does the business need?
+
+```text
+99%?
+99.9%?
+99.99%?
+```
+
+### 4. What happens if one Availability Zone fails?
+
+```text
+Does the application continue working?
+```
+
+### 5. What happens if the entire region fails?
+
+```text
+Can I fail over to another region?
+```
+
+### 6. How much data can I lose?
+
+This determines your replication strategy.
+
+```text
+Near-zero data loss → synchronous / stronger consistency requirements
+
+Some acceptable data loss → asynchronous replication may be acceptable
+```
+
+### 7. How quickly must the application recover?
+
+This affects your:
+
+* RTO
+* automation
+* failover architecture
+* active-active vs active-passive design
+
+### 8. Are backups protected?
+
+Ask:
+
+```text
+Can one compromised admin delete everything?
+```
+
+### 9. Have we tested Disaster Recovery?
+
+If not:
+
+```text
+You don't really know if it works.
+```
+
+---
+
+# The Most Important Idea
+
+The biggest lesson from this module is:
+
+> **Resiliency is not something you add to one Azure resource. It is something you design across the entire architecture.**
+
+You can have:
+
+```text
+3 Availability Zones
++
+Multiple VMs
++
+Load Balancer
++
+Database Replication
+```
+
+But if everything depends on:
+
+```text
+ONE non-redundant component
+```
+
+then that component can still bring down the entire application.
+
+Think of an Azure architecture as a chain:
+
+```text
+User
+ ↓
+DNS
+ ↓
+Load Balancer
+ ↓
+Application
+ ↓
+Database
+ ↓
+Storage
+ ↓
+Identity
+```
+
+**The resilience of the entire solution depends on how all of these components work together—not just on the strongest component.** 
+
+
+
