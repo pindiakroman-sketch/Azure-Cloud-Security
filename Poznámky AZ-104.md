@@ -2534,4 +2534,581 @@ Identity
 **The resilience of the entire solution depends on how all of these components work together—not just on the strongest component.** 
 
 
+Understanding Microsoft Azure Availability Zones! 14.video
+
+## 1. What is an Azure Region?
+
+**Region = a geographical area of Azure** that contains multiple physical facilities/data centers.
+
+For example, you can choose:
+
+> **East US**
+
+Within a region, there are multiple physical environments that provide compute, storage, networking, and other resources.
+
+Important:
+
+**Region ≠ a single data center.**
+
+---
+
+# 2. What is an Availability Zone?
+
+**Availability Zone (AZ) = an isolated physical environment/data center within a single Azure region.**
+
+The main purpose of an AZ is:
+
+> **ISOLATION – separation from other zones.**
+
+Azure aims to isolate Availability Zones mainly in terms of:
+
+* ⚡ **Power** – power supply
+* ❄️ **Cooling** – cooling systems
+* 🌐 **Networking** – network infrastructure
+
+If a local power failure occurs in one zone, the goal is for the other zones to continue operating.
+
+---
+
+# 3. How can you visualize it?
+
+Imagine a single Azure region:
+
+```text
+                 AZURE REGION
+        ┌────────────────────────────┐
+        │                            │
+        │   AZ1       AZ2       AZ3  │
+        │   🏢        🏢        🏢   │
+        │                            │
+        └────────────────────────────┘
+```
+
+Each zone is a physically isolated environment.
+
+If:
+
+```text
+AZ1 💥
+```
+
+then:
+
+```text
+AZ2 ✅
+AZ3 ✅
+```
+
+can continue operating.
+
+---
+
+# 4. Why do Availability Zones exist?
+
+Before Availability Zones, there were **Availability Sets**.
+
+An Availability Set allows you to distribute VMs across different:
+
+> **racks / fault domains**
+
+So if one rack fails:
+
+```text
+Rack 1 💥
+
+Rack 2 ✅
+Rack 3 ✅
+```
+
+VMs in the other racks can continue operating.
+
+However, they are still located **within the same data center/physical environment**.
+
+Availability Zones take this one level higher:
+
+```text
+Availability Set
+       ↓
+different racks / fault domains
+
+Availability Zones
+       ↓
+different isolated physical environments
+```
+
+---
+
+# 5. AZ1, AZ2, and AZ3 do not mean specific buildings
+
+This is **very important**.
+
+It is not:
+
+```text
+AZ1 = Building 1
+AZ2 = Building 2
+AZ3 = Building 3
+```
+
+Instead, they are logical labels for isolated physical environments.
+
+Also:
+
+> **AZ1 in one subscription does not necessarily represent the same physical location as AZ1 in another subscription.**
+
+Azure uses consistent zone mapping **within a specific subscription**, but the mapping does not necessarily correspond between different subscriptions.
+
+---
+
+# 6. Availability Zone ≠ Distance
+
+This is a common mistake.
+
+Do not think:
+
+> "AZ1 and AZ2 are always, for example, 10 miles apart."
+
+❌ No.
+
+Azure **does not guarantee a specific distance** between Availability Zones.
+
+They may be relatively close to each other.
+
+The main idea is:
+
+> **Isolation of power, cooling, and networking.**
+
+Not:
+
+> "A large geographical distance."
+
+---
+
+# 7. Availability Zone ≠ Proximity Placement Group
+
+Remember this:
+
+### Availability Zone
+
+I want:
+
+> **resilience / isolation**
+
+### Proximity Placement Group
+
+I want:
+
+> **resources to be as close to each other as possible / low latency**
+
+So:
+
+```text
+Availability Zone
+       ↓
+resilience
+
+Proximity Placement Group
+       ↓
+physical proximity / low latency
+```
+
+An Availability Zone does **not guarantee** that two VMs will be physically very close to each other.
+
+---
+
+# 8. Biggest mistake: One VM in one AZ
+
+Imagine:
+
+```text
+AZ1
+└── VM1
+```
+
+You might say:
+
+> "I'm using an Availability Zone, so I'm resilient."
+
+❌ No.
+
+If you have only **one VM**, you still have only one VM.
+
+If that VM fails:
+
+```text
+VM1 💥
+```
+
+your application may become unavailable.
+
+An Availability Zone by itself **is not magic that automatically increases resilience**.
+
+---
+
+# 9. How should you use Availability Zones correctly?
+
+Use **multiple instances** and distribute them across zones.
+
+For example:
+
+```text
+AZ1          AZ2          AZ3
+ │            │            │
+VM1           VM2          VM3
+```
+
+If:
+
+```text
+AZ1 💥
+```
+
+you have:
+
+```text
+VM1 💥
+VM2 ✅
+VM3 ✅
+```
+
+Your services can therefore continue operating.
+
+This is the main reason Availability Zones exist.
+
+---
+
+# 10. VM Scale Sets can handle this automatically
+
+You do not have to do everything manually.
+
+For example, you can use:
+
+**Virtual Machine Scale Sets**
+
+and configure them to be zone-redundant.
+
+Azure can then distribute VMs across Availability Zones.
+
+A similar principle can be used with services/workloads such as:
+
+* VM Scale Sets
+* AKS worker nodes
+* App Service Plans
+
+---
+
+# 11. What if I need only one VM?
+
+Here is something interesting.
+
+Suppose you have:
+
+```text
+AZ1
+└── VM1
+```
+
+A VM itself cannot exist in three AZs simultaneously.
+
+However, you can make its **storage** more resilient.
+
+---
+
+# 12. ZRS Managed Disk
+
+Normally, you can have a disk using **LRS**.
+
+LRS:
+
+> copies of the data are kept within the same physical environment/AZ.
+
+But you can use:
+
+**ZRS – Zone-Redundant Storage**
+
+With ZRS, copies of the data are distributed across Availability Zones.
+
+Simplified:
+
+```text
+AZ1       AZ2       AZ3
+ │         │         │
+Disk      Disk      Disk
+copy      copy      copy
+```
+
+If AZ1 fails:
+
+```text
+VM → ❌
+Disk data → ✅
+```
+
+You can then create a new VM and attach the existing disk.
+
+---
+
+# 13. Azure Site Recovery
+
+Another option is:
+
+**Azure Site Recovery**
+
+It is typically used to replicate VMs between regions for **Disaster Recovery**.
+
+According to the video, it can also be used to replicate a VM to another Availability Zone within the same region.
+
+For example:
+
+```text
+AZ1
+VM1
+ │
+ │ replication
+ ↓
+AZ2
+VM replica
+```
+
+If AZ1 fails, you can recover/start the VM in the other zone.
+
+---
+
+# 14. Think about the entire system
+
+This is **one of the most important things for AZ-104/AZ-500**.
+
+It is not enough to simply create:
+
+```text
+AZ1 → VM
+AZ2 → VM
+AZ3 → VM
+```
+
+and say:
+
+> "Done, the application is resilient."
+
+You need to look at the **entire architecture**.
+
+For example:
+
+```text
+             Load Balancer
+                  │
+        ┌─────────┼─────────┐
+        ↓         ↓         ↓
+       AZ1       AZ2       AZ3
+       VM1       VM2       VM3
+        │         │         │
+        └─────────┼─────────┘
+                  ↓
+              Database
+```
+
+Every important component should have the **same or better level of resilience**.
+
+---
+
+# 15. Single Point of Failure
+
+This is a very important concept:
+
+> **Single Point of Failure (SPOF)**
+
+It is a component whose failure can bring down the entire service.
+
+For example:
+
+```text
+AZ1 → VM1
+AZ2 → VM2
+AZ3 → VM3
+
+       ↓
+   Load Balancer
+       ↓
+     Database
+```
+
+If you have resilient VMs but:
+
+```text
+Database 💥
+```
+
+and the database is a single instance without protection against failure, the entire system may still have a problem.
+
+Therefore:
+
+> **Resilience must be handled end-to-end.**
+
+---
+
+# 16. Zone-redundant vs Zonal
+
+You should definitely remember this.
+
+### Zone-redundant service
+
+The service is designed to operate across multiple AZs.
+
+```text
+AZ1 ─┐
+AZ2 ─┼── Service
+AZ3 ─┘
+```
+
+### Zonal service
+
+You deploy the service into a **specific AZ**.
+
+For example, the video mentions:
+
+> **NAT Gateway**
+
+It can be zonal.
+
+Therefore, you need to be careful that its placement does not create a **Single Point of Failure**.
+
+---
+
+# 17. VNet and Subnet
+
+Important:
+
+**A Virtual Network and subnet are not automatically tied to a single Availability Zone.**
+
+A subnet can span an entire region.
+
+So:
+
+```text
+Region
+│
+├── AZ1
+│    └── VM
+│
+├── AZ2
+│    └── VM
+│
+└── AZ3
+     └── VM
+
+        ↑
+     one VNet/subnet
+```
+
+Therefore, with zonal services, you need to think about how your resources are distributed.
+
+---
+
+# 18. Availability Zones ≠ Disaster Recovery
+
+🔥 **This is one of the most important things to remember.**
+
+### Availability Zones
+
+You mainly use them for:
+
+> **High Availability**
+
+within **a single region**.
+
+### Multiple Azure Regions
+
+You use them for:
+
+> **Disaster Recovery**
+
+If, for example, an entire region is affected by:
+
+* a major natural disaster
+* flooding
+* a large-scale regional outage
+
+Availability Zones within that same region may not be enough.
+
+Therefore, you can have:
+
+```text
+Region A
+├── AZ1
+├── AZ2
+└── AZ3
+
+        ↓ DR
+
+Region B
+├── AZ1
+├── AZ2
+└── AZ3
+```
+
+Regions can be hundreds of miles apart.
+
+---
+
+# 🧠 The easiest way to remember it
+
+Think of **baskets of eggs**:
+
+```text
+          REGION
+             │
+     ┌───────┼───────┐
+     ↓       ↓       ↓
+   AZ1      AZ2      AZ3
+   🧺       🧺       🧺
+   🥚       🥚       🥚
+```
+
+If one basket falls:
+
+```text
+AZ1 💥
+
+AZ2 🥚
+AZ3 🥚
+```
+
+You still have two-thirds of your workload.
+
+But if you have only:
+
+```text
+AZ1
+🧺
+🥚
+```
+
+then having three baskets does not help because you only have **one egg**.
+
+➡️ **You need multiple instances and distribute them across AZs.**
+
+---
+
+# 🎯 AZ-104 / AZ-500 – What you should take away
+
+| Term                          | Remember                                                |
+| ----------------------------- | ------------------------------------------------------- |
+| **Region**                    | A geographical Azure area                               |
+| **Availability Zone**         | An isolated physical environment within a region        |
+| **Main purpose of AZ**        | Isolation / High Availability                           |
+| **What it isolates**          | Power, cooling, networking                              |
+| **AZ ≠ DR**                   | DR is typically handled using another region            |
+| **AZ ≠ proximity**            | AZ does not guarantee physical proximity                |
+| **Proximity Placement Group** | Low latency / resources close together                  |
+| **Availability Set**          | Fault domains/racks within a physical environment       |
+| **Zone-redundant**            | Redundancy across AZs                                   |
+| **Zonal**                     | Resource is placed in a specific AZ                     |
+| **LRS disk**                  | Local replication                                       |
+| **ZRS disk**                  | Replication across AZs                                  |
+| **Multiple VMs across AZs**   | The real benefit of AZs                                 |
+| **Single VM in one AZ**       | The AZ alone does not automatically increase resilience |
+| **SPOF**                      | A component whose failure can bring down the service    |
+
+
+
 
