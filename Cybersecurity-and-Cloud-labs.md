@@ -8,3 +8,8 @@ principle of get:
 During this exercise, you learned about the Client-Server model and how HTTP(S) works. You specifically focused on GET requests, inspecting HTTP traffic using Firefox Developer Tools, and understanding the structure of requests and responses. You familiarized yourself with key terms such as scheme, host, port, and status codes, especially recognizing how to identify the scheme in a URL like 'https://www.iamlearning.thm/contact'. Overall, the lab helped enhance your ability to analyze web communication and troubleshoot issues effectively.
 During this exercise, you learned how to use browser developer tools, specifically Firefox Developer Tools, to inspect HTTP GET requests and responses. You practiced commands such as opening the developer tools, navigating to the Network tab, and filtering requests to analyze the details of web traffic. This included understanding how to capture requests, view their components like scheme and host, and interpret the status codes received from the server.
 
+2. work with virtualization manager
+
+Your manager has asked you to investigate an issue with the email service. Essentially, everyone in the company stopped receiving emails today, and no one knows what happened.
+
+Open the Virtualization Manager site by clicking the View Site button below, and let's investigate!
